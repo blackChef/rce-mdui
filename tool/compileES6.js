@@ -1,4 +1,3 @@
-let { resolvePlugin, resolvePreset } = require('webpack-babel-link');
 let { transformFileSync } = require('babel-core');
 let { removeSync, outputFileSync } = require('fs-extra');
 let last = require('lodash/last');
@@ -8,13 +7,16 @@ let resolve = require('path').resolve.bind(undefined, __dirname);
 let babelOpts = {
   babelrc: false,
   plugins: [
-    'transform-es2015-destructuring',
     'transform-object-rest-spread',
-  ].map( resolvePlugin(require) ),
+  ],
   presets: [
     'react',
-    'es2015'
-  ].map( resolvePreset(require) )
+    ['env', {
+      targets: { browser: [`last 6 versions`] },
+      modules: false,
+      loose: true,
+    }]
+  ]
 };
 
 let doBabel = filePath => transformFileSync(filePath, babelOpts);

@@ -1,4 +1,4 @@
-let { copySync } = require('fs-extra');
+let { copySync, removeSync } = require('fs-extra');
 let { readdirSync } = require('fs');
 let resolve = require('path').resolve.bind(undefined, __dirname);
 let compileES6 = require('./compileES6');
@@ -35,6 +35,7 @@ let copyFiles = function() {
   // );
 };
 
+removeSync(resolveDist());
 copyFiles();
 compileES6(dist);
 
