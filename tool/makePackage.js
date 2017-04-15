@@ -9,19 +9,11 @@ let dist = '../readyToPublish';
 let resolveRoot = resolve.bind(undefined, '../');
 let resolveSrc = resolve.bind(undefined, src);
 let resolveDist = resolve.bind(undefined, dist);
-let resolveComponents = resolveSrc.bind(undefined, 'components');
 
 let copyFiles = function() {
-  readdirSync( resolveComponents() ).forEach(function(item) {
-    copySync(
-      resolveComponents(item),
-      resolveDist(item)
-    );
-  });
-
   copySync(
-    resolveSrc('utils'),
-    resolveDist('utils')
+    resolveSrc(),
+    resolveDist()
   );
 
   copySync(
@@ -29,10 +21,14 @@ let copyFiles = function() {
     resolveDist('package.json')
   );
 
-  // copySync(
-  //   resolveRoot('README.md'),
-  //   resolveDist('README.md')
-  // );
+  try {
+    copySync(
+      resolveRoot('README.md'),
+      resolveDist('README.md')
+    );
+  } catch(e) {
+    console.log(e);
+  }
 };
 
 removeSync(resolveDist());
