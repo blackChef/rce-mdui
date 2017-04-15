@@ -1,5 +1,4 @@
 import React from 'react';
-import { view as LinkButton } from '../buttons/linkButton';
 import { view as IconButton } from '../buttons/iconButton';
 import createComponent from 'rce-pattern/createComponent';
 import range from 'lodash/range';

@@ -1,5 +1,4 @@
 import React from 'react';
-import setClassNames from 'classnames';
 import { getSlotWithName } from '../slot/';
 import createComponent from 'rce-pattern/createComponent';
 import checkProps from '../utils/checkProps';

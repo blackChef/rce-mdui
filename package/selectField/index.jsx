@@ -1,7 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
-import { getSlotWithName } from '../slot/';
 import include from 'lodash/includes';
 import { view as Slot } from '../slot/';
 import { view as TextFieldBtn } from '../textField/button';

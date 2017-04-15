@@ -2,7 +2,6 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotWithName } from '../slot/';
 import proxyModel from 'rce-pattern/createProxyModel';
-import includes from 'lodash/includes';
 import { view as Checkbox, init as checkboxInit } from '../checkbox/';
 
 
@@ -39,7 +38,7 @@ let update = function({ type, payload, model, dispatch }) {
 let renderCheckbox = function(dispatch, type, model, id) {
   let isChecked = function() {
     return type === 'multiple' ?
-      includes(model.val(), id) :
+      model.val().includes(id) :
       model.val() === id;
   };
 

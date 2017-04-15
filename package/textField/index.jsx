@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom';
 import createComponent from 'rce-pattern/createComponent';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Simple } from './simple';
-import throttle from 'lodash/throttle';
 
 let name = 'textField';
 

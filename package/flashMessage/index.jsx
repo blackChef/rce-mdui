@@ -1,7 +1,7 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { openPopup } from '../popup/popupStack';
-import { default as setClassNames } from 'classnames';
+import setClassNames from 'classnames';
 import checkProps from '../utils/checkProps';
 
 

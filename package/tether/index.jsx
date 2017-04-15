@@ -3,7 +3,6 @@ import noop from 'lodash/noop';
 import TetherClass from 'tether';
 import createComponent from 'rce-pattern/createComponent';
 import { openPopup } from '../popup/popupStack';
-import ReactDOM from 'react-dom';
 
 
 
