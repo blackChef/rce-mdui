@@ -1,7 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { default as setClassNames } from 'classnames';
-import checkProps from '../utils/checkProps';
 import { view as IconButton } from '../buttons/iconButton';
 import { getSlotWithName } from '../slot/';
 

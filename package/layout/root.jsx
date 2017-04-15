@@ -1,7 +1,5 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import matchScreenSize from '../utils/matchScreenSize';
-import debounce from 'lodash/debounce';
 import { view as NavDrawer, init as navDrawerInit, isPopup } from './navDrawer';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Slot, getSlotWithName } from '../slot/';
