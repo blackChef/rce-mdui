@@ -1,15 +1,10 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-import moment from '../utils/moment';
+import identity from 'lodash/identity';
 import rome from 'rome';
 import createComponent from 'rce-pattern/createComponent';
-import createModelHolder from 'rce-pattern/createModelHolder';
 import { view as TextFieldBtn } from '../textField/button';
 import { view as Dialog } from '../confirm';
-import { view as _Tabs, init as tabsInit } from '../tabs/';
 import { view as Slot } from '../slot/';
-
-
 
 
 let name = 'dateTimePicker';
@@ -78,8 +73,8 @@ let view = React.createClass({
   },
 
   render() {
-    let { model, dispatch, label, ...otherProps } = this.props;
-    let _time = moment(model.time.val()).format('ll HH:mm');
+    let { model, dispatcher, label, timeFormatter = identity, ...otherProps } = this.props;
+    let time = model.time.val();
 
     return (
       <div ref="main">
@@ -90,7 +85,7 @@ let view = React.createClass({
         >
           <Slot name="content">
             <Picker
-              initialValue={model.time.val()}
+              initialValue={time}
               ref="picker"
             />
           </Slot>
@@ -99,15 +94,13 @@ let view = React.createClass({
         <TextFieldBtn
           className="textField--dropDown"
           floatingLabel={label}
-          onClick={() => dispatch('showPicker')}
-          value={_time}
+          onClick={dispatcher('showPicker')}
+          value={timeFormatter(time)}
         />
       </div>
     );
   },
 });
-
-
 
 view = createComponent({ name, view, update });
 export { init, view };
