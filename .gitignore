@@ -5,6 +5,7 @@ ehthumbs.db
 node_modules/
 readyToPublish/
 demo/index.js
+package/package.json
 prepros.cfg
 
 # Folder config file

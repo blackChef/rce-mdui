@@ -26,9 +26,7 @@ let copyFiles = function() {
       resolveRoot('README.md'),
       resolveDist('README.md')
     );
-  } catch(e) {
-    console.log(e);
-  }
+  } catch(e) {}
 };
 
 removeSync(resolveDist());
