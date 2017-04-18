@@ -1,0 +1,81 @@
+.dialogView {
+
+  @include popup;
+  display: flex;
+  justify-content: center;
+
+  @include respondTo_page(md) {
+    padding: 24px 40px;
+  };
+
+
+  &_front {
+    max-width: $s_page_md;
+    width: 100%;
+    max-height: 100%;
+    background: $c_bodyBg;
+    display: flex;
+    flex-direction: column;
+    @include depth(24);
+
+    &_header {
+      position: relative;
+      z-index: 10;
+    }
+
+    &_body {
+      flex: 1;
+      @include allowScroll('y');
+      position: relative;
+
+      // browser some times doesnt render height properly
+      // 80 is url bar's height
+      padding-bottom: 80px;
+    }
+
+    transform: translateY($s_unit * 6);
+    opacity: 0;
+    transition-duration: 300ms;
+    @at-root .dialogView.is_active > & {
+      transform: translateY(0);
+      opacity: 1;
+      will-change: transform, opacity;
+    }
+  }
+
+  &_background {
+    background: $c_dialog_bg;
+    display: none;
+    @include respondTo_page(md) {
+      display: block;
+    }
+
+    opacity: 0;
+    transition-duration: 120ms;
+    @at-root .dialogView.is_active > & {
+      opacity: 1;
+      will-change: opacity;
+    }
+  }
+}
+
+.dialogView--transparentBg {
+  .dialogView_front {
+    @include depth(0);
+  }
+  .dialogView_background {
+    background-color: transparent;
+  }
+}
+
+.dialogView--lg {
+  .dialogView_front {
+    max-width: $s_page_lg;
+  }
+}
+
+.dialogView--xlg {
+  .dialogView_front {
+    max-width: $s_page_xlg;
+  }
+}

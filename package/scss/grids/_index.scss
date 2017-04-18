@@ -1,0 +1,103 @@
+// foundation grids http://foundation.zurb.com/sites/docs/flex-grid.html
+
+@import 'foundation/foundation';
+@import 'basic';
+@import 'align';
+@import 'gutter';
+@import 'container';
+
+
+@mixin setWidth($name) {
+  @for $i from 1 through 12 {
+    @if ($name == 'xxsm') {
+      .col_#{$i} {
+        @include flex-grid-column($i, null);
+      }
+    } @else {
+      .col_#{$name}_#{$i} {
+        @include flex-grid-column($i, null);
+      }
+    }
+  }
+}
+
+@mixin setOrder($name) {
+  @for $i from 1 through 6 {
+    @if ($name == 'xxsm') {
+      .col_order_#{$i} {
+        @include flex-grid-column($i, null);
+      }
+    } @else {
+      .col_#{$name}_order_#{$i} {
+        order: $i;
+      }
+    }
+  }
+}
+
+@mixin setOffset($name) {
+  @for $i from 0 through 11 {
+    @if ($name == 'xxsm') {
+      .col_offset_#{$i} {
+        $flex: flex-grid-column($i);
+        margin-left: nth($flex, 3);
+      }
+    } @else {
+      .col_#{$name}_offset_#{$i} {
+        $flex: flex-grid-column($i);
+        margin-left: nth($flex, 3);
+      }
+    }
+  }
+}
+
+@mixin setAll($name) {
+  @include setWidth($name);
+  @include setOffset($name);
+  @include setOrder($name);
+}
+
+@each $name, $size in $breakPoints {
+  @if $size == 0 {
+    @include setAll($name);
+  }
+
+  @else {
+    @media screen and (min-width: $size) {
+      @include setAll($name);
+    }
+  }
+}
+
+@each $breakPointName, $breakPointSize in $breakPoints {
+  @include respondTo_page($breakPointName) {
+    @if ($breakPointName == 'xxsm') {
+      .col_shrink {
+        flex: 0 0 auto;
+        max-width: 100%;
+      }
+
+      .col_expand {
+        flex: 1 1 0px;
+        padding-left: $s_gutter / 2;
+        padding-right: $s_gutter / 2;
+        min-width: unset;
+        max-width: unset;
+      }
+
+    } @else {
+      .col_#{$breakPointName}_shrink {
+        flex: 0 0 auto;
+        max-width: 100%;
+      }
+
+      .col_#{$breakPointName}_expand {
+        flex: 1 1 0px;
+        padding-left: $s_gutter / 2;
+        padding-right: $s_gutter / 2;
+        min-width: unset;
+        max-width: unset;
+      }
+    }
+  }
+}

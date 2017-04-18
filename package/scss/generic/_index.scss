@@ -1,0 +1,50 @@
+@import './normalize';
+
+html {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: inherit;
+}
+
+body {
+  font-family: "Helvetica Neue", "Microsoft Yahei", sans-serif;
+  background-color: $c_bodyBg;
+  font-size: $s_font_body;
+  color: $c_text_primary;
+}
+
+a {
+  text-decoration: none;
+  color: $c_accent;
+
+  &.link--underline {
+    text-decoration: underline;
+  }
+
+  &.link--underline--hover {
+    @respondTo_hoverable {
+      text-decoration: underline;
+    }
+  }
+}
+
+input, button, select, textarea {
+  &:focus {
+    outline: none;
+  }
+}
+
+
+button {
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  &[readonly] {
+    cursor: default;
+  }
+}

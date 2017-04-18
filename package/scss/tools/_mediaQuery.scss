@@ -1,0 +1,8 @@
+@mixin respondTo_page($breakPoint) {
+  $size: map-get($breakPoints, $breakPoint);
+
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+

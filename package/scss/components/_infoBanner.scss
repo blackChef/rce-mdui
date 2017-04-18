@@ -1,0 +1,33 @@
+.infoBanner {
+  display: flex;
+  align-items: center;
+  padding: $s_gutter;
+
+  &:empty {
+    padding: 0;
+  }
+
+  &_content {
+
+  }
+
+  &--info {
+    background-color: $blue-100;
+    color: $blue-900;
+  }
+
+  &--success {
+    background-color: $green-100;
+    color: $green-900;
+  }
+
+  &--warning {
+    background-color: $amber-100;
+    color: $amber-900;
+  }
+
+  &--error {
+    background-color: $red-100;
+    color: $red-900;
+  }
+}

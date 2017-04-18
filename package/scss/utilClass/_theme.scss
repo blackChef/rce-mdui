@@ -1,0 +1,25 @@
+@each $name, $color in $colorMap {
+  .u_bg_#{$name} {
+    background-color: $color !important;
+  }
+
+  .u_text_#{$name} {
+    color: $color !important;
+  }
+}
+
+.u_bg_transparent {
+  background-color: transparent !important;
+}
+
+.u_text_primary {
+  color: $c_text_primary !important;
+}
+
+.u_text_secondary {
+  color: $c_text_secondary !important;
+}
+
+.u_text_tertiary {
+  color: $c_text_tertiary !important;
+}

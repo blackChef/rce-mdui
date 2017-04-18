@@ -1,0 +1,31 @@
+.circularProgress {
+  display: inline-flex;
+  position: relative;
+
+
+
+  &_number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    @include circle;
+    @include center;
+  }
+
+  &_img {
+    position: relative;
+    z-index: 1;
+
+    &_front {
+      stroke: $c_primary;
+      transition: stroke-dashoffset 300ms;
+    }
+
+    &_background {
+      stroke: $grey-400;
+    }
+  }
+}

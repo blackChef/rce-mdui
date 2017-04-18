@@ -1,0 +1,51 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $s_touchable;
+  padding-left: $s_gutter;
+  padding-right: $s_gutter;
+  overflow: hidden;
+
+
+  &_indicator {
+    margin-left: $s_gutter;
+    margin-right: $s_gutter;
+    display: flex;
+
+    &_current {
+      @include center;
+      @include circle;
+      // width: 36px;
+      // height: 36px;
+      // background: $c_accent;
+      // color: $c_text_primary;
+    }
+
+    @mixin surround() {
+      display: none;
+
+      &_item {
+        margin-right: $s_gutter/2;
+      }
+    }
+
+    &_before {
+      @include surround;
+      margin-right: $s_gutter/2;
+    }
+
+    &_after {
+      @include surround;
+      margin-left: $s_gutter/2;
+    }
+  }
+
+  &_firstPageButton {
+    margin-right: $s_gutter/2;
+  }
+
+  &_lastPageButton {
+    margin-left: $s_gutter/2;
+  }
+}

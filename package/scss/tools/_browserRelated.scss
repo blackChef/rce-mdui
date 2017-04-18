@@ -1,0 +1,11 @@
+// assume modernizr exist
+@mixin androidLegacy() {
+  .no-flexbox.flexboxlegacy {
+    @content;
+  }
+}
+
+
+@mixin iosClickable {
+  cursor: pointer;
+}

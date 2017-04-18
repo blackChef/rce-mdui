@@ -1,0 +1,20 @@
+@import './fontSize';
+@import './breakPoints';
+@import './genericColors';
+@import './appTheme';
+@import './theme';
+
+// size
+$s_unit: 8px;
+$s_touchable: $s_unit * 6;
+$s_gutter: $s_unit * 2;
+
+// component size
+$s_navDrawerWidth: 240px;
+$s_appBarHeight: 56px;
+$s_icon: 24px;
+
+// z index
+$z_navDrawer: 20;
+$z_appBar: 10;
+$z_dialog: 30;
