@@ -79,16 +79,14 @@ let view = React.createClass({
   render() {
     let content = this.state.showContent ?
       (
-        <Content {...this.props}
-          parentDispatch={this.props.dispatch}
-        />
+        <Transition leaveTimeout={300} leaveName="fadeout">
+          <Content {...this.props}
+            parentDispatch={this.props.dispatch}
+          />
+        </Transition>
       ) : null;
 
-    return (
-      <Transition leaveTimeout={300} leaveName="fadeout">
-        {content}
-      </Transition>
-    );
+    return content;
   },
 });
 
