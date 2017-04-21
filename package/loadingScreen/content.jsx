@@ -3,6 +3,7 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as Spinner } from '../progressIndicator/circular';
 import { view as LinkButton } from '../buttons/linkButton';
 import { view as Icon } from '../icon/';
+import { view as Transition } from '../transition/enterLeave';
 
 let name = 'Content';
 
@@ -91,14 +92,17 @@ let view = function(props) {
   let { model, className = '' } = props;
 
   return (
-    <div className={`loadingScreen ${className}`} data-status={model.val()}>
+    <Transition
+      className={`loadingScreen ${className}`} data-status={model.val()}
+      leaveTimeout={300} leaveName="fadeout"
+    >
        <div className="loadingScreen_front">
           {renderInfo(props)}
           {renderActions(props)}
        </div>
 
        <div className="loadingScreen_background" />
-    </div>
+    </Transition>
   );
 };
 

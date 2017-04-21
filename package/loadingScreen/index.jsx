@@ -1,7 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { view as Content } from './content';
-import { view as Transition } from '../transition/enterLeave';
 
 let name = 'loadingScreen';
 
@@ -79,11 +78,9 @@ let view = React.createClass({
   render() {
     let content = this.state.showContent ?
       (
-        <Transition leaveTimeout={300} leaveName="fadeout">
-          <Content {...this.props}
-            parentDispatch={this.props.dispatch}
-          />
-        </Transition>
+        <Content {...this.props}
+          parentDispatch={this.props.dispatch}
+        />
       ) : null;
 
     return content;
