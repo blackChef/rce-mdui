@@ -90,8 +90,15 @@ let actions = {
     model.loadingScreenModel.set( merge({}, curVal, payload) );
   },
 
-  closeDialog({ model }) {
+  reset({ model }) {
     model.set( init() );
+  },
+
+  closeDialog({ model, dispatch }) {
+    model.show.set(false);
+    setTimeout(function() {
+      dispatch('reset');
+    }, 400);
   },
 
   setOpenAnimStatus({ model, payload }) {
