@@ -5,6 +5,7 @@ ehthumbs.db
 node_modules/
 readyToPublish/
 demo/index.js
+demo/index.css
 package/package.json
 prepros.cfg
 
