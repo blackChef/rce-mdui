@@ -4,7 +4,7 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Simple } from './simple';
 
-let name = 'textField';
+let name = 'TextField';
 
 let init = function() {
   return '';
@@ -39,12 +39,7 @@ let view = React.createClass({
 
   componentDidMount() {
     let main = findDOMNode(this.refs.main);
-    this.input = main.querySelector('input');
-    // input.addEventListener('focusin', function(event) {
-    //   setTimeout(function() {
-    //     event.target.scrollIntoViewIfNeeded();
-    //   }, 300);
-    // }, false);
+    this.input = main.querySelector('.textField_field');
   },
 
   render() {
@@ -52,7 +47,7 @@ let view = React.createClass({
       model,
       dispatch,
       dispatcher,
-      name = 'emptyTextField',
+      name = '',
       floatingLabel = '',
       fixedFloatingLabel = false,
       hint = '',
@@ -74,7 +69,6 @@ let view = React.createClass({
         name={name}
         defaultValue={this.initialValue}
         onChange={event => dispatch('change', event.target.value)}
-
       />
     );
   },

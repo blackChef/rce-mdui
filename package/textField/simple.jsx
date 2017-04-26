@@ -1,9 +1,9 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
+import InputField from './inputField';
 
 
-
-let name = 'textField--simple';
+let name = 'TextField--simple';
 
 let init = function() {};
 
@@ -24,8 +24,9 @@ let view = function(props) {
 
   return (
     <div className={`textField ${classNameModifier}`}>
-      <input className="textField_field"
+      <InputField
         {...otherProps}
+        className="textField_field"
         onChange={onChange}
       />
       <div className="textField_line"></div>

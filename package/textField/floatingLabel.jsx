@@ -1,9 +1,11 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
+import InputField from './inputField';
 
 
-let name = 'textField--floatingLabel';
+
+let name = 'TextField--floatingLabel';
 
 let init = function() {};
 
@@ -24,27 +26,26 @@ let view = React.createClass({
     this.setState({ isFocused: false });
   },
 
+  componentDidMount() {
+    this.input = this.refs.main.querySelector('.textField_field');
+  },
+
   isFloating() {
     if (this.props.fixedFloatingLabel) {
       return true;
     }
 
-    else {
-      if (this.state.isFocused) {
-        return true;
-      } else {
-        let input = this.refs.input;
-
-        // mounted
-        if (input) {
-          return input.value !== '';
-
-        // initial render
-        } else {
-          return this.props.defaultValue !== '';
-        };
-      }
+    if (this.state.isFocused) {
+      return true;
     }
+
+    // mounted
+    if (this.input) {
+      return this.input.value !== '';
+    }
+
+    // initial render
+    return this.props.defaultValue !== '';
   },
 
   render() {
@@ -57,19 +58,19 @@ let view = React.createClass({
       fixedFloatingLabel = false,
       onChange,
       placeholder,
-      className: classNameModifier = '',
+      className = '',
       ...otherProps
     } = this.props;
 
-    let classNames = setClassNames(`textField textField--floatingLabel ${classNameModifier}`, {
+    let classNames = setClassNames(`textField textField--floatingLabel ${className}`, {
       is_floating: this.isFloating()
     });
 
     return (
-      <div className={classNames}>
-        <input className="textField_field"
+      <div className={classNames} ref="main">
+        <InputField
           {...otherProps}
-          ref="input"
+          className="textField_field"
           onChange={onChange}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
