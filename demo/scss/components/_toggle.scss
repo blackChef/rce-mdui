@@ -1,0 +1,72 @@
+.toggle {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  @include center;
+
+  input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  &_appearance {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      background-color: rgba(black, 0.38);
+      height: 14px;
+      width: 36px;
+      border-radius: 14px;
+      top: 50%;
+      margin-top: -7px;
+      transition: 175ms;
+    }
+
+    &::after {
+      content: '';
+      @include circle(20px);
+      @include depth(2);
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      background: $grey-50;
+      top: 50%;
+      margin-top: -10px;
+      transition: 175ms;
+    }
+  }
+
+  input:checked + &_appearance {
+    &::before {
+      background-color: rgba($c_primary, 0.5);
+    }
+
+    &::after {
+      transform: translateX(36px - 20px);
+      background-color: $c_primary;
+    }
+  }
+}
+
+.toggle--accent {
+  input:checked + .toggle_appearance {
+    &::before {
+      background-color: rgba($c_accent, 0.5);
+    }
+
+    &::after {
+      background-color: $c_accent;
+    }
+  }
+}

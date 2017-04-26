@@ -1,0 +1,23 @@
+$c_success: $green-500;
+$c_failed: $red-500;
+$c_info: $blue-500;
+
+// light
+$themeType: 'light';
+$c_primary: #3F51B5;
+$c_secondary: lighten($c_primary, 5%);
+$c_accent: #E91E63;
+$c_appBar_bg: $c_primary;
+$c_appBar_text: $c_text_white_primary;
+$c_bodyBg: #F2F2F2;
+$c_paper: white;
+
+// dark
+// $themeType: 'dark';
+// $c_primary: #78CC87;
+// $c_secondary: lighten($c_primary, 5%);
+// $c_accent: #78CC87;
+// $c_appBar_text: $c_text_white_primary;
+// $c_appBar_bg: #545864;
+// $c_bodyBg: #464953;
+// $c_paper: #545864;

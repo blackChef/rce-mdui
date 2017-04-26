@@ -1,0 +1,25 @@
+.label {
+  font-size: $s_font_caption;
+  padding: $s_gutter/4 $s_gutter/2;
+  @include roundCorner;
+  text-align: center;
+  color: white;
+
+  background-color: $grey-500;
+
+  &--default {
+    background-color: $grey-500;
+  }
+
+  &--info {
+    background-color: $blue-500;
+  }
+
+  &--success {
+    background-color: $green-500;
+  }
+
+  &--danger {
+    background-color: $red-500;
+  }
+}

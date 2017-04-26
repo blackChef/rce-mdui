@@ -1,0 +1,19 @@
+.paper {
+  background: $c_paper;
+  color: $c_text_primary;
+  @include depth(2);
+}
+
+@each $breakPointName, $breakPointSize in $breakPoints {
+  @include respondTo_page($breakPointName) {
+    .paper_#{$breakPointName}--stretch {
+      // margin: unset;
+      border-radius: unset;
+    }
+
+    .paper_#{$breakPointName}--card {
+      // margin: $s_gutter;
+      @include roundCorner();
+    }
+  }
+}

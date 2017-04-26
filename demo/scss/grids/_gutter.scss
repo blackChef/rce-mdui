@@ -1,0 +1,99 @@
+$positionList: (
+  top,
+  right,
+  bottom,
+  left,
+);
+
+$types: (
+  padding,
+  margin
+);
+
+
+@each $type in $types {
+  @each $breakPointName, $breakPointSize in $breakPoints {
+
+    @include respondTo_page($breakPointName) {
+      @if ($breakPointName == 'xxsm') {
+        $breakPointStr: '';
+      } @else {
+        $breakPointStr: '_#{$breakPointName}';
+      }
+
+      .surroundGutter#{$breakPointStr}_#{$type} {
+        #{$type}: $s_gutter;
+      }
+
+      .surroundGutter#{$breakPointStr}_#{$type}_half {
+        #{$type}: $s_gutter / 2;
+      }
+
+      .surroundGutter#{$breakPointStr}_#{$type}_3Quater {
+        #{$type}: $s_gutter * 3 / 4;
+      }
+
+      .surroundGutter#{$breakPointStr}_unset {
+        #{$type}: unset;
+      }
+
+      .sideGutter#{$breakPointStr}_#{$type} {
+        #{$type}-left: $s_gutter;
+        #{$type}-right: $s_gutter;
+      }
+
+      .sideGutter#{$breakPointStr}_#{$type}_half {
+        #{$type}-left: $s_gutter / 2;
+        #{$type}-right: $s_gutter / 2;
+      }
+
+      .sideGutter#{$breakPointStr}_#{$type}_3Quater {
+        #{$type}-left: $s_gutter * 3 / 4;
+        #{$type}-right: $s_gutter * 3 / 4;
+      }
+
+      .sideGutter#{$breakPointStr}_unset {
+        #{$type}-left: unset;
+        #{$type}-right: unset;
+      }
+
+      .verticalGutter#{$breakPointStr}_#{$type} {
+        #{$type}-top: $s_gutter;
+        #{$type}-bottom: $s_gutter;
+      }
+
+      .verticalGutter#{$breakPointStr}_#{$type}_half {
+        #{$type}-top: $s_gutter / 2;
+        #{$type}-bottom: $s_gutter / 2;
+      }
+
+      .verticalGutter#{$breakPointStr}_#{$type}_3Quater {
+        #{$type}-top: $s_gutter * 3 / 4;
+        #{$type}-bottom: $s_gutter * 3 / 4;
+      }
+
+      .verticalGutter#{$breakPointStr}_unset {
+        #{$type}-top: unset;
+        #{$type}-bottom: unset;
+      }
+
+      @each $position in $positionList {
+        .#{$position}Gutter#{$breakPointStr}_#{$type} {
+          #{$type}-#{$position}: $s_gutter;
+        }
+
+        .#{$position}Gutter#{$breakPointStr}_#{$type}_half {
+          #{$type}-#{$position}: $s_gutter / 2;
+        }
+
+        .#{$position}Gutter#{$breakPointStr}_#{$type}_3Quater {
+          #{$type}-#{$position}: $s_gutter * 3 / 4;
+        }
+
+        .#{$position}Gutter#{$breakPointStr}_#{$type}_unset {
+          #{$type}-#{$position}: unset;
+        }
+      }
+    };
+  }
+}

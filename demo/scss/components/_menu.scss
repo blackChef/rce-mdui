@@ -1,0 +1,85 @@
+
+.tether-target-attached-top.tether-target-attached-right.tether-element-attached-top.tether-element-attached-right {
+  .menu_front {
+    transform-origin: 100% 0;
+  }
+}
+
+
+.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-bottom.tether-element-attached-right {.menu_front {
+    transform-origin: 100% 100%;
+  }
+}
+
+
+.tether-target-attached-top.tether-target-attached-center.tether-element-attached-top.tether-element-attached-center {.menu_front {
+    transform-origin: 50% 0%;
+  }
+}
+
+.menu {
+  z-index: $z_dialog;
+  visibility: hidden;
+  position: fixed !important;
+
+
+  &.is_active {
+    visibility: visible;
+  }
+
+  &_front {
+
+    position: relative;
+    z-index: 1;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: 175ms;
+    background: $c_paper;
+    @include depth(8);
+    max-height: 50vh;
+    @include allowScroll('y');
+  }
+
+  &.is_active &_front {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &_background {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.menu_item {
+  height: $s_touchable;
+  min-width: 88px;
+  display: flex;
+  align-items: center;
+  padding: 0 $s_gutter;
+  cursor: pointer;
+  color: $c_text_primary;
+
+  @include clipText;
+  @include respondTo_hoverable {
+    background-color: rgba(black, 0.05);
+  };
+
+  button {
+    width: 100%;
+    background-color: transparent !important;
+    color: $c_text_primary;
+  }
+
+  .rwdFlatButton_icon {
+    display: none;
+  }
+
+  .rwdFlatButton_label {
+    display: initial;
+  }
+}

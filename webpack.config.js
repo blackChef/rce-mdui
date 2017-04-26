@@ -14,13 +14,17 @@ let babelConfig = {
 
 module.exports = {
   entry: {
-    index: './demo/index.jsx',
+    index: './demo/jsx/index.jsx',
   },
   output: {
-    filename: './demo/[name].js',
+    filename: './demo/js/[name].js',
   },
   resolve: {
     extensions: [".js", ".jsx"],
+    modules: [
+      'package',
+      'node_modules',
+    ]
   },
   module: {
     loaders: [

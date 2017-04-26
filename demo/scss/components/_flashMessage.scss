@@ -1,0 +1,40 @@
+.flashMessage {
+  @include popup;
+  @include center;
+  visibility: hidden;
+  pointer-events: none;
+
+  &.is_active {
+    visibility: visible;
+  }
+
+  &_front {
+    padding: 0 $s_gutter;
+    min-width: 8em;
+    background-color: rgba($c_accent, 0.9);
+    color: white;
+    height: 48px;
+    @include center;
+    border-radius: 24px;
+    top: 25%;
+    @include depth(8);
+
+    opacity: 0;
+    transform: translateY($s_gutter);
+    transition-duration: 175ms;
+  }
+
+  &.is_active &_front {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flashMessage--top {
+  align-items: flex-start;
+
+  .flashMessage_front {
+    top: $s_gutter * 2;
+    transform: translateY(-$s_gutter);
+  }
+}

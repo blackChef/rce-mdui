@@ -1,0 +1,46 @@
+.actionBar {
+  display: flex;
+  align-items: center;
+  padding-left: $s_gutter / 2;
+  padding-right: $s_gutter;
+  min-height: $s_touchable;
+
+  &_navButton {
+    margin-right: $s_unit * 3;
+
+    &:empty {
+      margin-right: 0;
+    }
+  }
+
+  &_title {
+    @include clipText;
+    flex: 1;
+    font-size: $s_font_title;
+    color: $c_text_white_primary;
+
+    &_primary {
+      font-size: $s_font_subheading;
+    }
+
+    &_secondary {
+      font-size: $s_font_caption;
+      color: $c_text_white_secondary;
+    }
+  }
+
+  &_actions {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 50%;
+
+    &_item {
+      margin-right: $s_gutter;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
