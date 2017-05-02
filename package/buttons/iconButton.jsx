@@ -13,8 +13,7 @@ let update = function({ type, payload, model, dispatch }) {};
 let view = function(props) {
   let {
     children,
-    type,
-    icon = type,
+    icon,
     className,
     ...otherProps
   } = props;
