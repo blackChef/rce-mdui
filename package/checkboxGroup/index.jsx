@@ -15,12 +15,10 @@ let init = function(type = 'multiple') {
 
 let update = function({ type, payload, model, dispatch }) {
   let { id, isChecked } = payload;
-
   if (type === 'toggle_multiple') {
     if (!isChecked) {
-      model.set(
-        model.val().filter(i => i.id === id)
-      );
+      let newModel = model.val().filter(i => i !== id);
+      model.set(newModel);
     } else {
       model.set( model.val().concat([id]) );
     }
