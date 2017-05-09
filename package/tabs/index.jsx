@@ -78,7 +78,7 @@ let view = React.createClass({
   },
 
   render() {
-    let { model, dispatch, children, className = '' } = this.props;
+    let { model, dispatch, dispatcher, children, className = '' } = this.props;
     let tabPanes = getSlotWithName(children, false, 'tabPane');
     let mapTabpanes = map(tabPanes);
 
