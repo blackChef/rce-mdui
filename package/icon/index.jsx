@@ -9,13 +9,17 @@ let update = function({ type, payload, model, dispatch }) {};
 
 let view = function(props) {
   let {
-    model, dispatch, dispatcher,
-    type, className = '',
+    model,
+    dispatch,
+    dispatcher,
+    type,
+    icon = type,
+    className = '',
     ...otherProps
   } = props;
 
   return (
-    <i {...otherProps} className={`mdIcon ${className}`}>{type}</i>
+    <i {...otherProps} className={`mdIcon ${className}`}>{icon}</i>
   );
 };
 
