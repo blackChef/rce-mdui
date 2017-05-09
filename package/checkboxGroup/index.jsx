@@ -55,7 +55,7 @@ let view = function(props) {
     dispatcher,
     children,
     type = 'multiple',
-    containerComponent = <Div />
+    containerComponent = <div />
   } = props;
 
   let items = getSlotWithName(children, false, 'item')
