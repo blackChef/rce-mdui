@@ -62,6 +62,6 @@ let view = function(props) {
   );
 };
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view, update, cursorProps: ['options'] });
 export { init, view };
 
