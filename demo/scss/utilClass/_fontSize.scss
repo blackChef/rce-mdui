@@ -1,6 +1,0 @@
-
-@each $name, $size in $fontSizeMap {
-  .u_fontSize_#{$name} {
-    font-size: $size;
-  }
-}
