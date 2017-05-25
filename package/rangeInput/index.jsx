@@ -3,6 +3,50 @@ import createComponent from 'rce-pattern/createComponent';
 
 
 const THUMB_WIDTH = 14; // px
+const MARKER_WIDTH = 1; // px
+const MARKER_COLOR = '#333333';
+
+let makeGradient = function({ marks, min, max, inputWidth }) {
+  let getPercentage = pos => `${(pos / inputWidth * 100).toFixed(6)}%`;
+
+  let colorStops = marks.map(function({ value, label }) {
+    if (value === min) {
+      let leftPos = `0%`;
+      let rightPos = `calc(0% + ${MARKER_WIDTH}px)`;
+
+      return (
+        `${MARKER_COLOR} ${leftPos},`+
+        `${MARKER_COLOR} ${rightPos},`+
+        `transparent ${rightPos}`
+      );
+    }
+
+    if (value === max) {
+      let leftPos = `calc(100% - ${MARKER_WIDTH}px)`;
+      let rightPos = `100%`;
+
+      return (
+        `transparent ${leftPos},` +
+        `${MARKER_COLOR} ${leftPos},` +
+        `${MARKER_COLOR} ${rightPos}`
+      );
+    }
+
+    let centerPos = (value - min) / (max - min) * inputWidth;
+    let halfMarkWidth = MARKER_WIDTH / 2;
+    let leftPos = `calc(${getPercentage(centerPos)} - ${halfMarkWidth}px)`;
+    let rightPos = `calc(${getPercentage(centerPos)} + ${halfMarkWidth}px)`;
+
+    return (
+      `transparent ${leftPos},` +
+      `${MARKER_COLOR} ${leftPos},` +
+      `${MARKER_COLOR} ${rightPos},` +
+      `transparent ${rightPos}`
+    );
+  });
+
+  return `linear-gradient(to right, ${colorStops.join(',')})`;
+};
 
 
 let name = 'RangeInput';
@@ -22,9 +66,18 @@ let update = function({ type, payload, model, dispatch }) {
 };
 
 let view = React.createClass({
+  getInitialState() {
+    return {
+      inputElem: null,
+      markGradient: ''
+    };
+  },
+
   getThumbPosition() {
-    let { inputElem } = this;
-    if (!this.inputElem) { return '0'; }
+    let { inputElem } = this.state;
+    if (inputElem === null) {
+      return 0;
+    }
 
     let inputWidth = inputElem.clientWidth;
     let progress = this.getProgress();
@@ -41,7 +94,19 @@ let view = React.createClass({
   },
 
   setRef(input) {
-    this.inputElem = input;
+    let {
+      marks = [ /* { value: Number, label: String } */ ],
+      min = 0,
+      max = 100,
+    } = this.props;
+
+    this.setState({
+      inputElem: input,
+      markGradient: makeGradient({
+        inputWidth: input.clientWidth,
+        marks, min, max
+      })
+    });
   },
 
   update(event) {
@@ -54,9 +119,11 @@ let view = React.createClass({
       dispatcher,
       model,
       className = '',
+      marks,
       ...otherProps
     } = this.props;
 
+    let { markGradient } = this.state;
     let progress = this.getProgress();
     let thumbPosition = this.getThumbPosition();
 
@@ -69,24 +136,27 @@ let view = React.createClass({
           onChange={this.update}
         />
 
-        <div
-          className="rangeInput_track_front"
-          style={{ transform: `scaleX(${progress})` }}></div>
+        <div className="rangeInput_track">
+          <div className="rangeInput_track_marks"
+            style={{ backgroundImage: markGradient }}
+          />
 
-        <div className="rangeInput_track_bg">
-          <div className="rangeInput_track_bg_steps"></div>
+          <div
+            className="rangeInput_track_front"
+            style={{ transform: `scaleX(${progress})` }}
+          />
+
+          <div className="rangeInput_track_bg" />
         </div>
 
-        {this.inputElem &&
-          <div
-            className="rangeInput_tooltip"
-            style={{ transform: `translateX(${thumbPosition})` }}
-          >
-            <div className="rangeInput_tooltip_content">
-              {model.val()}
-            </div>
+        <div
+          className="rangeInput_tooltip"
+          style={{ transform: `translateX(${thumbPosition})` }}
+        >
+          <div className="rangeInput_tooltip_content">
+            {model.val()}
           </div>
-        }
+        </div>
       </div>
     );
   },
