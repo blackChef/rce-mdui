@@ -7,8 +7,6 @@ const MARKER_WIDTH = 1; // px
 const MARKER_COLOR = '#333333';
 
 let makeGradient = function({ marks, min, max, inputWidth }) {
-  let getPercentage = pos => `${(pos / inputWidth * 100).toFixed(6)}%`;
-
   let colorStops = marks.map(function({ value, label }) {
     if (value === min) {
       let leftPos = `0%`;
@@ -32,10 +30,10 @@ let makeGradient = function({ marks, min, max, inputWidth }) {
       );
     }
 
-    let centerPos = (value - min) / (max - min) * inputWidth;
+    let centerPos = (value - min) / (max - min) * 100 + '%';
     let halfMarkWidth = MARKER_WIDTH / 2;
-    let leftPos = `calc(${getPercentage(centerPos)} - ${halfMarkWidth}px)`;
-    let rightPos = `calc(${getPercentage(centerPos)} + ${halfMarkWidth}px)`;
+    let leftPos = `calc(${centerPos} - ${halfMarkWidth}px)`;
+    let rightPos = `calc(${centerPos} + ${halfMarkWidth}px)`;
 
     return (
       `transparent ${leftPos},` +

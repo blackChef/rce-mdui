@@ -39,6 +39,7 @@
   // Thumb position and thumb width are relative.
   // If we change thumb width, we have to change javascript too.
   $thumbWidth: 14px;
+  $trackHeight: 3px;
 
   position: relative;
   display: flex;
@@ -57,7 +58,7 @@
   }
 
   &_track {
-    height: 4px;
+    height: $trackHeight;
     position: relative;
 
     &_front, &_bg, &_marks {
@@ -81,7 +82,7 @@
     }
 
     &_bg {
-      background-color: $grey-300;
+      background-color: #B0B0B0;
     }
   }
 
