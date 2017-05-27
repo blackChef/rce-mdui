@@ -1,7 +1,9 @@
+let resolvePath = require('path').resolve.bind(undefined, __dirname);
+
 let babelConfig = {
   presets: [
-    ['babel-preset-react'],
-    ['babel-preset-env', {
+    [require.resolve('babel-preset-react')],
+    [require.resolve('babel-preset-env'), {
       targets: { browser: [`last 2 versions`] },
       modules: false,
       loose: true,
@@ -22,6 +24,8 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     modules: [
+      resolvePath('./node_modules'),
+      resolvePath('./src/js'),
       'package',
       'node_modules',
     ]

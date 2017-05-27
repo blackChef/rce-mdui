@@ -47,7 +47,7 @@ let makeGradient = function({ marks, min, max, inputWidth }) {
 };
 
 
-let name = 'RangeInput';
+let name = 'RangeInput_slider';
 
 let init = function(props = {}) {
   let {
@@ -60,6 +60,9 @@ let init = function(props = {}) {
 };
 
 let update = function({ type, payload, model, dispatch }) {
+  // console.log('model', model);
+  // debugger
+  // console.log('update proxy', model.val(), payload);
   model.set(payload);
 };
 
@@ -92,6 +95,10 @@ let view = React.createClass({
   },
 
   setRef(input) {
+    if (input === null) {
+      return;
+    }
+
     let {
       marks = [ /* { value: Number, label: String } */ ],
       min = 0,
@@ -108,7 +115,9 @@ let view = React.createClass({
   },
 
   update(event) {
-    this.props.dispatch('update', +event.target.value);
+    let { model, dispatch } = this.props;
+    let val = event.target.value;
+    dispatch('update', Math.floor(Math.random() * (100 - 0 + 1)) + 0);
   },
 
   render() {

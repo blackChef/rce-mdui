@@ -35,12 +35,12 @@
   &::-ms-thumb { @content; }
 }
 
-.rangeInput {
-  // Thumb position and thumb width are relative.
-  // If we change thumb width, we have to change javascript too.
-  $thumbWidth: 14px;
-  $trackHeight: 3px;
+// Thumb position and thumb width are relative.
+// If we change thumb width, we have to change javascript too.
+$thumbWidth: 14px;
+$trackHeight: 3px;
 
+.rangeInput {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -170,4 +170,36 @@
   @include styleRangeInputThumb {
     background-color: $grey-300;
   };
+}
+
+.rangeInput_range {
+  position: relative;
+
+  .rangeInput {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+    input {
+      pointer-events: none;
+      @include styleRangeInputThumb {
+        pointer-events: auto;
+      };
+    }
+
+    &_track_front {
+      background-color: transparent;
+    }
+  }
+
+  &_track {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: $trackHeight;
+    top: 0;
+    background-color: $c_primary;
+    transform-origin: 0 50%;
+  }
 }
