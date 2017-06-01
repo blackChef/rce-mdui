@@ -70,6 +70,10 @@ let view = React.createClass({
   onFormSubmit(event) {
     event.stopPropagation(); // form maybe nested at mount time
     event.preventDefault();
+    this.save();
+  },
+
+  save() {
     let { dispatch, apiCalls, onSave, validate } = this.props;
     dispatch('save', { apiCalls, onSave, validate });
   },
@@ -90,22 +94,35 @@ let view = React.createClass({
       isSaving,
       loadingScreenModel: {
         status,
-        loadingMsg,
         failedMsg,
-        onRequestRetry
+        requestType
       }
     } = this.props.model;
 
     let { className, ...otherProps } = props;
+    let { getData, save } = this;
+
+    let requestTypes = {
+      save: {
+        retry: save,
+        loadingMsg: '保存中'
+      },
+      getData: {
+        retry: getData,
+        loadingMsg: '加载中'
+      }
+    };
+
+    let { loadingMsg, retry } = requestTypes[requestType.val()];
 
     return (
       <LoadingScreen
         {...otherProps}
         className={`${className} ${(isSaving.val() ? 'loadingScreen--cover' : '')}`}
         model={status}
-        loadingMsg={loadingMsg.val()}
+        loadingMsg={loadingMsg}
+        onRequestRetry={retry}
         failedMsg={failedMsg.val()}
-        onRequestRetry={onRequestRetry.val()}
       />
     );
   },

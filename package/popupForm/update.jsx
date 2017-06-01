@@ -26,14 +26,13 @@ let actions = {
       let newModel = getLatestModel();
       setContent(res1, newModel.content);
       setSelectOptions(res2, newModel.selectOptions);
-      dispatch('setFetchingStatus', { status: 'success' });
+      dispatch('setFetchingStatus', { status: 'success', requestType: 'getData' });
       dispatch('setIsReady', true);
 
     }).catch(function(err) {
       dispatch('setFetchingStatus', {
         status: 'failed',
-        failedMsg: err.message,
-        onRequestRetry: () => dispatch('getData', payload)
+        failedMsg: err.message
       });
 
       console.error(err);
@@ -41,6 +40,7 @@ let actions = {
   },
 
   save({ payload, model, dispatch }) {
+
     let { apiCalls, onSave = noop, validate = () => true } = payload;
     let content = model.content.val();
 
@@ -54,7 +54,7 @@ let actions = {
     let { saveContent = resolve } = apiCalls;
 
     dispatch('setIsSaving', true);
-    dispatch('setFetchingStatus', { status: 'loading' });
+    dispatch('setFetchingStatus', { status: 'loading', requestType: 'save' });
 
     saveContent(content).then(function() {
       dispatch('setIsSaving', false);
@@ -66,7 +66,6 @@ let actions = {
       dispatch('setFetchingStatus', {
         status: 'failed',
         failedMsg: err.message,
-        onRequestRetry: () => dispatch('save', payload)
       });
 
       setTimeout(function() {

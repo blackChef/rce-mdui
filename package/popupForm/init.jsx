@@ -9,9 +9,8 @@ let init = function() {
     show: false,
     loadingScreenModel: {
       status: 'hide',
-      loadingMsg: '加载中...',
       failedMsg: '失败了',
-      onRequestRetry: noop,
+      requestType: 'getData',
     },
     isContentReady: false,
     isSaving: false,
