@@ -35,7 +35,8 @@ let renderContent = function(props) {
     let body = React.cloneElement(content, {
       reloadDialog: getData,
       model: model.content,
-      selectOptions: model.selectOptions.val(),
+      selectOptions: model.selectOptions,
+      cursorProps: ['selectOptions'],
     });
 
     return (
