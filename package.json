@@ -3,6 +3,10 @@
   "version": "0.1.6",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "makePackage": "cd ./tool && node makePackage"
+  },
   "devDependencies": {
     "babel-core": "^6.7.2",
     "babel-loader": "^6.2.4",
