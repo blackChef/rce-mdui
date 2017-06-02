@@ -27,6 +27,7 @@
     "react-dom": "^15.0.2",
     "react-select": "^1.0.0-rc.3",
     "react-textarea-autosize": "^4.1.0",
+    "react-transition-group": "^1.1.3",
     "rome": "^2.1.22",
     "tether": "^1.3.3"
   }

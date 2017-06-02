@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 let view = function(props) {
   let {
@@ -21,7 +21,7 @@ let view = function(props) {
   };
 
   return (
-    <ReactCSSTransitionGroup
+    <CSSTransitionGroup
       transitionName={names}
       transitionAppear={true}
       transitionAppearTimeout={timeout}
@@ -32,7 +32,7 @@ let view = function(props) {
       {...otherProps}
     >
       {children}
-    </ReactCSSTransitionGroup>
+    </CSSTransitionGroup>
   );
 };
 
