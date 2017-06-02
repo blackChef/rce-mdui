@@ -92,6 +92,10 @@ let view = React.createClass({
   },
 
   setRef(input) {
+    if (input === null) {
+      return;
+    }
+
     let {
       marks = [ /* { value: Number, label: String } */ ],
       min = 0,
