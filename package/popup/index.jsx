@@ -2,8 +2,9 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import noop from 'lodash/noop';
 import checkProps from '../utils/checkProps';
-import { openPopup } from './popupStack';
-
+import { addListener as addESCListener } from '../utils/escState';
+import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
+import { enableScroll, disableScroll } from '../utils/scrollState';
 
 let name = 'Popup';
 
@@ -56,8 +57,13 @@ let view = React.createClass({
       openAnimationDuration = 400,
     } = props;
 
+    let { content } = this.refs;
+
     onOpen();
-    this.closePopup = openPopup(this.refs.content);
+    disableScroll();
+    increaseDepth(content);
+    this.removeESCListener = addESCListener(this.tryToClose);
+
     setTimeout(afterOpen, openAnimationDuration);
   },
 
@@ -68,17 +74,25 @@ let view = React.createClass({
       closeAnimationDuration = 400,
     } = props;
 
+    let { closePopup } = this;
+    let { content } = this.refs;
+
     onClose();
+
     setTimeout(() => {
       afterClose();
-      this.closePopup();
+      enableScroll();
+      decreaseDepth(content);
     }, closeAnimationDuration);
   },
 
   tryToClose() {
     let { forceOpen, dispatch } = this.props;
+    let { removeESCListener } = this;
+
     if (!forceOpen) {
       dispatch('close');
+      removeESCListener();
     }
   },
 
@@ -88,6 +102,7 @@ let view = React.createClass({
     if (!isMounted) return;
 
     let { forceOpen, children } = this.props;
+
     return React.cloneElement(children, {
       forceOpen,
       tryToClose,

@@ -3,13 +3,8 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as NavDrawer, init as navDrawerInit, isPopup } from './navDrawer';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Slot, getSlotWithName } from '../slot/';
-import {
-  enableScroll,
-  disableScroll,
-  initPopupState,
-  resetPopupState
-} from '../popup/popupStack';
-
+import { init as initScrollState, enableScroll, disableScroll } from '../utils/scrollState';
+import { init as initZIndexState } from '../utils/zIndexState';
 
 let name = 'Root';
 
@@ -32,15 +27,12 @@ let update = function({ type, payload, model, dispatch }) {
 
 let view = React.createClass({
   componentDidMount() {
-    initPopupState({
-      baseZIndex: 30,
+    initScrollState({
       mainSelector: '.layout_main',
       mainBodySelector: '.layout_main_body',
     });
-  },
 
-  componentWillUnmount() {
-    resetPopupState();
+    initZIndexState(30);
   },
 
   renderNavDrawerToggle() {

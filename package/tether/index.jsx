@@ -2,8 +2,9 @@ import React from 'react';
 import noop from 'lodash/noop';
 import TetherClass from 'tether';
 import createComponent from 'rce-pattern/createComponent';
-import { openPopup } from '../popup/popupStack';
-
+import { addListener as addESCListener } from '../utils/escState';
+import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
+import { enableScroll, disableScroll } from '../utils/scrollState';
 
 
 let name = 'Tether';
@@ -104,7 +105,13 @@ let view = React.createClass({
 
     if ( disabled || model.val() ) return;
 
-    let { tetherInstance, insertPopupDOM, createTetherInstance, afterTetherInited } = this;
+    let {
+      tetherInstance,
+      insertPopupDOM,
+      createTetherInstance,
+      afterTetherInited
+    } = this;
+
     if (createOnShow && !tetherInstance) {
       this.setState({ isPopupMounted: true }, () => {
         insertPopupDOM();
@@ -117,19 +124,30 @@ let view = React.createClass({
   },
 
   afterTetherInited() {
-    let { popupDOM, triggerDOM, tetherInstance } = this;
     let {
       dispatch,
-      disableScroll = true,
+      shouldDisableScroll = true,
       beforeShow = noop,
       afterShow = noop,
     } = this.props;
 
+    let {
+      popupDOM,
+      triggerDOM,
+      tetherInstance,
+      hidePopup
+    } = this;
+
     beforeShow({ popupDOM, triggerDOM });
+
     tetherInstance.enable();
     tetherInstance.position();
     dispatch('show');
-    this.closePopup = openPopup(popupDOM, disableScroll);
+
+    this.removeESCListener = addESCListener(this.hidePopup);
+    increaseDepth(popupDOM);
+    if (shouldDisableScroll) disableScroll();
+
     afterShow({ popupDOM, triggerDOM });
   },
 
@@ -140,16 +158,30 @@ let view = React.createClass({
       popupCloseAnimDuration = 300,
       beforeHide = noop,
       afterHide = noop,
+      shouldDisableScroll = true,
     } = this.props;
-
-    let { tetherInstance, closePopup, popupDOM, triggerDOM } = this;
 
     if ( !model.val() ) return;
 
+    let {
+      tetherInstance,
+      closePopup,
+      removeESCListener,
+      popupDOM,
+      triggerDOM
+    } = this;
+
     beforeHide({ popupDOM, triggerDOM });
+
     dispatch('hide');
-    closePopup(popupCloseAnimDuration);
+    removeESCListener();
     tetherInstance.disable();
+
+    setTimeout(() => {
+      decreaseDepth(popupDOM);
+      if (shouldDisableScroll) enableScroll();
+    }, popupCloseAnimDuration);
+
     afterHide({ popupDOM, triggerDOM });
   },
 

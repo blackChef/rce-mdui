@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { enableScroll, disableScroll } from '../popup/popupStack';
+import { enableScroll, disableScroll } from '../utils/scrollState';
 import debounce from 'lodash/debounce';
 import { view as Slot, getSlotWithName } from '../slot/';
 import matchScreenSize from '../utils/matchScreenSize';
