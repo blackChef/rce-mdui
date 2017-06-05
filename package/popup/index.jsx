@@ -1,7 +1,7 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import noop from 'lodash/noop';
-import checkProps from '../utils/checkProps';
+import { matchValues } from '../utils/checkProps';
 import { addListener as addESCListener } from '../utils/escState';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 import { enableScroll, disableScroll } from '../utils/scrollState';
@@ -43,7 +43,7 @@ let view = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    let checkOpen = checkProps('model.val', this.props, nextProps);
+    let checkOpen = matchValues('model.val', this.props, nextProps);
     let willOpen = checkOpen(false, true);
     let willClose = checkOpen(true, false);
     if (willOpen) this.willOpen(nextProps);

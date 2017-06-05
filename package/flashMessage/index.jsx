@@ -1,7 +1,7 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
-import checkProps from '../utils/checkProps';
+import { matchValues } from '../utils/checkProps';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 
 
@@ -20,9 +20,12 @@ let update = function({ type, payload, model, dispatch }) {
 
 let view = React.createClass({
   componentWillReceiveProps(nextProps) {
-    let checkShow = checkProps('model.val', this.props, nextProps);
-    let willShow = checkShow(false, true);
     let { dispatch, timeout = 1500 } = this.props;
+
+    let willShow = matchValues(
+      'model.val', this.props, nextProps,
+      false, true
+    );
 
     if (willShow) {
       let { main } = this.refs;

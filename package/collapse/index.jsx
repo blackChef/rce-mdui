@@ -1,7 +1,7 @@
 import React from 'react';
 import { getSlotWithName } from '../slot/';
 import createComponent from 'rce-pattern/createComponent';
-import checkProps from '../utils/checkProps';
+import { matchValues } from '../utils/checkProps';
 
 
 let name = 'Collapse';
@@ -17,7 +17,7 @@ let update = function({ type, payload, model, dispatch }) {
 let view = React.createClass({
   componentWillReceiveProps(nextProps) {
     let { container, content } = this.refs;
-    let checkOpen = checkProps('model.val', this.props, nextProps);
+    let checkOpen = matchValues('model.val', this.props, nextProps);
     let willOpen = checkOpen(false, true);
     let willClose = checkOpen(true, false);
 
