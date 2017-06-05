@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
+import { getSlotContent } from '../slot/';
 import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
 import { view as IconButton } from '../buttons/iconButton';
@@ -23,7 +23,7 @@ let Front = function(props) {
     tryToClose
   } = props;
 
-  let body = getSlotWithName(children, true, 'body');
+  let body = getSlotContent(children, 'body');
 
   return (
     <div className="dialogView_front">

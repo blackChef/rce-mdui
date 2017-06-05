@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
+import { getSlotContent } from '../slot/';
 import { view as Popup } from '../popup/';
 
 let name = 'Dialog';
@@ -16,11 +16,11 @@ let Front = function(props) {
     forceOpen
   } = props;
 
-  let getSlot = getSlotWithName(children, true);
-  let title = getSlot('title');
-  let content = getSlot('content');
-  let other = getSlot('other');
-  let actions = getSlot('actions').map(function(item) {
+  let getContent = getSlotContent(children);
+  let title = getContent('title');
+  let content = getContent('content');
+  let other = getContent('other');
+  let actions = getContent('actions').map(function(item) {
     return React.cloneElement(item, {
       tryToClose,
       forceOpen,

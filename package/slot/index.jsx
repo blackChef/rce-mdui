@@ -11,7 +11,6 @@ let view = React.createClass({
 
 let { toArray } = React.Children;
 
-// did not test with es6 class
 let getChildrenWithName = function(children, name) {
   return toArray(children).filter(function(item) {
     let itemName = item.type.displayName ? item.type.displayName : item.type.name;
@@ -19,25 +18,32 @@ let getChildrenWithName = function(children, name) {
   });
 };
 
-// reactChildren -> bool -> str -> [reacChildren]
-let getSlotWithName = curry(function(children, returnFirstSlotChildren, name) {
-  let slots = getChildrenWithName(children, 'Slot');
-  let match = slots.filter( item => item.props.name == name );
-  let ret;
-  if (match.length === 0) {
-
-    // read props.children wont throw error
-    ret = [{ props: { children: null } }];
-  } else {
-    ret = match;
-  }
-
-  if (returnFirstSlotChildren) {
-    return toArray( ret[0].props.children );
-  } else {
-    return ret;
-  }
+let getSlots = curry(function(children, name) {
+  return getChildrenWithName(children, 'Slot')
+    .filter(i => i.props.name === name);
 });
 
-export { view, getSlotWithName };
+let getSlot = curry(function(children, name) {
+  let slots = getSlots(children, name);
+
+  // read props won't throw error
+  if (slots[0] === undefined) {
+    return { props: {} };
+  }
+
+  return slots[0];
+});
+
+let getSlotContent = curry(function(children, name) {
+  let slots = getSlots(children, name);
+
+  if (slots.length === 0) {
+    return [];
+  }
+
+  return toArray(slots[0].props.children);
+});
+
+
+export { view, getSlots, getSlot, getSlotContent };
 

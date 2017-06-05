@@ -1,7 +1,7 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
 import proxyModel from 'rce-pattern/createProxyModel';
+import { getSlots, getSlotContent } from '../slot/';
 import { view as Checkbox, init as checkboxInit } from '../checkbox/';
 
 
@@ -58,7 +58,7 @@ let view = function(props) {
     containerComponent = <div />
   } = props;
 
-  let items = getSlotWithName(children, false, 'item')
+  let items = getSlots(children, 'item')
     .map(function(item, index) {
       let { children, id = index } = item.props;
       let checkbox = renderCheckbox(dispatch, type, model, id);

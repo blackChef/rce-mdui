@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
+import { getSlots } from '../slot/';
 import { view as Transition } from '../transition/appear';
 
 let name = 'tabs_remount';
@@ -18,7 +18,7 @@ let update = function({ type, payload, model, dispatch }) {
 let view = React.createClass({
   render() {
     let { model, dispatch, dispatcher, children, className = '' } = this.props;
-    let tabPanes = getSlotWithName(children, false, 'tabPane');
+    let tabPanes = getSlots(children, 'tabPane');
     let curIndex = model.val();
 
     let headerItems = tabPanes.map(function(item, index) {

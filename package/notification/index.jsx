@@ -2,7 +2,7 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
-import { getSlotWithName } from '../slot/';
+import { getSlot, getSlotContent } from '../slot/';
 
 
 
@@ -41,20 +41,20 @@ let view = React.createClass({
       className = '',
     } = this.props;
 
-    let getSlot = getSlotWithName(children);
+    let getRawSlot = getSlot(children);
+    let title = getRawSlot('title').props.content;
+    let meta = getRawSlot('meta').props.content;
 
-    let icon = getSlot(true, 'icon');
-    let title = getSlot(false, 'title')[0].props.content;
-    let meta = getSlot(false, 'meta')[0].props.content;
-    let content = getSlot(true, 'content');
-    let actions = getSlot(true, 'actions').map(function(item, index) {
+    let getContent = getSlotContent(children);
+    let icon = getContent('icon');
+    let content = getContent('content');
+    let actions = getContent('actions').map(function(item, index) {
       return <div key={index} className="notification_actions_item">{item}</div>;
     });
 
     let classNames = setClassNames(`notification ${className}`, {
       'is_active': model.val()
     });
-
 
     return (
       <div className="notification_placeholder" style={{ display: 'none' }}>

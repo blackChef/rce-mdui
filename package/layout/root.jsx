@@ -2,7 +2,7 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { view as NavDrawer, init as navDrawerInit, isPopup } from './navDrawer';
 import { view as IconButton } from '../buttons/iconButton';
-import { view as Slot, getSlotWithName } from '../slot/';
+import { view as Slot, getSlotContent } from '../slot/';
 import { init as initScrollState, enableScroll, disableScroll } from '../utils/scrollState';
 import { init as initZIndexState } from '../utils/zIndexState';
 
@@ -63,10 +63,11 @@ let view = React.createClass({
       }
     );
 
-    let navDrawer_header = getSlotWithName(children, true, 'navDrawer_header');
-    let navDrawer_body = getSlotWithName(children, true, 'navDrawer_body');
-    let navDrawer_footer = getSlotWithName(children, true, 'navDrawer_footer');
-    let otherContent = getSlotWithName(children, true, 'other');
+    let getContent = getSlotContent(children);
+    let navDrawer_header = getContent('navDrawer_header');
+    let navDrawer_body = getContent('navDrawer_body');
+    let navDrawer_footer = getContent('navDrawer_footer');
+    let otherContent = getContent('other');
 
     return (
       <div className={`layout ${model.navDrawerModel.isOpen.val() ? 'is_drawerOpen' : ''}`}>

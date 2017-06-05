@@ -2,7 +2,7 @@ import React from 'react';
 import noop from 'lodash/noop';
 import createComponent from 'rce-pattern/createComponent';
 import createModelHolder from 'rce-pattern/createModelHolder';
-import { getSlotWithName } from '../slot/';
+import { getSlots } from '../slot/';
 import { view as Tether } from '../tether/';
 import { view as IconButton } from '../buttons/iconButton';
 
@@ -17,7 +17,7 @@ let update = function({ type, payload, model, dispatch }) {};
 
 
 let Popup = function({ hidePopup, isShown, children }) {
-  let items = getSlotWithName(children, false, 'item')
+  let items = getSlots(children, 'item')
     .map(function(item, index) {
       let { onClick = noop, children } = item.props;
       let onItemClick = () => { onClick(); hidePopup(); };

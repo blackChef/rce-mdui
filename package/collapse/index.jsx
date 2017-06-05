@@ -1,6 +1,6 @@
 import React from 'react';
-import { getSlotWithName } from '../slot/';
 import createComponent from 'rce-pattern/createComponent';
+import { getSlotContent } from '../slot/';
 import { matchValues } from '../utils/checkProps';
 
 
@@ -49,9 +49,9 @@ let view = React.createClass({
 
   render() {
     let { model, dispatch, dispatcher, children, className = '' } = this.props;
-    let getSlot = getSlotWithName(children, true);
-    let header = getSlot('header');
-    let body = getSlot('body');
+    let getContent = getSlotContent(children);
+    let header = getContent('header');
+    let body = getContent('body');
 
     return (
       <div className={`collapse ${className} ${model.val() ? 'is_active' : ''}`}>

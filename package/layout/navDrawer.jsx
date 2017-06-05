@@ -2,7 +2,7 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 import debounce from 'lodash/debounce';
-import { view as Slot, getSlotWithName } from '../slot/';
+import { view as Slot, getSlotContent } from '../slot/';
 import matchScreenSize from '../utils/matchScreenSize';
 
 
@@ -103,11 +103,11 @@ let view = React.createClass({
     let { cloneChildrenWithProps } = this;
 
     let header = cloneChildrenWithProps(
-      getSlotWithName(children, true, 'header')
+      getSlotContent(children, 'header')
     );
 
     let body = cloneChildrenWithProps(
-      getSlotWithName(children, true, 'body')
+      getSlotContent(children, 'body')
     );
 
     return (
