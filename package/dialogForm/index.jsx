@@ -27,7 +27,8 @@ let renderContent = function(props) {
     content,
     Form,
     showContentImmediately = false,
-    getData
+    getData,
+    transitionType = "slideUp"
   } = props;
 
   let { isContentReady, isOpenAnimationEnd } = model.val();
@@ -43,7 +44,9 @@ let renderContent = function(props) {
     });
 
     return (
-      <Transition name="slideUp">
+      <Transition
+        name={transitionType}
+      >
         <Form>
           {renderMsg(model)}
           {body}
