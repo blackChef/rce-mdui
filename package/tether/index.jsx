@@ -6,7 +6,6 @@ import { addListener as addESCListener } from '../utils/escState';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 
-
 let name = 'Tether';
 
 let init = function() {
@@ -21,74 +20,86 @@ let update = function({ type, payload, model, dispatch }) {
   }
 };
 
+let createTether = function(props) {
+  let {
+    attachment = 'top center',
+    targetAttachment = 'bottom center',
+    target,
+    element
+  } = props;
+  let tetherInstance = new TetherClass({
+    attachment,
+    targetAttachment,
+    target,
+    element,
+    optimizations: {
+      gpu: false,
+      moveElement: false
+    },
+    constraints: [
+      {
+        to: 'scrollParent',
+        attachment: 'together'
+      }
+    ]
+  });
+
+  tetherInstance.disable();
+  return tetherInstance;
+};
+
 let view = React.createClass({
-  createTetherInstance() {
-    let {
-      attachment = 'top center',
-      targetAttachment = 'bottom center',
-    } = this.props;
+  tetherInstance: null,
+  triggerDOM: null,
+  popupDOM: null,
+  removeESCListener: null,
 
-    let { triggerDOM, popupDOM } = this;
-
-    this.tetherInstance = new TetherClass({
-      attachment,
-      targetAttachment,
-      target: triggerDOM,
-      element: popupDOM,
-      optimizations: {
-        gpu: false,
-        moveElement: false
-      },
-      constraints: [
-        {
-          to: 'scrollParent',
-          attachment: 'together'
-        }
-      ]
-    });
-
-    this.tetherInstance.disable();
+  tryEnableScroll() {
+    let { shouldDisableScroll = true } = this.props;
+    if (shouldDisableScroll) {
+      enableScroll();
+    }
   },
 
-  insertTriggerDOM() {
+  tryDisableScroll() {
+    let { shouldDisableScroll = true } = this.props;
+    if (shouldDisableScroll) {
+      disableScroll();
+    }
+  },
+
+  createTetherInstance() {
     let {
-      container,
-      triggerContainer,
-    } = this.refs;
+      popupDOM,
+      refs: {
+        triggerContainer
+      },
+      props: {
+        attachment,
+        targetAttachment,
+      }
+    } = this;
 
-    let triggerDOM = triggerContainer.firstChild;
-    container.parentNode.insertBefore(triggerDOM, container);
-
-    // We use containers to find dom. After init, we can safely remove theme.
-    // However root container is kept, so we don't get react inject dom error.
-    triggerContainer.remove();
-    this.triggerDOM = triggerDOM;
+    this.tetherInstance = createTether({
+      attachment,
+      targetAttachment,
+      target: triggerContainer,
+      element: popupDOM
+    });
   },
 
   insertPopupDOM() {
-    let {
-      container,
-      popupContainer
-    } = this.refs;
-
+    let { popupContainer } = this.refs;
     let popupDOM = popupContainer.firstChild;
     document.body.appendChild(popupDOM);
     popupContainer.remove();
     this.popupDOM = popupDOM;
   },
 
-  componentDidMount() {
-    this.insertTriggerDOM();
-
-    // instance is not created util opened
-    let { createOnShow = true } = this.props;
-    if (createOnShow === false) this.createTetherInstance();
-  },
-
   componentWillUnmount() {
     if (this.tetherInstance) {
-      this.popupDOM.remove();
       this.tetherInstance.destroy();
+      this.popupDOM.remove();
     }
   },
 
@@ -96,59 +107,65 @@ let view = React.createClass({
     return { isPopupMounted: false };
   },
 
+  tryInitTether(callback) {
+    let {
+      tetherInstance,
+      insertPopupDOM,
+      createTetherInstance
+    } = this;
+
+    if (tetherInstance) {
+      callback();
+      return;
+    }
+
+    this.setState({ isPopupMounted: true }, () => {
+      insertPopupDOM();
+      createTetherInstance();
+      callback();
+    });
+  },
+
   showPopup() {
     let {
       model,
-      createOnShow = true,
       disabled = false,
     } = this.props;
 
     if ( disabled || model.val() ) return;
 
     let {
-      tetherInstance,
-      insertPopupDOM,
-      createTetherInstance,
-      afterTetherInited
+      afterTetherInited,
+      tryInitTether
     } = this;
 
-    if (createOnShow && !tetherInstance) {
-      this.setState({ isPopupMounted: true }, () => {
-        insertPopupDOM();
-        createTetherInstance();
-        afterTetherInited();
-      });
-    } else {
-      afterTetherInited();
-    }
+    tryInitTether(afterTetherInited);
   },
 
   afterTetherInited() {
     let {
       dispatch,
-      shouldDisableScroll = true,
       beforeShow = noop,
       afterShow = noop,
     } = this.props;
 
     let {
       popupDOM,
-      triggerDOM,
       tetherInstance,
-      hidePopup
+      hidePopup,
+      tryDisableScroll
     } = this;
 
-    beforeShow({ popupDOM, triggerDOM });
+    beforeShow({ popupDOM });
 
     tetherInstance.enable();
     tetherInstance.position();
     dispatch('show');
-
-    this.removeESCListener = addESCListener(this.hidePopup);
     increaseDepth(popupDOM);
-    if (shouldDisableScroll) disableScroll();
+    tryDisableScroll();
+    this.removeESCListener = addESCListener(hidePopup);
 
-    afterShow({ popupDOM, triggerDOM });
+    afterShow({ popupDOM });
   },
 
   hidePopup() {
@@ -158,7 +175,6 @@ let view = React.createClass({
       popupCloseAnimDuration = 300,
       beforeHide = noop,
       afterHide = noop,
-      shouldDisableScroll = true,
     } = this.props;
 
     if ( !model.val() ) return;
@@ -168,21 +184,20 @@ let view = React.createClass({
       closePopup,
       removeESCListener,
       popupDOM,
-      triggerDOM
+      tryEnableScroll
     } = this;
 
-    beforeHide({ popupDOM, triggerDOM });
+    beforeHide({ popupDOM });
 
     dispatch('hide');
     removeESCListener();
     tetherInstance.disable();
 
     setTimeout(() => {
+      tryEnableScroll();
       decreaseDepth(popupDOM);
-      if (shouldDisableScroll) enableScroll();
+      afterHide({ popupDOM });
     }, popupCloseAnimDuration);
-
-    afterHide({ popupDOM, triggerDOM });
   },
 
   render() {
@@ -201,9 +216,12 @@ let view = React.createClass({
     let _popup = React.cloneElement(popup, childProps);
 
     return (
-      <div className="tether_placeholder" style={{ display: 'none' }} ref="container">
-        <div ref="triggerContainer">{_trigger}</div>
-        { isPopupMounted && <div ref="popupContainer">{_popup}</div> }
+      <div className="tether_triggerContainer" ref="triggerContainer">
+        {_trigger}
+        {
+          isPopupMounted &&
+          <div ref="popupContainer">{_popup}</div>
+        }
       </div>
     );
   },
