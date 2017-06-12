@@ -2,7 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 import createComponent from 'rce-pattern/createComponent';
 
-// https://github.com/JedWatson/react-select
 
 let name = 'chips';
 
