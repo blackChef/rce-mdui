@@ -1,8 +1,8 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { openPopup } from '../popup/popupStack';
 import setClassNames from 'classnames';
-import checkProps from '../utils/checkProps';
+import { matchValues } from '../utils/checkProps';
+import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 
 
 
@@ -13,22 +13,27 @@ let init = function() {
 };
 
 let update = function({ type, payload, model, dispatch }) {
-  if (type == 'hide') {
+  if (type === 'hide') {
     model.set(false);
-    payload(200);
   }
 };
 
 let view = React.createClass({
   componentWillReceiveProps(nextProps) {
-    let checkShow = checkProps('model.val', this.props, nextProps);
-    let willShow = checkShow(false, true);
     let { dispatch, timeout = 1500 } = this.props;
+
+    let willShow = matchValues(
+      'model.val', this.props, nextProps,
+      false, true
+    );
 
     if (willShow) {
       let { main } = this.refs;
-      let closePopup = openPopup(main, false);
-      setTimeout(() => dispatch('hide', closePopup), timeout);
+      increaseDepth(main);
+      setTimeout(function() {
+        dispatch('hide');
+        decreaseDepth(main);
+      }, timeout);
     }
   },
 

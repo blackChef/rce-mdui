@@ -1,7 +1,9 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
 import proxyModel from 'rce-pattern/createProxyModel';
+import cRemove from 'rce-pattern/array/remove';
+import cPush from 'rce-pattern/array/push';
+import { getSlots, getSlotContent } from '../slot/';
 import { view as Checkbox, init as checkboxInit } from '../checkbox/';
 
 
@@ -17,10 +19,9 @@ let update = function({ type, payload, model, dispatch }) {
   let { id, isChecked } = payload;
   if (type === 'toggle_multiple') {
     if (!isChecked) {
-      let newModel = model.val().filter(i => i !== id);
-      model.set(newModel);
+      cRemove(model, i => i === id);
     } else {
-      model.set( model.val().concat([id]) );
+      cPush(model, id);
     }
   }
 
@@ -58,7 +59,7 @@ let view = function(props) {
     containerComponent = <div />
   } = props;
 
-  let items = getSlotWithName(children, false, 'item')
+  let items = getSlots(children, 'item')
     .map(function(item, index) {
       let { children, id = index } = item.props;
       let checkbox = renderCheckbox(dispatch, type, model, id);

@@ -1,7 +1,7 @@
 import React from 'react';
 import setClassNames from 'classnames';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
+import { getSlotContent, getSlot } from '../slot/';
 import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
 
@@ -13,17 +13,14 @@ let init = function() {};
 let update = function({ type, payload, model, dispatch }) {};
 
 let view = function({ model, dispatch, dispatcher, children }) {
-  let getSlot = getSlotWithName(children, true);
-  let header_actions = getSlot('header_actions');
-  let header_navButton = getSlot('header_navButton');
-  let header_appLogo = getSlot('header_appLogo');
-  let header_title = getSlot('header_title');
-  let header_other = getSlot('header_other');
-  let body = getSlot('body');
-
-  let contextualBarProps = getSlotWithName(
-    children, false, 'header_contextualBar'
-  )[0].props;
+  let getContent = getSlotContent(children);
+  let header_actions = getContent('header_actions');
+  let header_navButton = getContent('header_navButton');
+  let header_appLogo = getContent('header_appLogo');
+  let header_title = getContent('header_title');
+  let header_other = getContent('header_other');
+  let body = getContent('body');
+  let contextualBarProps = getSlot(children, 'header_contextualBar').props;
 
   return (
     <div className="layout_main">

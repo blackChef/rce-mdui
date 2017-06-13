@@ -1,138 +1,24 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import noop from 'lodash/noop';
-import checkProps from '../utils/checkProps';
-import { openPopup } from './popupStack';
+import RenderInBody from './renderInBody';
+import { view as PopupContent, init as popupContentInit } from './popupContent';
 
 
 let name = 'Popup';
 
-let init = function() {
-  return false;
+let init = popupContentInit;
+
+let update = function({ type, payload, model, dispatch }) {};
+
+let view = function(props) {
+  return (
+    <RenderInBody>
+      <PopupContent {...props}></PopupContent>
+    </RenderInBody>
+  );
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type === 'close') {
-    model.set(false);
-  }
-};
-
-let view = React.createClass({
-  componentDidMount() {
-    this.isMounted = true;
-
-    // If we move entire dom into body,
-    // react might throw error: "Failed to execute 'insertBefore' on 'Node'".
-    // Because react tries to find our component dom, but it's not there.
-    // So we keep container in the inject position, only move content.
-    document.body.appendChild(this.refs.content);
-
-    if ( this.props.model.val() ) {
-      this.willOpen();
-    }
-  },
-
-  componentWillUnmount() {
-    // if it's still opened, unmount should trigger onClose callback
-    if ( this.props.model.val() ) {
-      this.willClose();
-    }
-
-    this.refs.content.remove();
-  },
-
-  componentWillReceiveProps(nextProps) {
-    let checkOpen = checkProps('model.val', this.props, nextProps);
-    let willOpen = checkOpen(false, true);
-    let willClose = checkOpen(true, false);
-    if (willOpen) this.willOpen(nextProps);
-    if (willClose) this.willClose(nextProps);
-  },
-
-  willOpen(props = this.props) {
-    let {
-      onOpen = noop,
-      afterOpen = noop,
-      openAnimationDuration = 400,
-    } = props;
-
-    onOpen();
-    this.closePopup = openPopup(this.refs.content);
-    setTimeout(afterOpen, openAnimationDuration);
-  },
-
-  willClose(props = this.props) {
-    let {
-      onClose = noop,
-      afterClose = noop,
-      closeAnimationDuration = 400,
-    } = props;
-
-    onClose();
-    setTimeout(() => {
-      afterClose();
-      this.closePopup();
-    }, closeAnimationDuration);
-  },
-
-  tryToClose() {
-    let { forceOpen, dispatch } = this.props;
-    if (!forceOpen) {
-      dispatch('close');
-    }
-  },
-
-  renderFront() {
-    let { tryToClose, isMounted } = this;
-
-    if (!isMounted) return;
-
-    let { forceOpen, children } = this.props;
-    return React.cloneElement(children, {
-      forceOpen,
-      tryToClose,
-    });
-  },
-
-  renderBg() {
-    let { bgProps = {}, closeOnBgClick = true } = this.props;
-    let {
-      onClick,
-      className = '',
-      ...otherProps
-    } = bgProps;
-
-    return (
-      <div
-        className={`popup_background ${className}`}
-        onClick={closeOnBgClick ? this.tryToClose : noop}
-        { ...otherProps }
-      />
-    );
-  },
-
-  getClassName() {
-    let { className = '', model } = this.props;
-    let isOpen = model.val();
-    return `popup ${className} ${isOpen ? 'is_active' : ''}`;
-  },
-
-  render() {
-    return (
-      <div className="popup_placeholder" style={{ display: 'none' }}>
-        <div
-          className={this.getClassName()}
-          ref="content"
-        >
-          {this.renderFront()}
-          {this.renderBg()}
-        </div>
-      </div>
-    );
-  },
-});
 
 
-
-view = createComponent({ name, init, view, update });
+view = createComponent({ name, view, update });
 export { init, view };

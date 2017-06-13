@@ -1,7 +1,7 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { view as DialogSimple } from '../dialog/';
-import { view as Slot, getSlotWithName } from '../slot/';
+import { view as Slot, getSlotContent } from '../slot/';
 import { view as LinkButton } from '../buttons/linkButton';
 import noop from 'lodash/noop';
 
@@ -45,7 +45,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let content = getSlotWithName(children, true, 'content');
+  let content = getSlotContent(children, 'content');
 
   return (
     <DialogSimple {...otherProps} model={model} >

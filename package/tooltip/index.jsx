@@ -54,6 +54,7 @@ let view = React.createClass({
     return (
       <Tether
         {...this.props}
+        shouldDisableScroll={false}
         trigger={<Trigger {...this.props}/>}
         popup={<Popup {...this.props}/>}
       />

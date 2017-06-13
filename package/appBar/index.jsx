@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { view as Slot, getSlotWithName } from '../slot/';
+import { view as Slot, getSlot, getSlotContent } from '../slot/';
 import { view as ContextualBar } from '../contextualBar';
 
 let name = 'AppBar';
@@ -10,10 +10,7 @@ let init = function() {};
 let update = function({ type, payload, model, dispatch }) {};
 
 let renderContextualBar = function(appBarChildren) {
-  let slot = getSlotWithName(appBarChildren, false, 'contextualBar')[0];
-
-  if (!slot.props.children) return;
-
+  let slot = getSlot(appBarChildren, 'contextualBar');
   return (
     <ContextualBar {...slot.props}/>
   );
@@ -21,10 +18,10 @@ let renderContextualBar = function(appBarChildren) {
 
 
 let view = function({ children, className = '' }) {
-  let getSlot = getSlotWithName(children, true);
-  let navButton = getSlot('navButton');
-  let title = getSlot('title');
-  let actions = getSlot('actions').map(function(item, index) {
+  let getContent = getSlotContent(children);
+  let navButton = getContent('navButton');
+  let title = getContent('title');
+  let actions = getContent('actions').map(function(item, index) {
     return (
       <div
         key={index}
@@ -34,7 +31,7 @@ let view = function({ children, className = '' }) {
       </div>
     );
   });
-  let otherContent = getSlot('other');
+  let otherContent = getContent('other');
 
   return (
     <header className={`appBar ${className}`}>

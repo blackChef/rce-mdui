@@ -1,7 +1,7 @@
 import React from 'react';
 import curry from 'lodash/curry';
 import _map from 'lodash/map';
-import { getSlotWithName } from '../slot/';
+import { getSlots } from '../slot/';
 import createComponent from 'rce-pattern/createComponent';
 
 let map = curry(_map);
@@ -79,7 +79,7 @@ let view = React.createClass({
 
   render() {
     let { model, dispatch, dispatcher, children, className = '' } = this.props;
-    let tabPanes = getSlotWithName(children, false, 'tabPane');
+    let tabPanes = getSlots(children, 'tabPane');
     let mapTabpanes = map(tabPanes);
 
     return (

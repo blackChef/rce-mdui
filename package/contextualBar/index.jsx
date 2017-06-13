@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { getSlotWithName } from '../slot/';
+import { getSlotContent } from '../slot/';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Icon } from '../icon/';
@@ -18,7 +18,8 @@ let renderActionItem = function(item, index) {
 
 let renderActionsForSingleItem = function(count, children) {
   if (count == 1) {
-    let slots = getSlotWithName(children, true, 'single');
+    let slots = getSlotContent(children, 'single');
+
     return (
       <div className="contextualBar_actions_single">
         {slots.map(renderActionItem)}
@@ -29,7 +30,8 @@ let renderActionsForSingleItem = function(count, children) {
 
 let renderActionsForMultipleItems = function(count, children) {
   if (count > 0) {
-    let slots = getSlotWithName(children, true, 'multiple');
+    let slots = getSlotContent(children, 'multiple');
+
     return (
       <div className="contextualBar_actions_multiple">
         {slots.map(renderActionItem)}
