@@ -153,10 +153,13 @@ let view = React.createClass({
       popupDOM,
       tetherInstance,
       hidePopup,
-      tryDisableScroll
+      tryDisableScroll,
+      refs: {
+        triggerContainer: triggerDOM
+      }
     } = this;
 
-    beforeShow({ popupDOM });
+    beforeShow({ triggerDOM, popupDOM });
 
     tetherInstance.enable();
     tetherInstance.position();
@@ -165,7 +168,7 @@ let view = React.createClass({
     tryDisableScroll();
     this.removeESCListener = addESCListener(hidePopup);
 
-    afterShow({ popupDOM });
+    afterShow({ triggerDOM, popupDOM });
   },
 
   hidePopup() {
@@ -184,10 +187,13 @@ let view = React.createClass({
       closePopup,
       removeESCListener,
       popupDOM,
-      tryEnableScroll
+      tryEnableScroll,
+      refs: {
+        triggerContainer: triggerDOM
+      }
     } = this;
 
-    beforeHide({ popupDOM });
+    beforeHide({ triggerDOM, popupDOM });
 
     dispatch('hide');
     removeESCListener();
@@ -196,7 +202,7 @@ let view = React.createClass({
     setTimeout(() => {
       tryEnableScroll();
       decreaseDepth(popupDOM);
-      afterHide({ popupDOM });
+      afterHide({ triggerDOM, popupDOM });
     }, popupCloseAnimDuration);
   },
 
