@@ -26,7 +26,7 @@ let enableScroll = function() {
     main.style.height = '';
     main.style.overflow = '';
     mainBody.style.transform = '';
-    main.dataset.isScrollDisabled = true;
+    main.dataset.isScrollDisabled = false;
     setSt(currentScrollTop);
   }
 };
@@ -44,7 +44,7 @@ let disableScroll = function() {
     mainBody
   ) {
     currentScrollTop = getSt();
-    main.dataset.isScrollDisabled = false;
+    main.dataset.isScrollDisabled = true;
     main.style.height = '100vh';
     main.style.overflow = 'hidden';
     mainBody.style.transform = `translateY(-${currentScrollTop}px)`;
