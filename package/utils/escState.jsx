@@ -27,5 +27,5 @@ let init = function() {
 
 init();
 
-export { addListener };
+export default addListener;
 

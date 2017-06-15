@@ -4,6 +4,8 @@ import { getSlotContent } from '../slot/';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Icon } from '../icon/';
+import { matchValues } from '../utils/checkProps';
+import addESCListener from '../utils/escState';
 
 
 let name = 'ContextualBar';
@@ -40,34 +42,66 @@ let renderActionsForMultipleItems = function(count, children) {
   }
 };
 
-let view = function({ model, dispatch, children, count, onRequestDeselectAll }) {
-  let className = setClassNames('contextualBar', {
-    'is_active': count > 0,
-  });
+let Count = React.createClass({
+  shouldComponentUpdate(nextProps) {
+    // we don't want to see count number changes into 0
+    if (nextProps.count === 0) {
+      return false;
+    }
 
-  return (
-    <div className={className}>
-      <div className="contextualBar_control">
-        <IconButton
-          className="contextualBar_control_closeButton iconButton--white"
-          icon="close"
-          onClick={ onRequestDeselectAll }
-        />
+    return true;
+  },
+  render() {
+    let { count } = this.props;
+    return (
+      <div className="contextualBar_control_count">
+        <div className="contextualBar_control_count_prefix">已选择</div>
+        {count}
+        <div className="contextualBar_control_count_suffix">项</div>
+      </div>
+    );
+  },
+});
 
-        <div className="contextualBar_control_count">
-          <div className="contextualBar_control_count_prefix">已选择</div>
-          {count}
-          <div className="contextualBar_control_count_suffix">项</div>
+let view = React.createClass({
+  componentWillReceiveProps(nextProps) {
+    let checkCount = matchValues('count', this.props, nextProps);
+    let isGotoActive = checkCount(0, nextCount => nextCount > 0);
+    let isGotoInActive = checkCount(curCount => curCount > 0, 0);
+
+    if (isGotoActive) {
+      this.removeESCListener = addESCListener(this.props.onRequestDeselectAll);
+    }
+
+    if (isGotoInActive) {
+      this.removeESCListener();
+    }
+  },
+  render() {
+    let { children, count, onRequestDeselectAll, className = '' } = this.props;
+    let classNames = setClassNames(`contextualBar ${className}`, {
+      'is_active': count > 0,
+    });
+
+    return (
+      <div className={classNames}>
+        <div className="contextualBar_control">
+          <IconButton
+            className="contextualBar_control_closeButton iconButton--white"
+            icon="close"
+            onClick={ onRequestDeselectAll }
+          />
+          <Count count={count}/>
+        </div>
+
+        <div className="contextualBar_actions">
+          { renderActionsForMultipleItems(count, children) }
+          { renderActionsForSingleItem(count, children) }
         </div>
       </div>
-
-      <div className="contextualBar_actions">
-        { renderActionsForMultipleItems(count, children) }
-        { renderActionsForSingleItem(count, children) }
-      </div>
-    </div>
-  );
-};
+    );
+  },
+});
 
 view = createComponent({ name, view, update });
 export { init, view };

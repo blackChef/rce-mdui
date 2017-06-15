@@ -2,7 +2,7 @@ import React from 'react';
 import noop from 'lodash/noop';
 import TetherClass from 'tether';
 import createComponent from 'rce-pattern/createComponent';
-import { addListener as addESCListener } from '../utils/escState';
+import addESCListener from '../utils/escState';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 

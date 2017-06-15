@@ -2,7 +2,7 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import noop from 'lodash/noop';
 import { matchValues } from '../utils/checkProps';
-import { addListener as addESCListener } from '../utils/escState';
+import addESCListener from '../utils/escState';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 
