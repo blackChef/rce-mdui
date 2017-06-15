@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import noop from 'lodash/noop';
 import TetherClass from 'tether';
 import createComponent from 'rce-pattern/createComponent';
@@ -48,7 +49,7 @@ let createTether = function(props) {
   return tetherInstance;
 };
 
-let view = React.createClass({
+let view = createClass({
   tetherInstance: null,
   triggerDOM: null,
   popupDOM: null,

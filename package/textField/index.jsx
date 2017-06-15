@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import { findDOMNode } from 'react-dom';
 import createComponent from 'rce-pattern/createComponent';
 import { view as FloatingLabel } from './floatingLabel';
@@ -22,7 +23,7 @@ let update = function({ type, payload, model, dispatch }) {
  * but still let consumer control input through model
  */
 
-let view = React.createClass({
+let view = createClass({
   componentWillReceiveProps(nextProps) {
     let newValue = nextProps.model.val();
     let oldValue = this.input.value;

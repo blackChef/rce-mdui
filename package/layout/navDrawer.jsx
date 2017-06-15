@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 import debounce from 'lodash/debounce';
@@ -29,7 +30,7 @@ let update = function({ type, payload, model, dispatch }) {
   actions[type]();
 };
 
-let view = React.createClass({
+let view = createClass({
   getInitialState() {
     return {
       isPopup: isPopup()

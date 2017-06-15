@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 
 
@@ -63,7 +64,7 @@ let update = function({ type, payload, model, dispatch }) {
   model.set(payload);
 };
 
-let view = React.createClass({
+let view = createClass({
   getInitialState() {
     return {
       inputElem: null,

@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlots } from '../slot/';
 import { view as Transition } from '../transition/appear';
@@ -15,7 +16,7 @@ let update = function({ type, payload, model, dispatch }) {
   }
 };
 
-let view = React.createClass({
+let view = createClass({
   render() {
     let { model, dispatch, dispatcher, children, className = '' } = this.props;
     let tabPanes = getSlots(children, 'tabPane');

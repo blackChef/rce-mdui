@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import { matchValues } from '../utils/checkProps';
@@ -14,7 +15,7 @@ let update = function({ type, payload, model, dispatch }) {
   model.set( !model.val() );
 };
 
-let view = React.createClass({
+let view = createClass({
   componentWillReceiveProps(nextProps) {
     let { container, content } = this.refs;
     let checkOpen = matchValues('model.val', this.props, nextProps);

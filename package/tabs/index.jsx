@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import curry from 'lodash/curry';
 import _map from 'lodash/map';
 import { getSlots } from '../slot/';
@@ -54,7 +55,7 @@ let renderBody = curry(function(model, item, index) {
   );
 });
 
-let view = React.createClass({
+let view = createClass({
   componentDidUpdate(prevProps) {
     let targetIndex = this.props.model.val();
     let curIndex = prevProps.model.val();

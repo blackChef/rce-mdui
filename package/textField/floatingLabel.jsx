@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import InputField from './inputField';
@@ -11,7 +12,7 @@ let init = function() {};
 
 let update = function({ type, payload, model, dispatch }) {};
 
-let view = React.createClass({
+let view = createClass({
   getInitialState() {
     return {
       isFocused: false,

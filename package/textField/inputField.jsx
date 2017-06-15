@@ -1,9 +1,10 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import Textarea from 'react-textarea-autosize';
 import addESCListener from '../utils/escState';
 import noop from 'lodash/noop';
 
-let InputField = React.createClass({
+let InputField = createClass({
   onFocus(event) {
     let { onFocus = noop } = this.props;
     onFocus(event);

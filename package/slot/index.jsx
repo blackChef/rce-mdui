@@ -1,7 +1,8 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import curry from 'lodash/curry';
 
-let view = React.createClass({
+let view = createClass({
   displayName: 'Slot',
   render: function() {
     return null;

@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import noop from 'lodash/noop';
 import createComponent from 'rce-pattern/createComponent';
 import createModelHolder from 'rce-pattern/createModelHolder';
@@ -49,7 +50,7 @@ let Trigger = function(props) {
   );
 };
 
-let view = React.createClass({
+let view = createClass({
   render() {
     return (
       <Tether

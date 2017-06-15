@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
@@ -18,7 +19,7 @@ let update = function({ type, payload, model, dispatch }) {
   }
 };
 
-let view = React.createClass({
+let view = createClass({
   componentDidMount() {
     document.body.appendChild(this.refs.main);
   },

@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import init from './init';
 import update from './update';
@@ -23,7 +24,7 @@ if (window.Element && !Element.prototype.closest) {
 
 let name = 'PopupForm';
 
-let view = React.createClass({
+let view = createClass({
   componentDidMount() {
     if ( this.props.model.show.val() ) {
       this.onOpen();

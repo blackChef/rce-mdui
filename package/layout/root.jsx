@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { view as NavDrawer, init as navDrawerInit, isPopup } from './navDrawer';
 import { view as IconButton } from '../buttons/iconButton';
@@ -25,7 +26,7 @@ let update = function({ type, payload, model, dispatch }) {
 };
 
 
-let view = React.createClass({
+let view = createClass({
   componentDidMount() {
     initScrollState({
       mainSelector: '.layout_main',

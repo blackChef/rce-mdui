@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import { matchValues } from '../utils/checkProps';
@@ -18,7 +19,7 @@ let update = function({ type, payload, model, dispatch }) {
   }
 };
 
-let view = React.createClass({
+let view = createClass({
   componentWillReceiveProps(nextProps) {
     let { dispatch, timeout = 1500 } = this.props;
 

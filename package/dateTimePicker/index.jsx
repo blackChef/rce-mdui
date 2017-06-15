@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import identity from 'lodash/identity';
 import rome from 'rome';
 import createComponent from 'rce-pattern/createComponent';
@@ -29,7 +30,7 @@ let update = function({ type, payload, model, dispatch }) {
   actions[type]();
 };
 
-let Picker = React.createClass({
+let Picker = createClass({
   componentDidMount() {
     let { elem } = this.refs;
     let { initialValue, romeOptions = {} } = this.props;
@@ -65,7 +66,7 @@ let Picker = React.createClass({
   },
 });
 
-let view = React.createClass({
+let view = createClass({
   confirm(closeDialog) {
     let time = this.refs.picker.getDate();
     this.props.dispatch('confirm', time);

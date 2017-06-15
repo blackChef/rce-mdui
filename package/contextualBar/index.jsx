@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import setClassNames from 'classnames';
@@ -42,7 +43,7 @@ let renderActionsForMultipleItems = function(count, children) {
   }
 };
 
-let Count = React.createClass({
+let Count = createClass({
   shouldComponentUpdate(nextProps) {
     // we don't want to see count number changes into 0
     if (nextProps.count === 0) {
@@ -63,7 +64,7 @@ let Count = React.createClass({
   },
 });
 
-let view = React.createClass({
+let view = createClass({
   componentWillReceiveProps(nextProps) {
     let checkCount = matchValues('count', this.props, nextProps);
     let isGotoActive = checkCount(0, nextCount => nextCount > 0);
