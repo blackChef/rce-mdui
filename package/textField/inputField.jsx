@@ -1,13 +1,44 @@
 import React from 'react';
 import Textarea from 'react-textarea-autosize';
+import addESCListener from '../utils/escState';
+import noop from 'lodash/noop';
 
-let InputField = function(props) {
-  let { autoResize = false, ...otherProps } = props;
-  if (autoResize) {
-    return <Textarea {...otherProps} style={{ resize: 'none' }}/>;
-  } else {
-    return <input {...otherProps} />;
-  }
-};
+let InputField = React.createClass({
+  onFocus(event) {
+    let { onFocus = noop } = this.props;
+    onFocus(event);
+
+    let inputDOM = event.target;
+    this.removeESCListener = addESCListener(() => inputDOM.blur());
+  },
+
+  onBlur(event) {
+    let { onBlur = noop } = this.props;
+    onBlur(event);
+
+    this.removeESCListener !== undefined && this.removeESCListener();
+  },
+
+  render() {
+    let { autoResize = false, ...otherProps } = this.props;
+
+    if (autoResize) {
+      return (
+        <Textarea {...otherProps}
+          style={{ resize: 'none' }}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+        />
+      );
+    }
+
+    return (
+      <input {...otherProps}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+      />
+    );
+  },
+});
 
 export default InputField;

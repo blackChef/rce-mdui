@@ -56,7 +56,6 @@ let view = React.createClass({
       ...otherProps
     } = this.props;
 
-
     let Component = floatingLabel === '' ? Simple : FloatingLabel;
 
     return (
