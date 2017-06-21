@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "makePackage": "cd ./tool && node makePackage"
   },
+  "author": "blackChef",
+  "repository": "https://github.com/blackChef/rce-mdui.git",
   "devDependencies": {
     "babel-core": "^6.7.2",
     "babel-loader": "^6.2.4",
