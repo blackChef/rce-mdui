@@ -65,9 +65,10 @@ let view = createClass({
       closeAnimationDuration = 400,
     } = props;
 
-    let { closePopup } = this;
+    let { removeESCListener } = this;
     let { content } = this.refs;
 
+    removeESCListener();
     onClose();
 
     setTimeout(() => {
@@ -79,10 +80,8 @@ let view = createClass({
 
   tryToClose() {
     let { forceOpen, dispatch } = this.props;
-    let { removeESCListener } = this;
     if (!forceOpen) {
       dispatch('close');
-      removeESCListener();
     }
   },
 
