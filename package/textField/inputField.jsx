@@ -16,8 +16,15 @@ let InputField = createClass({
   onBlur(event) {
     let { onBlur = noop } = this.props;
     onBlur(event);
+    this.tryRemoveESCListener();
+  },
 
+  tryRemoveESCListener() {
     this.removeESCListener !== undefined && this.removeESCListener();
+  },
+
+  componentWillUnmount() {
+    this.tryRemoveESCListener();
   },
 
   render() {
