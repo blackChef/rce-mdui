@@ -2,17 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createModelHolder from 'rce-pattern/createModelHolder';
 import createComponent from 'rce-pattern/createComponent';
-import { view as rangeInput } from 'rangeInput/';
+import { view as Input } from 'textField/';
 
-let Test = createModelHolder(rangeInput, 0);
 
-let marks = [
-  { value: 30, label: '30%' },
-  { value: 50, label: '50%' },
-  { value: 90 },
-];
+let T = React.createClass({
+  onChange(event) {
+    let { value } = event.target;
+    console.log('event', value);
+  },
+  render() {
+    return <input
+    onChange={this.onChange}/>
+  }
+});
+
+
+let Test = createModelHolder(Input, 'fdf');
 
 ReactDOM.render(
-  <Test marks={marks} step={10} className="rangeInput--bubble"/>,
+  <Test />,
   document.querySelector('.appContainer')
 );

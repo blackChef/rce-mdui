@@ -4,6 +4,8 @@ import { findDOMNode } from 'react-dom';
 import createComponent from 'rce-pattern/createComponent';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Simple } from './simple';
+import debounce from 'lodash/debounce';
+
 
 let name = 'TextField';
 
@@ -16,31 +18,42 @@ let update = function({ type, payload, model, dispatch }) {
 };
 
 
-/**
- * https://segmentfault.com/q/1010000003974633
- * Model update is async, breaks chinese pinyin ime.
- * Here we are using uncontrolled input,
- * but still let consumer control input through model
- */
+// Chines pinyin ime can be problematic.
+// We can't use model as valule directly, because model update is async,
+// break chinese pinyin ime.
+
+// Reading event.target.value is problematic too.
+// Typing "aa" for "啊啊" will receive `event.target.value` like these:
+// windows: "a", "a'a", "啊啊";
+// ios: "a", "a a", '啊啊', "", "啊啊";
+// android: "啊啊"
 
 let view = createClass({
   componentWillReceiveProps(nextProps) {
-    let newValue = nextProps.model.val();
-    let oldValue = this.input.value;
+    let nextModelVal = nextProps.model.val();
+    let domValue = this.inputDOM.value;
 
-    if (newValue !== oldValue) {
-      this.input.value = newValue;
+    if (nextModelVal !== domValue) {
+      this.inputDOM.value = nextModelVal;
     }
   },
 
   componentWillMount() {
-    let modelVal = this.props.model.val();
-    this.initialValue = (!modelVal && modelVal !== 0)? init() : modelVal;
+    this.defaultValue = this.props.model.val();
+
+    // debounce updating model, so no chinese ime issue on ios
+    let updateModel = debounce(value => {
+      this.props.dispatch('change', value);
+    }, 300);
+
+    this.onChange = function(event) {
+      updateModel(event.target.value);
+    }
   },
 
   componentDidMount() {
     let main = findDOMNode(this.refs.main);
-    this.input = main.querySelector('.textField_field');
+    this.inputDOM = main.querySelector('.textField_field');
   },
 
   render() {
@@ -48,7 +61,6 @@ let view = createClass({
       model,
       dispatch,
       dispatcher,
-      name = '',
       floatingLabel = '',
       fixedFloatingLabel = false,
       hint = '',
@@ -66,9 +78,8 @@ let view = createClass({
         floatingLabel={floatingLabel}
         fixedFloatingLabel={fixedFloatingLabel}
         hint={hint}
-        name={name}
-        defaultValue={this.initialValue}
-        onChange={event => dispatch('change', event.target.value)}
+        defaultValue={this.defaultValue}
+        onChange={this.onChange}
       />
     );
   },
