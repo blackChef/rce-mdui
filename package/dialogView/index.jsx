@@ -18,19 +18,23 @@ let update = function({ type, payload, model, dispatch }) {};
 let Front = function(props) {
   let {
     children,
-    appBarProps = { className: 'dialogView_front_header appBar--shadow' },
+    appBarProps = { className: 'appBar--shadow' },
     forceOpen,
-    tryToClose
+    tryToClose,
+    navButtonIcon = 'close'
   } = props;
 
   let body = getSlotContent(children, 'body');
 
   return (
     <div className="dialogView_front">
-      <AppBar {...appBarProps}>
+      <AppBar
+        {...appBarProps}
+        className={`dialogView_front_header ${appBarProps.className}`}
+      >
         <Slot name="navButton">
           <IconButton
-            icon="close"
+            icon={navButtonIcon}
             disabled={forceOpen}
             onClick={tryToClose}
           />

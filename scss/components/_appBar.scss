@@ -25,6 +25,24 @@
   }
 }
 
+.appBar--light {
+  background: white;
+  color: $c_text_black_primary;
+
+  .iconButton,
+  .rwdFlatButton,
+  .linkButton {
+    @include coloredFlatBtn($c_text_black_primary);
+  }
+
+  .iconButton[disabled],
+  .linkButton[disabled],
+  .rwdFlatButton[disabled] {
+    color: $c_text_black_secondary;
+  }
+
+}
+
 .globalAppBar {
   .appLogo {
     display: none;

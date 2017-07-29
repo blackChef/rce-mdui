@@ -17,7 +17,6 @@
     @include clipText;
     flex: 1;
     font-size: $s_font_title;
-    color: $c_text_white_primary;
 
     &_primary {
       font-size: $s_font_subheading;
@@ -25,7 +24,6 @@
 
     &_secondary {
       font-size: $s_font_caption;
-      color: $c_text_white_secondary;
     }
   }
 
