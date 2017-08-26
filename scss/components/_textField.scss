@@ -22,6 +22,10 @@
       color: $c_text_tertiary;
       border-bottom-style: dashed;
     }
+
+    &[readonly] {
+      border-bottom-style: dashed;
+    }
   }
 
   &_line {

@@ -41,7 +41,13 @@ let actions = {
 
   save({ payload, model, dispatch }) {
 
-    let { apiCalls, onSave = noop, validate = () => true } = payload;
+    let {
+      form,
+      apiCalls,
+      onSave = noop,
+      validate = () => true
+    } = payload;
+
     let content = model.content.val();
 
     let validateResult = validate(content);
@@ -56,11 +62,11 @@ let actions = {
     dispatch('setIsSaving', true);
     dispatch('setFetchingStatus', { status: 'loading', requestType: 'save' });
 
-    saveContent(content).then(function() {
+    saveContent(content, form).then(function(res) {
       dispatch('setIsSaving', false);
       dispatch('setFetchingStatus', { status: 'success' });
       dispatch('closeDialog');
-      onSave(content);
+      onSave(content, res);
 
     }).catch(function(err) {
       dispatch('setFetchingStatus', {

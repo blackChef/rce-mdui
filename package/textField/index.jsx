@@ -44,11 +44,11 @@ let view = createClass({
     // debounce updating model, so no chinese ime issue on ios
     let updateModel = debounce(value => {
       this.props.dispatch('change', value);
-    }, 300);
+    }, 100);
 
     this.onChange = function(event) {
       updateModel(event.target.value);
-    }
+    };
   },
 
   componentDidMount() {

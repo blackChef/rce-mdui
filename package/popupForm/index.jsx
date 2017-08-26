@@ -75,8 +75,13 @@ let view = createClass({
   },
 
   save() {
+    let { form } = this;
     let { dispatch, apiCalls, onSave, validate } = this.props;
-    dispatch('save', { apiCalls, onSave, validate });
+    dispatch('save', { apiCalls, onSave, validate, form });
+  },
+
+  setForm(elem) {
+    this.form = elem;
   },
 
   Form(props) {
@@ -84,6 +89,7 @@ let view = createClass({
     return (
       <form
         {...props}
+        ref={this.setForm}
         id={formId}
         onSubmit={onFormSubmit}
       />

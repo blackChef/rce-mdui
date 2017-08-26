@@ -115,6 +115,10 @@
   @include circleButton(32px);
   @include flatButton;
   @include center;
+  color: rgba(0, 0, 0, 0.38);
+  .mdIcon {
+    color: inherit;
+  }
 }
 
 .linkButton {
