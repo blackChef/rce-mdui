@@ -5,6 +5,8 @@ import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent, getSlot } from '../slot/';
 import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
+import { init as initScrollState, enableScroll, disableScroll } from '../utils/scrollState';
+import { init as initZIndexState } from '../utils/zIndexState';
 import throttle from 'lodash/throttle';
 
 let name = 'Page';
@@ -14,7 +16,7 @@ let init = function() {};
 let update = function({ type, payload, model, dispatch }) {};
 
 let view = createClass({
-  componentDidMount() {
+  setHeaderScrollBehavior() {
     let { autoHideHeader = false } = this.props;
     if (!autoHideHeader) return;
 
@@ -31,17 +33,7 @@ let view = createClass({
       let diff = curSt - prevSt;
       prevSt = curSt;
 
-      if (curSt === 0) {
-        setHeaderState('is_topEdge');
-      }
-
-      else if (
-        curSt + window.innerHeight === document.documentElement.scrollHeight
-      ) {
-        setHeaderState('is_bottomEdge');
-      }
-
-      else if (diff > distanceThrottle) {
+      if (diff > distanceThrottle) {
         setHeaderState('is_scrollDown');
       }
 
@@ -53,12 +45,23 @@ let view = createClass({
     window.addEventListener('scroll', this.onScroll, false);
   },
 
+  componentDidMount() {
+    initScrollState({
+      mainSelector: '.layout_main',
+      mainBodySelector: '.layout_main_body',
+    });
+
+    initZIndexState(30);
+
+    this.setHeaderScrollBehavior();
+  },
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll);
   },
 
   render() {
-    let { model, dispatch, dispatcher, children } = this.props;
+    let { model, dispatch, dispatcher, children, className = '' } = this.props;
     let getContent = getSlotContent(children);
     let header_actions = getContent('header_actions');
     let header_navButton = getContent('header_navButton');
@@ -69,7 +72,7 @@ let view = createClass({
     let contextualBarProps = getSlot(children, 'header_contextualBar').props;
 
     return (
-      <div className="layout_main">
+      <div className={`layout_main ${className}`}>
         <div className="layout_main_header" ref="header">
           <AppBar className="appBar--shadow globalAppBar">
             <Slot name="navButton">{header_navButton}</Slot>
