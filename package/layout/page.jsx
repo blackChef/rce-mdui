@@ -24,6 +24,8 @@ let view = createClass({
       header.dataset.scrollState = state;
     };
 
+    let throttle = 5;
+
     this.onScroll = debounce(function() {
       let curSt = window.scrollY;
       let diff = curSt - prevSt;
@@ -39,11 +41,11 @@ let view = createClass({
         setHeaderState('is_bottomEdge');
       }
 
-      else if (diff > 0) {
+      else if (diff > throttle) {
         setHeaderState('is_scrollDown');
       }
 
-      else if (diff < 0) {
+      else if (diff < -throttle) {
         setHeaderState('is_scrollUp');
       }
     }, 100, { leading: true });
