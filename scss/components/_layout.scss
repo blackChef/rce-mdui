@@ -11,14 +11,25 @@
     position: relative;
     padding-top: $s_appBarHeight;
 
-
-
     &_header {
       position: fixed;
       width: 100%;
       top: 0;
       right: 0;
       z-index: $z_navDrawer - 1;
+      transition: 225ms;
+
+      &[data-scroll-state="is_scrollDown"] {
+        transform: translateY(-100%);
+      }
+
+      &[data-scroll-state="is_scrollUp"] {
+        transform: translateY(0);
+      }
+
+      &[data-scroll-state="is_bottomEdge"] {
+        transform: translateY(-100%);
+      }
     }
 
     &_body {
