@@ -5,7 +5,7 @@ import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent, getSlot } from '../slot/';
 import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
-import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
 
 let name = 'Page';
 
@@ -24,9 +24,9 @@ let view = createClass({
       header.dataset.scrollState = state;
     };
 
-    let throttle = 5;
+    let distanceThrottle = 5;
 
-    this.onScroll = debounce(function() {
+    this.onScroll = throttle(function() {
       let curSt = window.scrollY;
       let diff = curSt - prevSt;
       prevSt = curSt;
@@ -41,11 +41,11 @@ let view = createClass({
         setHeaderState('is_bottomEdge');
       }
 
-      else if (diff > throttle) {
+      else if (diff > distanceThrottle) {
         setHeaderState('is_scrollDown');
       }
 
-      else if (diff < -throttle) {
+      else if (diff < -distanceThrottle) {
         setHeaderState('is_scrollUp');
       }
     }, 100, { leading: true });
