@@ -16,35 +16,6 @@ let init = function() {};
 let update = function({ type, payload, model, dispatch }) {};
 
 let view = createClass({
-  setHeaderScrollBehavior() {
-    let { autoHideHeader = false } = this.props;
-    if (!autoHideHeader) return;
-
-    let prevSt = 0;
-    let { header } = this.refs;
-    let setHeaderState = function(state) {
-      header.dataset.scrollState = state;
-    };
-
-    let distanceThrottle = 5;
-
-    this.onScroll = throttle(function() {
-      let curSt = window.scrollY;
-      let diff = curSt - prevSt;
-      prevSt = curSt;
-
-      if (diff > distanceThrottle) {
-        setHeaderState('is_scrollDown');
-      }
-
-      else if (diff < -distanceThrottle) {
-        setHeaderState('is_scrollUp');
-      }
-    }, 100, { leading: true });
-
-    window.addEventListener('scroll', this.onScroll, false);
-  },
-
   componentDidMount() {
     initScrollState({
       mainSelector: '.layout_main',
@@ -52,8 +23,6 @@ let view = createClass({
     });
 
     initZIndexState(30);
-
-    this.setHeaderScrollBehavior();
   },
 
   componentWillUnmount() {
