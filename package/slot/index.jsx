@@ -1,6 +1,7 @@
 import React from 'react';
 import createClass from 'create-react-class';
 import curry from 'lodash/curry';
+import memoize from 'lodash/memoize';
 
 let view = createClass({
   displayName: 'Slot',
@@ -9,13 +10,14 @@ let view = createClass({
   },
 });
 
-
-let { toArray } = React.Children;
+let toArray = memoize(function(children) {
+  return  React.Children.toArray(children);
+});
 
 let getChildrenWithName = function(children, name) {
   return toArray(children).filter(function(item) {
     let itemName = item.type.displayName ? item.type.displayName : item.type.name;
-    return itemName == name;
+    return itemName === name;
   });
 };
 

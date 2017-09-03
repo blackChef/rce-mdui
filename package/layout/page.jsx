@@ -15,6 +15,50 @@ let init = function() {};
 
 let update = function({ type, payload, model, dispatch }) {};
 
+let Header = createComponent({
+  name: 'PageHeader',
+  view({
+    header_navButton,
+    header_appLogo,
+    header_title,
+    header_actions,
+    contextualBarProps,
+    header_other,
+  }) {
+    return (
+      <div className="layout_main_header">
+        <AppBar
+          className="appBar--shadow globalAppBar"
+        >
+          <Slot name="navButton">{header_navButton}</Slot>
+          <Slot name="title">
+            {header_appLogo}
+            <div className="appBar_pageTitle">
+              {header_title}
+            </div>
+          </Slot>
+          <Slot name="actions">{header_actions}</Slot>
+          <Slot {...contextualBarProps} name="contextualBar"/>
+          <Slot name="other">{header_other}</Slot>
+        </AppBar>
+      </div>
+    );
+  }
+});
+
+let Body = createComponent({
+  name: 'PageBody',
+  view({ body }) {
+    return (
+      <main className="layout_main_body">
+        <div className="layout_main_body_inner">
+          {body}
+        </div>
+      </main>
+    );
+  }
+});
+
 let view = createClass({
   componentDidMount() {
     initScrollState({
@@ -25,43 +69,58 @@ let view = createClass({
     initZIndexState(30);
   },
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll);
+  componentWillMount() {
+    let { children, variableSlots = [], constantSlots = [] } = this.props;
+
+    let slots = [
+      'header_actions',
+      'header_navButton',
+      'header_appLogo',
+      'header_title',
+      'header_other',
+      'body',
+    ];
+
+    let _constantSlots;
+
+    if (variableSlots.length > 0) {
+      _constantSlots = slots.filter(i => !variableSlots.includes(i));
+    } else {
+      _constantSlots = constantSlots;
+    }
+
+    let constantSlotsMap = _constantSlots.reduce(function(preVal, slotName) {
+      return {
+        ...preVal,
+        [slotName]: getSlotContent(children, slotName)
+      };
+    }, {});
+
+    this.getSlotContent = function(children, name) {
+      if (constantSlotsMap[name]) {
+        return constantSlotsMap[name];
+      }
+
+      return getSlotContent(children, name);
+    };
   },
 
   render() {
-    let { model, dispatch, dispatcher, children, className = '' } = this.props;
-    let getContent = getSlotContent(children);
-    let header_actions = getContent('header_actions');
-    let header_navButton = getContent('header_navButton');
-    let header_appLogo = getContent('header_appLogo');
-    let header_title = getContent('header_title');
-    let header_other = getContent('header_other');
-    let body = getContent('body');
-    let contextualBarProps = getSlot(children, 'header_contextualBar').props;
+    let { children, className = '' } = this.props;
 
+    let headerProps = {
+      header_navButton: this.getSlotContent(children, 'header_navButton'),
+      header_appLogo: this.getSlotContent(children, 'header_appLogo'),
+      header_title: this.getSlotContent(children, 'header_title'),
+      header_actions: this.getSlotContent(children, 'header_actions'),
+      header_other: this.getSlotContent(children, 'header_other'),
+      contextualBarProps: getSlot(children, 'header_contextualBar').props,
+    };
+    let body = this.getSlotContent(children, 'body');
     return (
       <div className={`layout_main ${className}`}>
-        <div className="layout_main_header" ref="header">
-          <AppBar className="appBar--shadow globalAppBar">
-            <Slot name="navButton">{header_navButton}</Slot>
-            <Slot name="title">
-              {header_appLogo}
-              <div className="appBar_pageTitle">
-                {header_title}
-              </div>
-            </Slot>
-            <Slot name="actions">{header_actions}</Slot>
-            <Slot {...contextualBarProps} name="contextualBar"/>
-            <Slot name="other">{header_other}</Slot>
-          </AppBar>
-        </div>
-
-        <main className="layout_main_body">
-          <div className="layout_main_body_inner">
-            {body}
-          </div>
-        </main>
+        <Header {...headerProps}/>
+        <Body body={body}/>
       </div>
     );
   },

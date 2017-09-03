@@ -4,6 +4,8 @@ import createClass from 'create-react-class';
 import noop from 'lodash/noop';
 
 let RenderInBody = createClass({
+  displayName: 'RenderInBody',
+
   componentDidMount() {
     let { hookElem = noop} = this.props;
     let container = document.createElement('div');
