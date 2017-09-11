@@ -15,6 +15,7 @@ $types: (
   @each $breakPointName, $breakPointSize in $breakPoints {
 
     @include respondTo_page($breakPointName) {
+      $breakPointStr: null;
       @if ($breakPointName == 'xxsm') {
         $breakPointStr: '';
       } @else {

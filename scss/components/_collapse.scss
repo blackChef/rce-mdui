@@ -24,41 +24,41 @@
   }
 }
 
+@function setPseudo($dir) {
+  @if ($dir == left) {
+    @return 'before';
+  }
+  @else {
+    @return 'after';
+  }
+}
+
+@mixin margin($dir) {
+  @if ($dir == left) {
+    margin-right: $s_gutter;
+  }
+
+  @else {
+    margin-left: auto;
+  }
+}
+
 @mixin collapse--arrow($dir) {
-  @function setPseudo {
-    @if ($dir == left) {
-      @return 'before';
-    }
-    @else {
-      @return 'after';
-    }
-  }
-
-  @mixin margin() {
-    @if ($dir == left) {
-      margin-right: $s_gutter;
-    }
-
-    @else {
-      margin-left: auto;
-    }
-  }
-
   .collapse_header {
     height: $s_touchable;
     display: flex;
     align-items: center;
 
-    &::#{setPseudo()} {
+    &::#{setPseudo($dir)} {
       content: 'keyboard_arrow_down';
       @include mdIcon;
-      @include margin;
+      @include margin($dir);
       transition: 225ms;
       color: $c_icon;
     }
   }
 
-  &.is_active > .collapse_header::#{setPseudo()} {
+  &.is_active > .collapse_header::#{setPseudo($dir)} {
     transform: rotate(-180deg);
   }
 }

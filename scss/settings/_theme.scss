@@ -1,3 +1,9 @@
+$c_text_primary: null;
+$c_text_secondary: null;
+$c_text_tertiary: null;
+$c_icon: null;
+$c_divider: null;
+
 @if ($themeType == 'light') {
   $c_text_primary: $c_text_black_primary;
   $c_text_secondary: $c_text_black_secondary;

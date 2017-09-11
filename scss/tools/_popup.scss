@@ -1,9 +1,15 @@
-@mixin popup() {
+@mixin popup($useViewportSize: true) {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+
+  @if ($useViewportSize) {
+    width: 100vw;
+    height: 100vh;
+  } @else {
+    width: 100%;
+    height: 100%;
+  }
 
   visibility: hidden;
   &.is_active {

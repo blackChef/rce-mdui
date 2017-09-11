@@ -5,23 +5,6 @@
   margin-right: -$s_gutter / 2;
 }
 
-.row--noMargin {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.row--stretch {
-  flex: 1;
-}
-
-.row--fullWidth {
-  width: 100%;
-}
-
-.row--fullHeight {
-  height: 100%;
-}
-
 .row .row {
   max-width: none;
   margin-left: -$s_gutter / 2;
@@ -67,4 +50,21 @@
 .shrink {
   flex: 0 0 auto;
   max-width: 100%;
+}
+
+.row--noMargin {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.row--stretch {
+  flex: 1;
+}
+
+.row--fullWidth {
+  width: 100%;
+}
+
+.row--fullHeight {
+  height: 100%;
 }

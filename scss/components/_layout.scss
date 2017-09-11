@@ -9,10 +9,10 @@
   &_main {
     min-height: 100vh;
     position: relative;
-    padding-top: $s_appBarHeight;
+    // padding-top: $s_appBarHeight;
 
     &_header {
-      position: fixed;
+      position: relative;
       width: 100%;
       top: 0;
       right: 0;
@@ -26,10 +26,10 @@
       &[data-scroll-state="is_scrollUp"] {
         transform: translateY(0);
       }
+    }
 
-      &[data-scroll-state="is_bottomEdge"] {
-        transform: translateY(-100%);
-      }
+    &--autoHideHeader[data-is-scroll-disabled="true"] &_header {
+      transform: translateY(-100%);
     }
 
     &_body {

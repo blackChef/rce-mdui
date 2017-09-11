@@ -1,3 +1,8 @@
+$chips_item_bg: null;
+$chips_item_text: null;
+$chips_clearBtn_bg: null;
+$chips_clearBtn_text: null;
+
 @if ($themeType == 'light') {
   $chips_item_bg: #E0E0E0;
   $chips_item_text: $c_text_black_primary;

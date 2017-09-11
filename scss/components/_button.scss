@@ -40,7 +40,7 @@
     background-color: rgba(#999999, 0.2);
   };
 
-  &:active {
+  &:active, &.is_active {
     background-color: rgba(#999999, 0.4);
   }
 

@@ -1,4 +1,5 @@
 .dialogView {
+
   @include popup;
   display: flex;
   justify-content: center;
@@ -24,12 +25,8 @@
 
     &_body {
       flex: 1;
-      @include allowScroll('y');
       position: relative;
-
-      // browser some times doesnt render height properly
-      // 80 is url bar's height
-      padding-bottom: 80px;
+      @include allowScroll('y');
     }
 
     transform: translateY($s_unit * 6);
