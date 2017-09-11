@@ -42,6 +42,9 @@
   }
 }
 
+.globalAppBar {
+  @include depth(4);
+}
 
 @include respondTo_page(lg) {
   .is_drawerOpen {

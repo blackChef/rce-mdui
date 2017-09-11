@@ -9,7 +9,9 @@ let setSt = function(st) {
 };
 
 
-let mainSelector, mainBodySelector;
+let mainSelector, mainBodySelector, mainHeaderSelector;
+let styleType = 'transform';
+let moveHeader = false;
 let isDisabled = false;
 let requireDisableScrollCount = 0;
 let currentScrollTop = 0;
@@ -47,8 +49,22 @@ let enableScroll = function() {
   ) {
     main.style.height = '';
     main.style.overflow = '';
-    // mainBody.style.transform = '';
-    mainBody.style.marginTop = '';
+
+    if (styleType === 'transform') {
+      mainBody.style.transform = ``;
+    } else if (styleType === 'margin') {
+      mainBody.style.marginTop = ``;
+    }
+
+    if (moveHeader) {
+      let mainHeader = document.querySelector(mainHeaderSelector);
+      if (styleType === 'transform') {
+        mainHeader.style.transform = ``;
+      } else if (styleType === 'margin') {
+        mainHeader.style.marginTop = ``;
+      }
+    }
+
     main.dataset.isScrollDisabled = false;
     setSt(currentScrollTop);
 
@@ -75,8 +91,21 @@ let disableScroll = function() {
     main.dataset.isScrollDisabled = true;
     main.style.height = '100vh';
     main.style.overflow = 'hidden';
-    // mainBody.style.transform = `translateY(-${currentScrollTop}px)`;
-    mainBody.style.marginTop = `-${currentScrollTop}px`;
+
+    if (styleType === 'transform') {
+      mainBody.style.transform = `translateY(-${currentScrollTop}px)`;
+    } else if (styleType === 'margin') {
+      mainBody.style.marginTop = `-${currentScrollTop}px`;
+    }
+
+    if (moveHeader) {
+      let mainHeader = document.querySelector(mainHeaderSelector);
+      if (styleType === 'transform') {
+        mainHeader.style.transform = `translateY(-${currentScrollTop}px)`;
+      } else if (styleType === 'margin') {
+        mainHeader.style.marginTop = `-${currentScrollTop}px`;
+      }
+    }
 
     isDisabled = true;
     onDisableCallbacks.forEach(function(item) {
@@ -87,10 +116,16 @@ let disableScroll = function() {
 
 let init = function({
   mainSelector: _mainSelector,
-  mainBodySelector: _mainBodySelector
+  mainBodySelector: _mainBodySelector,
+  mainHeaderSelector: _mainHeaderSelector,
+  styleType: _styleType = 'transform', // transform | margin
+  moveHeader: _moveHeader = false,
 }) {
   mainSelector = _mainSelector;
   mainBodySelector = _mainBodySelector;
+  mainHeaderSelector = _mainHeaderSelector;
+  styleType = _styleType;
+  moveHeader = _moveHeader;
 };
 
 export {

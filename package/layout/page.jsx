@@ -28,7 +28,7 @@ let Header = createComponent({
     return (
       <div className="layout_main_header">
         <AppBar
-          className="appBar--shadow globalAppBar"
+          className="globalAppBar"
         >
           <Slot name="navButton">{header_navButton}</Slot>
           <Slot name="title">
@@ -61,9 +61,14 @@ let Body = createComponent({
 
 let view = createClass({
   componentDidMount() {
+    let { scrollStateProps = {} } = this.props;
+
     initScrollState({
       mainSelector: '.layout_main',
       mainBodySelector: '.layout_main_body',
+      mainHeaderSelector: '.layout_main_header',
+      moveHeader: false,
+      ...scrollStateProps
     });
 
     initZIndexState(30);
