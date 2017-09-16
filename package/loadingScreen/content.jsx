@@ -15,13 +15,15 @@ let renderActions = function({ model, onRequestRetry, parentDispatch }) {
   if (model.val() === 'failed') {
     return (
       <div className="loadingScreen_actions">
-        <LinkButton
-          className="linkButton--accent linkButton--bounded"
-          onClick={onRequestRetry}
-        >
-          重试
-        </LinkButton>
-
+        {
+          typeof onRequestRetry === 'function' &&
+          <LinkButton
+            className="linkButton--accent linkButton--bounded"
+            onClick={onRequestRetry}
+          >
+            重试
+          </LinkButton>
+        }
         <LinkButton
           className="linkButton--accent linkButton--bounded"
           onClick={() => parentDispatch('setStatus', 'hide')}
@@ -33,7 +35,7 @@ let renderActions = function({ model, onRequestRetry, parentDispatch }) {
   }
 };
 
-let LoadingInfo = function({ msg = '加载中' }) {
+let LoadingInfo = function({ msg = '请稍候' }) {
   return (
     <div className="loadingScreen_info">
       <div className="loadingScreen_indicator">
