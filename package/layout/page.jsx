@@ -62,15 +62,11 @@ let Body = createComponent({
 let view = createClass({
   componentDidMount() {
     let { scrollStateProps = {} } = this.props;
-
     initScrollState({
       mainSelector: '.layout_main',
       mainBodySelector: '.layout_main_body',
-      mainHeaderSelector: '.layout_main_header',
-      moveHeader: false,
       ...scrollStateProps
     });
-
     initZIndexState(30);
   },
 

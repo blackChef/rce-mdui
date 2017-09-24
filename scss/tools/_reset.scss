@@ -15,4 +15,5 @@
   border-radius: 0; // ios
   padding: 0; // ios
   box-shadow: none; // firefox add boxShadow to invalid input
+  overflow: hidden; // fix ios cursor may move out of box
 }
