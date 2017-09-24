@@ -1,6 +1,6 @@
 {
   "name": "rce-mdui",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -25,7 +25,7 @@
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.0",
     "lodash": "^4.6.1",
-    "rce-pattern": "^0.6.0",
+    "rce-pattern": "^0.6.2",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.0.2",
