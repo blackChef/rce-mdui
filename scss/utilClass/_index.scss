@@ -1,8 +1,14 @@
 @import './theme';
 @import './fontSize';
+@import './hide';
 
-.u_displayFlex {
-  display: flex !important;
+
+.u_display_flex, .u_display_flexbox {
+  display: flex;
+}
+
+.u_display_block {
+  display: block;
 }
 
 .u_touchable {
@@ -11,11 +17,11 @@
 }
 
 .u_clickable {
-  cursor: pointer !important;
+  cursor: pointer;
 }
 
 .u_noScroll {
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 .u_clipText {
@@ -43,16 +49,12 @@
   padding-bottom: $s_gutter / 2;
 }
 
-.u_hide {
-  display: none !important;
-}
-
-.u_hide--visibility {
-  visibility: hidden !important;
-}
-
 .u_readable {
-  line-height: 2 !important;
+  line-height: 2;
+}
+
+.u_resetLineHeight {
+  line-height: 1;
 }
 
 $positionList: (
@@ -63,20 +65,20 @@ $positionList: (
 
 @each $position in $positionList {
   .u_textAlign_#{$position} {
-    text-align: $position !important;
+    text-align: $position;
   }
 }
 
 .u_vh {
-  height: 100vh !important;
+  height: 100vh;
 }
 
 .u_fullWidth {
-  width: 100% !important;
+  width: 100%;
 }
 
 .u_fullHeight {
-  height: 100% !important;
+  height: 100%;
 }
 
 .u_pageBodyHeight {

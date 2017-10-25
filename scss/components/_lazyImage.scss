@@ -1,0 +1,18 @@
+.lazyImage {
+  &--keepRatio {
+    .lazyImage_innerWrapper {
+      background-color: $c_bodyBg;
+    }
+
+    img {
+      visibility: hidden;
+      opacity: 0;
+      transition: 225ms;
+
+      &.is_loaded {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -4,6 +4,10 @@
   @include depth(2);
 }
 
+.paper--border {
+  border: 1px solid $c_divider;
+}
+
 @each $breakPointName, $breakPointSize in $breakPoints {
   @include respondTo_page($breakPointName) {
     .paper_#{$breakPointName}--stretch {

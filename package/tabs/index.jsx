@@ -1,13 +1,10 @@
 import React from 'react';
 import createClass from 'create-react-class';
-import curry from 'lodash/curry';
-import _map from 'lodash/map';
-import { getSlots } from '../slot/';
 import createComponent from 'rce-pattern/createComponent';
+import { getSlots } from '../slot/';
+import { view as Transition } from '../transition/appear';
 
-let map = curry(_map);
-
-let name = 'tabs';
+let name = 'tabs_remount';
 
 let init = function() {
   return 0; //active index
@@ -19,85 +16,57 @@ let update = function({ type, payload, model, dispatch }) {
   }
 };
 
-
-let setClassName = function(suffix, model, index) {
-  if (index == model.val()) {
-    return 'is_active ' + suffix;
-  } else {
-    return suffix;
-  }
-};
-
-let getTabIndex = event => event.currentTarget.dataset.tabIndex;
-
-let renderHeader = curry(function(model, dispatcher, item, index) {
-  return (
-    <div
-      key={index}
-      data-tab-index={index}
-      className={setClassName('tabs_nav_item', model, index)}
-      onClick={dispatcher('changeTab', getTabIndex)}
-    >
-      {item.props.label}
-    </div>
-  );
-});
-
-let renderBody = curry(function(model, item, index) {
-  return (
-    <div
-      key={index}
-      data-tab-index={index}
-      className={setClassName('tabs_body_item', model, index)}
-    >
-      {item.props.children}
-    </div>
-  );
-});
-
 let view = createClass({
-  componentDidUpdate(prevProps) {
-    let targetIndex = this.props.model.val();
-    let curIndex = prevProps.model.val();
-    if (targetIndex === curIndex) return;
-
-
-    let { nav, body } = this.refs;
-
-    // navItem use ripple, ref to navItem wont work
-    let targetPane = body.querySelector(`[data-tab-index="${targetIndex}"]`);
-    let curPane = body.querySelector(`[data-tab-index="${curIndex}"]`);
-
-    if (!targetPane || !curPane) return;
-
-    curPane.classList.remove('slideUp', 'slideUp_active');
-    targetPane.classList.add('slideUp');
-
-    setTimeout(function() {
-      targetPane.classList.add('slideUp_active');
-    }, 20);
-  },
-
-  render() {
-    let { model, dispatch, dispatcher, children, className = '' } = this.props;
+  componentWillReceiveProps(nextProps) {
+    // if count of tabPanes changes
+    let { model, children, dispatch } = nextProps;
     let tabPanes = getSlots(children, 'tabPane');
-    let mapTabpanes = map(tabPanes);
+    let curIndex = model.val();
+    if (curIndex > tabPanes.length - 1) {
+      dispatch('changeTab', tabPanes.length - 1);
+    }
+  },
+  render() {
+    let { model, dispatch, dispatcher, children, className = '', transitionName = 'slideUp' } = this.props;
+    let tabPanes = getSlots(children, 'tabPane');
+    let curIndex = model.val();
+
+    let headerItems = tabPanes.map(function(item, index) {
+      return (
+        <div
+          key={index}
+          className={`tabs_nav_item ${index === curIndex ? 'is_active' : ''}`}
+          onClick={() => dispatch('changeTab', index)}
+        >
+          {item.props.label}
+        </div>
+      );
+    });
+
+    // model may not change now
+    let curPane = curIndex > tabPanes.length - 1 ?
+      tabPanes[tabPanes.length - 1].props.children :
+      tabPanes[curIndex].props.children;
 
     return (
       <div className={`tabs ${className}`}>
-        <div ref="nav" className="tabs_nav">
-          {mapTabpanes(renderHeader(model, dispatcher))}
+        <div className="tabs_nav">
+          {headerItems}
         </div>
 
-        <div ref="body" className="tabs_body">
-          {mapTabpanes(renderBody(model))}
+        <div className="tabs_body">
+          <Transition
+            name={transitionName}
+            className="tabs_body_item is_active"
+            key={curIndex}
+          >
+            {curPane}
+          </Transition>
         </div>
       </div>
     );
   },
 });
-
-
 
 view = createComponent({ name, view, update });
 export { init, view };

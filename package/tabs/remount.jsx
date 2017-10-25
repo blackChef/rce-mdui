@@ -17,8 +17,17 @@ let update = function({ type, payload, model, dispatch }) {
 };
 
 let view = createClass({
+  componentWillReceiveProps(nextProps) {
+    // if count of tabPanes changes
+    let { model, children, dispatch } = nextProps;
+    let tabPanes = getSlots(children, 'tabPane');
+    let curIndex = model.val();
+    if (curIndex > tabPanes.length - 1) {
+      dispatch('changeTab', tabPanes.length - 1);
+    }
+  },
   render() {
-    let { model, dispatch, dispatcher, children, className = '' } = this.props;
+    let { model, dispatch, dispatcher, children, className = '', transitionName = 'slideUp' } = this.props;
     let tabPanes = getSlots(children, 'tabPane');
     let curIndex = model.val();
 
@@ -34,6 +43,11 @@ let view = createClass({
       );
     });
 
+    // model may not change now
+    let curPane = curIndex > tabPanes.length - 1 ?
+      tabPanes[tabPanes.length - 1].props.children :
+      tabPanes[curIndex].props.children;
+
     return (
       <div className={`tabs ${className}`}>
         <div className="tabs_nav">
@@ -42,11 +56,11 @@ let view = createClass({
 
         <div className="tabs_body">
           <Transition
-            name="slideUp"
+            name={transitionName}
             className="tabs_body_item is_active"
             key={curIndex}
           >
-            {tabPanes[curIndex].props.children}
+            {curPane}
           </Transition>
         </div>
       </div>

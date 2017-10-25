@@ -1,0 +1,26 @@
+@each $breakPointName, $breakPointSize in $breakPoints {
+  @include respondTo_page($breakPointName) {
+    $breakPointStr: null;
+    @if ($breakPointName == 'xxsm') {
+      $breakPointStr: '';
+    } @else {
+      $breakPointStr: '_#{$breakPointName}';
+    }
+
+    .u_hide#{$breakPointStr} {
+      display: none ;
+    }
+
+    .u_visibilityHide#{$breakPointStr} {
+      visibility: hidden ;
+    }
+
+    .u_hide_unset#{$breakPointStr} {
+      display: unset ;
+    }
+
+    .u_visibilityHide_unset#{$breakPointStr} {
+      visibility: unset ;
+    }
+  }
+}
