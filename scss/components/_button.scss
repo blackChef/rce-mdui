@@ -116,6 +116,7 @@
   @include flatButton;
   @include center;
   color: rgba(0, 0, 0, 0.38);
+
   .mdIcon {
     color: inherit;
   }
@@ -223,6 +224,13 @@
 .fab {
   @include paperButton(8, 12);
   @include circleButton(56px);
+
+  background-color: $c_accent;
+  color: $c_text_white_primary;
+
+  .mdIcon {
+    color: inherit;
+  }
 
   &--mini {
     width: 40px;

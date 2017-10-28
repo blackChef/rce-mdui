@@ -53,8 +53,8 @@ let FailedInfo = function({ msg = '出错了' }) {
   return (
     <div className="loadingScreen_info u_text_failed">
       <div className="loadingScreen_indicator">
-        <Icon type="error" className="mdIcon--unbounded mdIcon--inheritColor"
-          style={{ fontSize: '40px' }}
+        <Icon icon="error" className="mdIcon--inheritColor"
+          size={40}
         />
       </div>
 
@@ -67,8 +67,8 @@ let SuccessInfo = function({ msg = '加载成功' }) {
   return (
     <div className="loadingScreen_info u_text_success">
       <div className="loadingScreen_indicator">
-        <Icon type="check_circle" className="mdIcon--unbounded mdIcon--inheritColor"
-          style={{ fontSize: '40px' }}
+        <Icon icon="check_circle" className="mdIcon--inheritColor"
+          size={40}
         />
       </div>
 

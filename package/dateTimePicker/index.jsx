@@ -32,7 +32,7 @@ let update = function({ type, payload, model, dispatch }) {
 
 let Picker = createClass({
   componentDidMount() {
-    let { elem } = this.refs;
+    let { elem } = this;
     let { initialValue, romeOptions = {} } = this.props;
     let options = Object.assign(romeOptions, {
       initialValue: new Date(initialValue),
@@ -61,14 +61,14 @@ let Picker = createClass({
 
   render() {
     return (
-      <div ref="elem" />
+      <div ref={e => this.elem = e} />
     );
   },
 });
 
 let view = createClass({
   confirm(closeDialog) {
-    let time = this.refs.picker.getDate();
+    let time = this.picker.getDate();
     this.props.dispatch('confirm', time);
     closeDialog();
   },
@@ -78,7 +78,7 @@ let view = createClass({
     let time = model.time.val();
 
     return (
-      <div ref="main">
+      <div>
         <Dialog
           className="dialog--noContentSidePadding dateTimeRangePicker_dialog"
           model={model.show}
@@ -87,13 +87,13 @@ let view = createClass({
           <Slot name="content">
             <Picker
               initialValue={time}
-              ref="picker"
+              ref={e => this.picker = e}
             />
           </Slot>
         </Dialog>
 
         <TextFieldBtn
-          className="textField--dropDown"
+          className="textFieldBtn--dropDown"
           floatingLabel={label}
           onClick={dispatcher('showPicker')}
           value={timeFormatter(time)}

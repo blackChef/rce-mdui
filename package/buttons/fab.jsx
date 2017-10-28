@@ -18,7 +18,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let content = icon ? <Icon type={icon} /> : children;
+  let content = icon ? <Icon icon={icon} /> : children;
 
   return (
     <Button {...otherProps} className={`fab ${className}`}>

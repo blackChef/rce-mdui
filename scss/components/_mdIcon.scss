@@ -1,11 +1,11 @@
-.mdIcon, .material-icons {
+.mdIcon {
   width: 24px;
-  height: 24px;
-  @include mdIcon;
+  color: $c_icon;
+
   @include center;
 
-  &--unbounded {
-    width: auto;
+  svg {
+    width: 100%;
     height: auto;
   }
 
@@ -13,5 +13,3 @@
     color: inherit;
   }
 }
-
-

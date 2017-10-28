@@ -99,23 +99,6 @@
   }
 }
 
-.textField--dropDown {
-  position: relative;
-
-  .textField_field {
-    padding-right: 24px;
-  }
-
-  &::after {
-    position: absolute;
-    right: 0;
-    bottom: 16px;
-    @include mdIcon;
-    content: 'arrow_drop_down';
-    color: $c_divider;
-  }
-}
-
 .textField--floatingLabel.textField--dropDown::after {
   bottom: 5px;
 }
@@ -130,5 +113,23 @@
     background: none;
     outline: none;
     border: none;
+  }
+
+  .mdIcon { display: none; }
+}
+
+.textFieldBtn--dropDown {
+  position: relative;
+
+  .textField_field {
+    padding-right: 24px;
+  }
+
+  .mdIcon {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    color: $c_divider;
   }
 }

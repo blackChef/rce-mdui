@@ -2,6 +2,10 @@
   &_header {
     overflow: hidden;
     cursor: pointer;
+
+    .mdIcon {
+      display: none;
+    }
   }
 
   &_body {
@@ -49,16 +53,21 @@
     display: flex;
     align-items: center;
 
-    &::#{setPseudo($dir)} {
-      content: 'keyboard_arrow_down';
-      @include mdIcon;
-      @include margin($dir);
+    .mdIcon {
+      display: flex;
       transition: 225ms;
-      color: $c_icon;
+
+      @if ($dir == left) {
+        order: -1;
+        margin-right: $s_gutter;
+      } @else {
+        order: 1;
+        margin-left: $s_gutter;
+      }
     }
   }
 
-  &.is_active > .collapse_header::#{setPseudo($dir)} {
+  &.is_active > .collapse_header .mdIcon {
     transform: rotate(-180deg);
   }
 }
@@ -69,12 +78,6 @@
 
 .collapse--rightArrow {
   @include collapse--arrow(right);
-
-  .collapse_header {
-    .mdIcon {
-      margin-right: $s_gutter * 1.5;
-    }
-  }
 }
 
 .collapse--arrow--align {

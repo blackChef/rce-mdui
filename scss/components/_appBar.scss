@@ -20,20 +20,25 @@
 }
 
 .globalAppBar {
+  .actionBar_title {
+    display: flex;
+    align-items: center;
+  }
+
   .appLogo {
     display: none;
+  }
 
-    &::after {
-      @include mdIcon;
-      color: inherit;
-      content: 'chevron_right';
-      margin-left: $s_gutter;
-      margin-right: $s_gutter;
-    }
+  .appLogo + .mdIcon {
+    display: none;
   }
 
   @include respondTo_page(lg) {
     .appLogo {
+      display: flex;
+    }
+
+    .appLogo + .mdIcon {
       display: flex;
     }
 
