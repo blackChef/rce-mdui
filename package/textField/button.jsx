@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 import { view as Simple } from './simple';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Icon } from '../icon/';
+import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down';
 
 
 let name = 'textFieldBtn';
@@ -41,7 +42,7 @@ let view = function(props) {
         fixedFloatingLabel={true}
         hint={hint}
       />
-      <Icon icon="arrow_drop_down"/>
+      <Icon icon={MdArrowDropDown}/>
     </div>
   );
 };

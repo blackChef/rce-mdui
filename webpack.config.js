@@ -1,3 +1,5 @@
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 let babelConfig = {
   presets: [
     ['babel-preset-react'],
@@ -26,6 +28,9 @@ module.exports = {
       'node_modules',
     ]
   },
+  plugins: [
+    new UglifyJSPlugin()
+  ],
   module: {
     loaders: [
       {

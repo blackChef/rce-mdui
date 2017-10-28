@@ -9,6 +9,8 @@ import { view as Icon } from '../icon/';
 import { init as initScrollState, enableScroll, disableScroll } from '../utils/scrollState';
 import { init as initZIndexState } from '../utils/zIndexState';
 import throttle from 'lodash/throttle';
+import MdChevronRight from 'react-icons/lib/md/chevron-right';
+
 
 let name = 'Page';
 
@@ -37,7 +39,7 @@ let Header = createComponent({
               header_appLogo.length ?
               <div>
                 {header_appLogo}
-                <Icon icon="chevron_right" className="mdIcon--inheritColor side_gutter_margin"/>
+                <Icon icon={MdChevronRight} className="mdIcon--inheritColor side_gutter_margin"/>
               </div> : null
             }
             <div className="appBar_pageTitle">

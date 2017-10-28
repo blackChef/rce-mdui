@@ -4,6 +4,10 @@ import { view as Spinner } from '../progressIndicator/circular';
 import { view as LinkButton } from '../buttons/linkButton';
 import { view as Icon } from '../icon/';
 import { view as Transition } from '../transition/enterLeave';
+import MdError from 'react-icons/lib/md/error';
+import MdCheckCircle from 'react-icons/lib/md/check-circle';
+
+
 
 let name = 'Content';
 
@@ -53,7 +57,7 @@ let FailedInfo = function({ msg = '出错了' }) {
   return (
     <div className="loadingScreen_info u_text_failed">
       <div className="loadingScreen_indicator">
-        <Icon icon="error" className="mdIcon--inheritColor"
+        <Icon icon={MdError} className="mdIcon--inheritColor"
           size={40}
         />
       </div>
@@ -67,7 +71,7 @@ let SuccessInfo = function({ msg = '加载成功' }) {
   return (
     <div className="loadingScreen_info u_text_success">
       <div className="loadingScreen_indicator">
-        <Icon icon="check_circle" className="mdIcon--inheritColor"
+        <Icon icon={MdCheckCircle} className="mdIcon--inheritColor"
           size={40}
         />
       </div>

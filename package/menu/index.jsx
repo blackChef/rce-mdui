@@ -6,6 +6,7 @@ import createModelHolder from 'rce-pattern/createModelHolder';
 import { getSlots } from '../slot/';
 import { view as Tether } from '../tether/';
 import { view as IconButton } from '../buttons/iconButton';
+import MdMoreVert from 'react-icons/lib/md/more-vert';
 
 
 let name = 'Menu';
@@ -45,7 +46,7 @@ let Popup = function({ hidePopup, isShown, children }) {
 
 let Trigger = function(props) {
   let {
-    triggerElement = <IconButton icon="more_vert"/>,
+    triggerElement = <IconButton icon={MoreVert}/>,
     showPopup,
   } = props;
 

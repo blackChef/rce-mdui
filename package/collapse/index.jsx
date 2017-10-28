@@ -4,6 +4,8 @@ import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import { matchValues } from '../utils/checkProps';
 import { view as Icon }  from '../icon';
+import MdKeyboardArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
+
 
 let name = 'Collapse';
 
@@ -57,7 +59,7 @@ let view = createClass({
     return (
       <div className={`collapse ${className} ${model.val() ? 'is_active' : ''}`}>
         <div className="collapse_header" onClick={dispatcher('toggle')}>
-          <Icon icon="keyboard_arrow_down"/>
+          <Icon icon={MdKeyboardArrowDown}/>
           <div>{header}</div>
         </div>
 
