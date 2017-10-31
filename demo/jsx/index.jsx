@@ -31,7 +31,7 @@ let App = React.createClass({
       <div>
         <Icon icon={MdInsertPhoto}/>
         <i className="mdFontIcon">insert_photo</i>
-        <IconButton icon={MdInsertPhoto} className="iconButton--primary"></IconButton>
+        <IconButton icon={<MdInsertPhoto></MdInsertPhoto>} className="iconButton--primary"></IconButton>
         <Fab icon={MdInsertPhoto} className="fab--primary"></Fab>
         <RwdFlatButton icon={MdInsertPhoto} className="rwdFlatButton--primary">fdsfdsf</RwdFlatButton>
         <TextFieldBtn className="textFieldBtn--dropDown" value="12313"></TextFieldBtn>
