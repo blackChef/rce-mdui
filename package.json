@@ -1,12 +1,13 @@
 {
   "name": "rce-mdui",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "makePackage": "cd ./tool && node makePackage",
-    "dev": "webpack --watch"
+    "dev": "set NODE_ENV=\"dev\"&&webpack --debug --output-pathinfo --watch",
+    "build": "set NODE_ENV=\"production\"&&webpack --progress"
   },
   "author": "blackChef",
   "repository": "https://github.com/blackChef/rce-mdui.git",

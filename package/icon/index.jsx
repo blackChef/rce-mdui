@@ -12,13 +12,11 @@ let view = function(props) {
     model,
     dispatch,
     dispatcher,
-    icon,
+    icon, // react class or react element
     className = '',
     size = 24,
     ...otherProps
   } = props;
-
-  if (React.isValidElement(icon)) {}
 
   let _icon = React.isValidElement(icon) ? icon : React.createElement(icon);
 
