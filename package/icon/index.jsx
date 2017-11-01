@@ -12,16 +12,16 @@ let view = function(props) {
     model,
     dispatch,
     dispatcher,
-    icon, // react class or react element
+    icon: Icon, // react class or react element
     className = '',
     size = 24,
     ...otherProps
   } = props;
 
-  let _icon = React.isValidElement(icon) ? icon : React.createElement(icon);
+  let _icon = React.isValidElement(Icon) ? Icon : <Icon width={size} height={size} />;
 
   return (
-    <div className={`mdIcon ${className}`} style={{ width: size }}>
+    <div className={`mdIcon ${className}`}>
       {_icon}
     </div>
   );
