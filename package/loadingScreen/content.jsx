@@ -43,9 +43,7 @@ let LoadingInfo = function({ msg = '请稍候' }) {
   return (
     <div className="loadingScreen_info">
       <div className="loadingScreen_indicator">
-        <div className="spinner">
-          <Spinner />
-        </div>
+        <Spinner />
       </div>
 
       <div className="loadingScreen_msg">{msg}</div>
