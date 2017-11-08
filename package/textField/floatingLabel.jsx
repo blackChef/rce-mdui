@@ -64,7 +64,9 @@ let view = createClass({
     } = this.props;
 
     let classNames = setClassNames(`textField textField--floatingLabel ${className}`, {
-      is_floating: this.isFloating()
+      is_floating: this.isFloating(),
+      is_readOnly: otherProps.readOnly,
+      is_disabled: otherProps.disabled,
     });
 
     return (
@@ -79,7 +81,7 @@ let view = createClass({
 
         <div className="textField_line"></div>
         <label className="textField_floatingLabel">{floatingLabel}</label>
-        <div className="textField_hint">{hint}</div>
+        {hint && <div className="textField_hint">{hint}</div>}
      </div>
     );
   },
