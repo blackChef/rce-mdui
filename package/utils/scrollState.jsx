@@ -36,6 +36,10 @@ let onDisableScroll = function(callback) {
 let getIsScrollDisabled = () => isDisabled;
 
 let enableScroll = function() {
+  if (!isDisabled) {
+    return;
+  }
+
   let main = document.querySelector(mainSelector);
   let mainBody = document.querySelector(mainBodySelector);
 
@@ -68,7 +72,6 @@ let enableScroll = function() {
 let disableScroll = function() {
   let main = document.querySelector(mainSelector);
   let mainBody = document.querySelector(mainBodySelector);
-
   requireDisableScrollCount += 1;
 
   // `count === 1` means that it's the first time that we want to disable scroll
