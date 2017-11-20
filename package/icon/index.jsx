@@ -18,10 +18,10 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let _icon = React.isValidElement(Icon) ? Icon : <Icon width={size} height={size} />;
+  let _icon = React.isValidElement(Icon) ? Icon : <Icon />;
 
   return (
-    <div className={`mdIcon ${className}`}>
+    <div className={`mdIcon ${className}`} style={{ fontSize: `${size}px` }}>
       {_icon}
     </div>
   );
