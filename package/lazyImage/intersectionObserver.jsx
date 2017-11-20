@@ -2,7 +2,11 @@ let observers = [
   // { elem, callback }
 ];
 
-let io = new IntersectionObserver(function(entries) {
+let options = {
+  threshold: 0
+};
+
+let onChange = function(entries) {
   entries.forEach(function({ target, intersectionRatio }) {
     if (intersectionRatio === 0) return;
 
@@ -12,7 +16,10 @@ let io = new IntersectionObserver(function(entries) {
 
     observer.callback();
   });
-});
+};
+
+
+let io = new IntersectionObserver(onChange, options);
 
 let onEnter = function(elem, callback) {
   io.observe(elem);
