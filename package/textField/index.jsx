@@ -41,10 +41,12 @@ let view = createClass({
   componentWillMount() {
     this.defaultValue = this.props.model.val();
 
+    let { dispatch, delay = 100 } = this.props;
+
     // debounce updating model, so no chinese ime issue on ios
     let updateModel = debounce(value => {
-      this.props.dispatch('change', value);
-    }, 100);
+      dispatch('change', value);
+    }, delay);
 
     this.onChange = function(event) {
       updateModel(event.target.value);
@@ -66,6 +68,7 @@ let view = createClass({
       hint = '',
       onChange,
       value,
+      delay,
       ...otherProps
     } = this.props;
 
