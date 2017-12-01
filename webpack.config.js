@@ -1,3 +1,8 @@
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+let nodeEnv = process.env.NODE_ENV;
+let isProduction = nodeEnv === `"production"`;
+
 let babelConfig = {
   presets: [
     ['babel-preset-react'],
@@ -26,6 +31,9 @@ module.exports = {
       'node_modules',
     ]
   },
+  plugins: isProduction? [
+    new UglifyJSPlugin()
+  ] : [],
   module: {
     loaders: [
       {

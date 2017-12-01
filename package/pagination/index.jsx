@@ -4,6 +4,10 @@ import createComponent from 'rce-pattern/createComponent';
 import range from 'lodash/range';
 import floor from 'lodash/floor';
 import min from 'lodash/min';
+import MdFirstPage from 'react-icons/lib/md/first-page';
+import MdChevronLeft from 'react-icons/lib/md/chevron-left';
+import MdChevronRight from 'react-icons/lib/md/chevron-right';
+import MdLastPage from 'react-icons/lib/md/last-page';
 
 let name = 'pagination';
 
@@ -96,7 +100,7 @@ let FirstPageBtn = createComponent({
   view({ parentProps: { currentPage, requestFirstPage } }) {
     return (
       <IconButton
-        icon="first_page"
+        icon={MdFirstPage}
         disabled={currentPage == 1}
         onClick={requestFirstPage}
       />
@@ -109,7 +113,7 @@ let PrevPageBtn = createComponent({
   view({ parentProps: { currentPage, requestPrevPage } }) {
     return (
       <IconButton
-        icon="chevron_left"
+        icon={MdChevronLeft}
         disabled={currentPage == 1}
         onClick={requestPrevPage}
       />
@@ -122,7 +126,7 @@ let NextPageBtn = createComponent({
   view({ parentProps: { currentPage, pageCount, requestNextPage } }) {
     return (
       <IconButton
-        icon="chevron_right"
+        icon={MdChevronRight}
         disabled={currentPage == pageCount}
         onClick={requestNextPage}
       />
@@ -135,7 +139,7 @@ let LastPageBtn = createComponent({
   view({ parentProps: { currentPage, pageCount, requestLastPage } }) {
     return (
       <IconButton
-        icon="last_page"
+        icon={MdLastPage}
         disabled={currentPage == pageCount}
         onClick={requestLastPage}
       />

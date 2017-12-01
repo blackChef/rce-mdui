@@ -5,9 +5,12 @@ import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent, getSlot } from '../slot/';
 import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
+import { view as Icon } from '../icon/';
 import { init as initScrollState, enableScroll, disableScroll } from '../utils/scrollState';
 import { init as initZIndexState } from '../utils/zIndexState';
 import throttle from 'lodash/throttle';
+import MdChevronRight from 'react-icons/lib/md/chevron-right';
+
 
 let name = 'Page';
 
@@ -32,7 +35,13 @@ let Header = createComponent({
         >
           <Slot name="navButton">{header_navButton}</Slot>
           <Slot name="title">
-            {header_appLogo}
+            {
+              header_appLogo.length ?
+              <div>
+                {header_appLogo}
+                <Icon icon={MdChevronRight} className="mdIcon--inheritColor side_gutter_margin"/>
+              </div> : null
+            }
             <div className="appBar_pageTitle">
               {header_title}
             </div>

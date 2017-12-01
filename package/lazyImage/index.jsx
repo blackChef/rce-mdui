@@ -12,20 +12,26 @@ let init = function() {};
 
 let update = function({ type, payload, model, dispatch, getLatestModel }) {};
 
+let Placeholder = createComponent({
+  view({ width, height }) {
+    return <canvas className="lazyImage_placeholder" width={width} height={height}/>;
+  }
+});
+
 let view = createClass({
   getInitialState() {
     return {
-      isRealSrcApplied: false,
+      shouldShowImage: false,
       isLoaded: false,
     };
   },
 
   componentDidMount() {
-    this.unobserveImage = onEnter(this.refs.image, this.showImage);
+    this.unobserveImage = onEnter(this.refs.container, this.showImage);
   },
 
   showImage() {
-    this.setState({ isRealSrcApplied: true });
+    this.setState({ shouldShowImage: true });
     this.unobserveImage();
   },
 
@@ -38,49 +44,30 @@ let view = createClass({
       model,
       dispatch,
       dispatcher,
-      shouldKeepRatio = false,
       src, width, height,
       imgProps = {},
       wrapperProps = {},
       className = '',
     } = this.props;
 
-    if (!shouldKeepRatio) {
-      return (
-        <img
-          className={className + ' ' + this.state.isLoaded ? 'is_loaded' : ''}
-          ref="image"
-          src={this.state.isRealSrcApplied ? src : undefined}
-          onLoad={this.onLoad}
-          {...imgProps}
-        />
-      );
-    }
+    let { shouldShowImage, isLoaded } = this.state;
 
     return (
       <div
-        className={`lazyImage lazyImage--keepRatio ${className}`}
-        style={{ width, maxWidth: '100%' }}
+        className={`lazyImage ${className}`}
+        ref="container"
         {...wrapperProps}
       >
-        <div
-          className="lazyImage_innerWrapper"
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: 0,
-            paddingBottom: `${(height / width).toFixed(2) * 100}%`,
-          }}
-        >
-          <img
-            className={this.state.isLoaded ? 'is_loaded' : ''}
-            style={{ position: 'absolute', top: 0, left: 0 }}
-            ref="image"
-            src={this.state.isRealSrcApplied ? src : undefined}
-            onLoad={this.onLoad}
-            {...imgProps}
-          />
-        </div>
+        <Placeholder width={width} height={height}/>
+
+        <img
+          className={isLoaded ? 'is_loaded' : ''}
+          src={shouldShowImage ? src : ''}
+          onLoad={this.onLoad}
+          width={width}
+          height={height}
+          {...imgProps}
+        />
       </div>
     );
   },

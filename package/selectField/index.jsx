@@ -88,7 +88,7 @@ let view = createClass({
           fullWidth={true}
           triggerElement={
             <TextFieldBtn
-              className="textField--dropDown"
+              className="textFieldBtn--dropDown"
               value={selectedLabel}
               floatingLabel={floatingLabel}
               readOnly={readOnly}

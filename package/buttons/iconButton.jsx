@@ -14,16 +14,16 @@ let view = function(props) {
   let {
     children,
     icon,
-    className,
+    className  = '',
     ...otherProps
   } = props;
 
-  let content = icon ? <Icon type={icon} /> : children;
+  let content = icon ? <Icon icon={icon} /> : children;
 
   return (
     <Button
       {...otherProps}
-      className={`iconButton iconButton--unbounded ${className}`}
+      className={`iconButton ${className}`}
     >
       {content}
     </Button>

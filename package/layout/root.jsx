@@ -4,6 +4,7 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as NavDrawer, init as navDrawerInit, isPopup } from './navDrawer';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Slot, getSlotContent } from '../slot/';
+import MdMenu from 'react-icons/lib/md/menu';
 
 
 let name = 'Root';
@@ -30,7 +31,7 @@ let view = createClass({
     let { dispatcher } = this.props;
     return (
       <IconButton
-        icon="menu"
+        icon={MdMenu}
         onClick={dispatcher('toggleNavDrawer')}
       />
     );

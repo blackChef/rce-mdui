@@ -12,7 +12,7 @@ let update = function({ type, payload, model, dispatch }) {};
 let view = function(props) {
   let {
     children,
-    className,
+    className = '',
     ...otherProps
   } = props;
 

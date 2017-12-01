@@ -7,6 +7,7 @@ import { view as IconButton } from '../buttons/iconButton';
 import { view as Icon } from '../icon/';
 import { matchValues } from '../utils/checkProps';
 import addESCListener from '../utils/escState';
+import MdClose from 'react-icons/lib/md/close';
 
 
 let name = 'ContextualBar';
@@ -89,7 +90,7 @@ let view = createClass({
         <div className="contextualBar_control">
           <IconButton
             className="contextualBar_control_closeButton iconButton--white"
-            icon="close"
+            icon={MdClose}
             onClick={ onRequestDeselectAll }
           />
           <Count count={count}/>

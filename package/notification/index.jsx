@@ -4,6 +4,7 @@ import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
 import { getSlot, getSlotContent } from '../slot/';
+import MdClose from 'react-icons/lib/md/close';
 
 
 
@@ -74,7 +75,7 @@ let view = createClass({
               </div>
 
               <IconButton
-                icon="close"
+                icon={MdClose}
                 className="notification_closeBtn notification_header_right"
                 onClick={this.close}
               />

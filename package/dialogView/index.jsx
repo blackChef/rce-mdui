@@ -5,6 +5,9 @@ import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Popup } from '../popup/';
+import CloseIcon from 'react-icons/lib/md/close';
+
+
 
 let name = 'DialogView';
 
@@ -21,7 +24,7 @@ let Front = function(props) {
     appBarProps = { className: 'appBar--shadow' },
     forceOpen,
     tryToClose,
-    navButtonIcon = 'close'
+    navButtonIcon = CloseIcon
   } = props;
 
   let body = getSlotContent(children, 'body');

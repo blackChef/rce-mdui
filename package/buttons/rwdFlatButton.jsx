@@ -23,7 +23,7 @@ let view = function(props) {
       {...otherProps}
       className={`rwdFlatButton ${className}`}
     >
-      <Icon className="rwdFlatButton_icon" type={icon} />
+      <Icon className="rwdFlatButton_icon" icon={icon} />
       <span className="rwdFlatButton_label">{children}</span>
     </Button>
   );

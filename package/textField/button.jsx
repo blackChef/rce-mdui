@@ -3,6 +3,8 @@ import createComponent from 'rce-pattern/createComponent';
 import noop from 'lodash/noop';
 import { view as Simple } from './simple';
 import { view as FloatingLabel } from './floatingLabel';
+import { view as Icon } from '../icon/';
+import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down';
 
 
 let name = 'textFieldBtn';
@@ -33,14 +35,14 @@ let view = function(props) {
   }
 
   return (
-    <div className="textFieldBtn">
+    <div className={`textFieldBtn ${className}`}>
       <button type="button" {...otherProps} onClick={onClick} className="textFieldBtn_btn" />
       <Component readOnly value={value}
-        className={className}
         floatingLabel={floatingLabel}
         fixedFloatingLabel={true}
         hint={hint}
       />
+      <Icon icon={MdArrowDropDown}/>
     </div>
   );
 };

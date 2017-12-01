@@ -3,6 +3,8 @@ import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import { matchValues } from '../utils/checkProps';
+import { view as Icon }  from '../icon';
+import MdKeyboardArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
 
 
 let name = 'Collapse';
@@ -17,7 +19,7 @@ let update = function({ type, payload, model, dispatch }) {
 
 let view = createClass({
   componentWillReceiveProps(nextProps) {
-    let { container, content } = this.refs;
+    let { container, content } = this;
     let checkOpen = matchValues('model.val', this.props, nextProps);
     let willOpen = checkOpen(false, true);
     let willClose = checkOpen(true, false);
@@ -40,7 +42,7 @@ let view = createClass({
 
   componentDidMount() {
     let isOpen = this.props.model.val();
-    let { container, content } = this.refs;
+    let { container, content } = this;
 
     if (isOpen) {
       container.classList.add('is_active');
@@ -57,11 +59,12 @@ let view = createClass({
     return (
       <div className={`collapse ${className} ${model.val() ? 'is_active' : ''}`}>
         <div className="collapse_header" onClick={dispatcher('toggle')}>
-          {header}
+          <Icon icon={MdKeyboardArrowDown}/>
+          <div>{header}</div>
         </div>
 
-        <div className="collapse_body" ref="container">
-          <div className="collapse_body_inner" ref="content">
+        <div className="collapse_body" ref={e => this.container = e}>
+          <div className="collapse_body_inner" ref={e => this.content = e}>
             {body}
           </div>
         </div>
