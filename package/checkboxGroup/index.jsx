@@ -3,8 +3,8 @@ import createComponent from 'rce-pattern/createComponent';
 import proxyModel from 'rce-pattern/createProxyModel';
 import cRemove from 'rce-pattern/array/remove';
 import cPush from 'rce-pattern/array/push';
-import { getSlots, getSlotContent } from '../slot/';
-import { view as Checkbox, init as checkboxInit } from '../checkbox/';
+import { getSlots } from '../slot/';
+import { view as Checkbox } from '../checkbox/';
 
 
 let name = 'CheckboxGroup';

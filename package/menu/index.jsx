@@ -46,7 +46,7 @@ let Popup = function({ hidePopup, isShown, children }) {
 
 let Trigger = function(props) {
   let {
-    triggerElement = <IconButton icon={MoreVert}/>,
+    triggerElement = <IconButton icon={MdMoreVert}/>,
     showPopup,
   } = props;
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import createClass from 'create-react-class';
-import setClassNames from 'classnames';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent, getSlot } from '../slot/';
 import { view as AppBar } from '../appBar/';
 import { view as Slot } from '../slot/';
 import { view as Icon } from '../icon/';
-import { init as initScrollState, enableScroll, disableScroll } from '../utils/scrollState';
+import { init as initScrollState } from '../utils/scrollState';
 import { init as initZIndexState } from '../utils/zIndexState';
 import throttle from 'lodash/throttle';
 import MdChevronRight from 'react-icons/lib/md/chevron-right';
