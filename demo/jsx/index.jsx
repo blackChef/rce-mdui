@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createModelHolder from 'rce-pattern/createModelHolder';
 import createComponent from 'rce-pattern/createComponent';
+
 import { view as Slot } from 'slot/';
 import { view as Dialog } from 'dialog/';
 import { view as DialogView } from 'dialogView/';
+
+console.log(ReactDOM);
 
 let init = function() {
   return {
@@ -39,31 +42,6 @@ let App = function({ model }) {
     </div>
   );
 };
-
-let App = React.createClass({
-  componentDidMount() {
-  },
-  render() {
-    let { model } = this.props;
-    return (
-      <div>
-        <Icon icon={MdInsertPhoto}/>
-        <i className="mdFontIcon">insert_photo</i>
-        <IconButton icon={<MdInsertPhoto></MdInsertPhoto>} className="iconButton--primary"></IconButton>
-        <Fab icon={MdInsertPhoto} className="fab--primary"></Fab>
-        <RwdFlatButton icon={MdInsertPhoto} className="rwdFlatButton--primary">fdsfdsf</RwdFlatButton>
-        <TextFieldBtn className="textFieldBtn--dropDown" value="12313"></TextFieldBtn>
-
-        <DateTimePicker model={model}></DateTimePicker>
-
-        <Collapse className="collapse--leftArrow" model={model.f}>
-          <Slot name="header" >header</Slot>
-          <Slot name="body">body</Slot>
-        </Collapse>
-      </div>
-    );
-  },
-});
 
 
 App = createComponent({

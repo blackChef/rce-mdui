@@ -1,4 +1,6 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+let path = require('path');
+let resolvePath = path.resolve.bind(undefined, __dirname);
 
 let nodeEnv = process.env.NODE_ENV;
 let isProduction = nodeEnv === `"production"`;
@@ -18,6 +20,7 @@ let babelConfig = {
 };
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: {
     index: './demo/jsx/index.jsx',
   },
@@ -27,7 +30,8 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     modules: [
-      'package',
+      resolvePath('./node_modules'),
+      resolvePath('./package'),
       'node_modules',
     ]
   },
