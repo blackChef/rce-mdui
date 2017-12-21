@@ -6,18 +6,28 @@
 
 .paper--border {
   border: 1px solid $c_divider;
+  border-bottom: none;
+}
+
+.paper--stretch {
+  border-radius: unset;
+}
+
+.paper--card {
+  @include roundCorner();
+  overflow: hidden;
 }
 
 @each $breakPointName, $breakPointSize in $breakPoints {
   @include respondTo_page($breakPointName) {
     .paper_#{$breakPointName}--stretch {
-      // margin: unset;
       border-radius: unset;
     }
 
     .paper_#{$breakPointName}--card {
-      // margin: $s_gutter;
       @include roundCorner();
+      overflow: hidden;
     }
   }
 }
+
