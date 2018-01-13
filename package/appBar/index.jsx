@@ -1,13 +1,11 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { view as Slot, getSlot, getSlotContent } from '../slot/';
+import { getSlot, getSlotContent } from '../slot/';
 import { view as ContextualBar } from '../contextualBar';
 
 let name = 'AppBar';
 
 let init = function() {};
-
-let update = function({ type, payload, model, dispatch }) {};
 
 let renderContextualBar = function(appBarChildren) {
   let slot = getSlot(appBarChildren, 'contextualBar');
@@ -57,5 +55,5 @@ let view = function({ children, className = '' }) {
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

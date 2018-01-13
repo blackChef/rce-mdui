@@ -7,13 +7,15 @@ import addESCListener from '../utils/escState';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 
+
+
 let name = 'Popup';
 
 let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ type, model }) {
   if (type === 'close') {
     model.set(false);
   }
@@ -48,11 +50,9 @@ let view = createClass({
       openAnimationDuration = 400,
     } = props;
 
-    let { content } = this.refs;
-
     onOpen();
     disableScroll();
-    increaseDepth(content);
+    increaseDepth(this.contentRef);
     this.removeESCListener = addESCListener(this.tryToClose);
 
     setTimeout(afterOpen, openAnimationDuration);
@@ -66,7 +66,6 @@ let view = createClass({
     } = props;
 
     let { removeESCListener } = this;
-    let { content } = this.refs;
 
     removeESCListener();
     onClose();
@@ -74,7 +73,7 @@ let view = createClass({
     setTimeout(() => {
       afterClose();
       enableScroll();
-      decreaseDepth(content);
+      decreaseDepth(this.contentRef);
     }, closeAnimationDuration);
   },
 
@@ -99,13 +98,8 @@ let view = createClass({
       bgProps = {},
       closeOnBgClick = true
     } = this.props;
-    let {
-      onClick,
-      className = '',
-      ...otherProps
-    } = bgProps;
+    let { className = '', ...otherProps } = bgProps;
     let { tryToClose } = this;
-
     return (
       <div
         { ...otherProps }
@@ -125,7 +119,7 @@ let view = createClass({
     return (
       <div
         className={this.getClassName()}
-        ref="content"
+        ref={e => this.contentRef = e}
       >
         {this.renderFront()}
         {this.renderBg()}

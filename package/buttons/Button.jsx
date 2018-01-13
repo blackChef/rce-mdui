@@ -1,29 +1,23 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
+import omit from 'lodash/omit';
 
 let name = 'button';
 
 let init = function() {};
 
-let update = function() {};
-
 let view = function(props) {
   let {
-    model,
-    dispatch,
-    dispatcher,
     children,
     className,
-    tagName = 'button',
+    tagName: ButtonTag = 'button',
     type = 'button',
     ...otherProps
   } = props;
 
-  let ButtonTag = tagName;
-
   return (
     <ButtonTag
-      {...otherProps}
+      {...omit(otherProps, ['model', 'dispatch', 'dispatcher'])}
       type={type}
       className={className}
     >
@@ -32,5 +26,5 @@ let view = function(props) {
   );
 };
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { view, init };

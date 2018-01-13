@@ -5,17 +5,11 @@ let name = 'icon';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let view = function(props) {
   let {
-    model,
-    dispatch,
-    dispatcher,
     icon: Icon, // react class or react element
     className = '',
     size = 24,
-    ...otherProps
   } = props;
 
   let _icon = React.isValidElement(Icon) ? Icon : <Icon />;
@@ -27,5 +21,5 @@ let view = function(props) {
   );
 };
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

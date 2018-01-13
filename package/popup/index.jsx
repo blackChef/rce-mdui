@@ -8,8 +8,6 @@ let name = 'Popup';
 
 let init = popupContentInit;
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let view = function(props) {
   return (
     <RenderInBody>
@@ -20,5 +18,5 @@ let view = function(props) {
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

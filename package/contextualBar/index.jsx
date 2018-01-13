@@ -4,7 +4,6 @@ import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
-import { view as Icon } from '../icon/';
 import { matchValues } from '../utils/checkProps';
 import addESCListener from '../utils/escState';
 import MdClose from 'react-icons/lib/md/close';
@@ -14,14 +13,12 @@ let name = 'ContextualBar';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let renderActionItem = function(item, index) {
   return <div key={index} className="contextualBar_actions_item">{item}</div>;
 };
 
 let renderActionsForSingleItem = function(count, children) {
-  if (count == 1) {
+  if (count === 1) {
     let slots = getSlotContent(children, 'single');
 
     return (
@@ -105,5 +102,5 @@ let view = createClass({
   },
 });
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

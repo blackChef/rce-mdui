@@ -1,6 +1,5 @@
 
 let highestZIndex = 0;
-let bazeZIndex;
 
 let increaseDepth = function(elem) {
   highestZIndex += 1;
