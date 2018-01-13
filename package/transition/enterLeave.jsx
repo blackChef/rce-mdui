@@ -9,6 +9,7 @@ let view = function(props) {
     enterTimeout = 0,
     leaveTimeout = 0,
     component = 'div',
+    className = 'reactTransitionHelper',
     ...otherProps
   } = props;
 
@@ -27,7 +28,7 @@ let view = function(props) {
       transitionLeaveTimeout={leaveTimeout}
       transitionEnter={!!enterTimeout}
       transitionLeave={!!leaveTimeout}
-      className="reactTransitionHelper"
+      className={className}
       component={component}
     >
       {children}
