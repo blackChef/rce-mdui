@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createModelHolder from 'rce-pattern/createModelHolder';
 import createComponent from 'rce-pattern/createComponent';
-
 import { view as Slot } from 'slot/';
 import { view as Dialog } from 'dialog/';
 import { view as DialogView } from 'dialogView/';
-
-console.log(ReactDOM);
 
 let init = function() {
   return {

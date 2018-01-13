@@ -29,6 +29,7 @@ let view = function(props) {
     model,
     children,
     okLabel = '确定',
+    closeOnBgClick = false,
     ...otherProps
   } = props;
 
@@ -37,7 +38,7 @@ let view = function(props) {
   return (
     <DialogSimple {...otherProps}
       model={model}
-      closeOnBgClick={false}
+      closeOnBgClick={closeOnBgClick}
     >
       <Slot name="content">{content}</Slot>
       <Slot name="actions">
