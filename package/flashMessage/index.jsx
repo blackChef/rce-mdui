@@ -13,10 +13,8 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type === 'hide') {
-    model.set(false);
-  }
+let update = function({ model }) {
+  model.set(false);
 };
 
 let view = createClass({
@@ -29,32 +27,31 @@ let view = createClass({
     );
 
     if (willShow) {
-      let { main } = this.refs;
-      increaseDepth(main);
+      increaseDepth(this.mainRef);
       setTimeout(function() {
         dispatch('hide');
-        decreaseDepth(main);
+        decreaseDepth(this.mainRef);
       }, timeout);
     }
   },
 
   componentDidMount() {
-    document.body.appendChild(this.refs.main);
+    document.body.appendChild(this.mainRef);
   },
 
   componentWillUnmount() {
-    this.refs.main.remove();
+    this.mainRef.remove();
   },
 
   render() {
-    let { model, dispatch, msg, className = '' } = this.props;
+    let { model, msg, className = '' } = this.props;
     let popupClassName = setClassNames(`flashMessage ${className}`, {
       'is_active': model.val()
     });
 
     return (
       <div className="flashMessage_placeholder" style={{ display: 'none' }}>
-        <div className={popupClassName} ref="main">
+        <div className={popupClassName} ref={e => this.mainRef = e}>
           <div className="flashMessage_front">{msg}</div>
         </div>
       </div>

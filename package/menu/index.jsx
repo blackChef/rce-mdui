@@ -15,9 +15,6 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {};
-
-
 let Popup = function({ hidePopup, isShown, children }) {
   let items = getSlots(children, 'item')
     .map(function(item, index) {
@@ -88,6 +85,6 @@ let view = createClass({
 });
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 view = createModelHolder(view, init());
 export { init, view };

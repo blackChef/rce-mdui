@@ -10,8 +10,6 @@ let name = 'TextField--floatingLabel';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let view = createClass({
   getInitialState() {
     return {
@@ -28,7 +26,7 @@ let view = createClass({
   },
 
   componentDidMount() {
-    this.input = this.refs.main.querySelector('.textField_field');
+    this.input = this.mainRef.querySelector('.textField_field');
   },
 
   isFloating() {
@@ -51,14 +49,9 @@ let view = createClass({
 
   render() {
     let {
-      model,
-      dispatch,
-      dispatcher,
       hint = '',
       floatingLabel = '',
-      fixedFloatingLabel = false,
       onChange,
-      placeholder,
       className = '',
       ...otherProps
     } = this.props;
@@ -70,7 +63,7 @@ let view = createClass({
     });
 
     return (
-      <div className={classNames} ref="main">
+      <div className={classNames} ref={e => this.mainRef = e}>
         <InputField
           {...otherProps}
           className="textField_field"
@@ -90,5 +83,5 @@ let view = createClass({
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

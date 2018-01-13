@@ -7,15 +7,12 @@ import { view as Slot } from '../slot/';
 import { view as Icon } from '../icon/';
 import { init as initScrollState } from '../utils/scrollState';
 import { init as initZIndexState } from '../utils/zIndexState';
-import throttle from 'lodash/throttle';
 import MdChevronRight from 'react-icons/lib/md/chevron-right';
 
 
 let name = 'Page';
 
 let init = function() {};
-
-let update = function({ type, payload, model, dispatch }) {};
 
 let Header = createComponent({
   name: 'PageHeader',
@@ -136,5 +133,5 @@ let view = createClass({
 });
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

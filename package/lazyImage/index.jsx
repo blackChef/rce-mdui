@@ -10,8 +10,6 @@ let name = 'LazyImage';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch, getLatestModel }) {};
-
 let Placeholder = createComponent({
   view({ width, height }) {
     return <canvas className="lazyImage_placeholder" width={width} height={height}/>;
@@ -27,7 +25,7 @@ let view = createClass({
   },
 
   componentDidMount() {
-    this.unobserveImage = onEnter(this.refs.container, this.showImage);
+    this.unobserveImage = onEnter(this.containerRef, this.showImage);
   },
 
   showImage() {
@@ -41,9 +39,6 @@ let view = createClass({
 
   render() {
     let {
-      model,
-      dispatch,
-      dispatcher,
       src, width, height,
       imgProps = {},
       wrapperProps = {},
@@ -55,7 +50,7 @@ let view = createClass({
     return (
       <div
         className={`lazyImage ${className}`}
-        ref="container"
+        ref={e => this.containerRef = e}
         {...wrapperProps}
       >
         <Placeholder width={width} height={height}/>
@@ -75,6 +70,6 @@ let view = createClass({
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 view = createModelHolder(view, init);
 export { init, view };

@@ -17,17 +17,19 @@ let init = function() {
   };
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  let actions = {
-    showPicker() {
-      model.show.set(true);
-    },
+let actions = {
+  // { payload, model, dispatch, getLatestModel }
+  showPicker({ model }) {
+    model.show.set(true);
+  },
+  confirm({ model, payload }) {
+    model.time.set(+payload);
+  },
+};
 
-    confirm() {
-      model.time.set(+payload);
-    },
-  };
-  actions[type]();
+let update = function(props) {
+  let { type, ...otherProps } = props;
+  actions[type](otherProps);
 };
 
 let Picker = createClass({
@@ -74,7 +76,12 @@ let view = createClass({
   },
 
   render() {
-    let { model, dispatcher, label, timeFormatter = identity, ...otherProps } = this.props;
+    let {
+      model,
+      dispatcher,
+      label,
+      timeFormatter = identity,
+    } = this.props;
     let time = model.time.val();
 
     return (

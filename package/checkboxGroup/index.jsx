@@ -15,7 +15,7 @@ let init = function(type = 'multiple') {
     null; // selected item's id
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ type, payload, model }) {
   let { id, isChecked } = payload;
   if (type === 'toggle_multiple') {
     if (!isChecked) {
@@ -53,7 +53,6 @@ let view = function(props) {
   let {
     model,
     dispatch,
-    dispatcher,
     children,
     type = 'multiple',
     containerComponent = <div />

@@ -9,15 +9,6 @@ let view = function(props) {
     enterTimeout = 0,
     leaveTimeout = 0,
     component = 'div',
-
-    // strip out these props
-    enterClassName,
-    leaveClassName,
-    transitionName,
-    transitionAppear,
-    transitionAppearTimeout,
-    transitionEnter,
-    transitionLeave,
     ...otherProps
   } = props;
 
@@ -30,6 +21,7 @@ let view = function(props) {
 
   return (
     <CSSTransitionGroup
+      {...otherProps}
       transitionName={names}
       transitionEnterTimeout={enterTimeout}
       transitionLeaveTimeout={leaveTimeout}
@@ -37,7 +29,6 @@ let view = function(props) {
       transitionLeave={!!leaveTimeout}
       className="reactTransitionHelper"
       component={component}
-      {...otherProps}
     >
       {children}
     </CSSTransitionGroup>

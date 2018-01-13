@@ -11,8 +11,6 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let CloseBtn = function({ tryToClose, okLabel }) {
   return (
     <LinkButton
@@ -50,5 +48,5 @@ let view = function(props) {
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

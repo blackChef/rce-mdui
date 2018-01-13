@@ -3,7 +3,7 @@ import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 import debounce from 'lodash/debounce';
-import { view as Slot, getSlotContent } from '../slot/';
+import {getSlotContent } from '../slot/';
 import matchScreenSize from '../utils/matchScreenSize';
 
 
@@ -17,17 +17,11 @@ let init = function() {
   };
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  let actions = {
-    close() {
-      model.isOpen.set(false);
-      if ( isPopup() ) {
-        enableScroll();
-      }
-    },
-  };
-
-  actions[type]();
+let update = function({ model }) {
+  model.isOpen.set(false);
+  if ( isPopup() ) {
+    enableScroll();
+  }
 };
 
 let view = createClass({
@@ -38,11 +32,8 @@ let view = createClass({
   },
 
   componentDidMount() {
-    let { updateCollapseHeader } = this;
-    let { dispatch } = this.props;
-
     this.toggleScrollWhenLayoutChange = debounce(() => {
-      let { model, dispatch } = this.props;
+      let { model } = this.props;
       let curIsPopup = isPopup();
       let prevIsPopup = this.state.isPopup;
 
@@ -69,7 +60,7 @@ let view = createClass({
   closeDrawerBeforeDispatchClick(event) {
     if ( isPopup() ) {
       let { dispatch } = this.props;
-      let { front } = this.refs;
+      let { frontRef } = this;
       let { currentTarget } = event;
 
       event.preventDefault();
@@ -77,10 +68,10 @@ let view = createClass({
 
       let dispatchClick = function() {
         currentTarget.dispatchEvent( new MouseEvent('click') );
-        front.removeEventListener('transitionend', dispatchClick);
+        frontRef.removeEventListener('transitionend', dispatchClick);
       };
 
-      front.addEventListener('transitionend', dispatchClick, false);
+      frontRef.addEventListener('transitionend', dispatchClick, false);
     }
   },
 
@@ -113,7 +104,7 @@ let view = createClass({
 
     return (
       <aside className={`navDrawer ${className}`}>
-        <div ref="front" className="navDrawer_front">
+        <div ref={e => this.frontRef = e} className="navDrawer_front">
           <div className="navDrawer_front_header">
             {header}
           </div>

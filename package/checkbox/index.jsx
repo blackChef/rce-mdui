@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-
+import omit from 'lodash/omit';
 
 let name = 'checkbox';
 
@@ -8,19 +8,23 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ payload, model }) {
   model.set(payload);
 };
 
 let isChecked = event => event.target.checked;
 
 let view = function(props) {
-  let { model, dispatch, dispatcher, type, checked, ...otherProps } = props;
+  let {
+    model,
+    dispatcher,
+    ...otherProps
+  } = props;
 
   return (
     <div className="checkbox">
       <input
-        {...otherProps}
+        {...omit(otherProps, ['dispatcher'])}
         type="checkbox"
         checked={model.val()}
         onChange={dispatcher('toggle', isChecked)}

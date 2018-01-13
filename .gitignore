@@ -1,6 +1,7 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+eslint.result
 
 node_modules/
 readyToPublish/

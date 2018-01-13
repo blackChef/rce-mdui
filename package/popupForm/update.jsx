@@ -7,7 +7,7 @@ import makePromise from '../utils/emptyPromise';
 let resolve = makePromise({ type: 'resolve', ticks: 2 });
 
 let actions = {
-  getData({ payload = {}, dispatch, model, getLatestModel }) {
+  getData({ payload = {}, dispatch, getLatestModel }) {
     let {
       getContent = resolve,
       getSelectOptions = resolve,
@@ -40,7 +40,6 @@ let actions = {
   },
 
   save({ payload, model, dispatch }) {
-
     let {
       form,
       apiCalls,

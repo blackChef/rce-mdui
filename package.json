@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "makePackage": "cd ./tool && node makePackage",
     "dev": "set NODE_ENV=\"dev\"&&webpack --debug --output-pathinfo --watch",
-    "build": "set NODE_ENV=\"production\"&&webpack --progress"
+    "build": "set NODE_ENV=\"production\"&&webpack --progress",
+    "lint": "eslint \"package/**\" -o eslint.result"
   },
   "author": "blackChef",
   "repository": "https://github.com/blackChef/rce-mdui.git",

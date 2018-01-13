@@ -58,7 +58,7 @@ let renderContent = function(props) {
 
 let OkBtn = function(props) {
   let {
-    model, forceOpen, formId, okLabel = '确认'
+    model, formId, okLabel = '确认'
   } = props;
 
   let {
@@ -80,14 +80,9 @@ let OkBtn = function(props) {
 
 let CancelBtn = function(props) {
   let {
-    model, forceOpen, tryToClose, formId, cancelLabel = '取消'
+    model, forceOpen, tryToClose, cancelLabel = '取消'
   } = props;
-
-  let {
-    isSaving,
-    isContentReady,
-  } = model.val();
-
+  let { isSaving } = model.val();
   return (
     <LinkButton
       className="linkButton--bounded linkButton--primary rightGutter_margin_half"
@@ -106,12 +101,7 @@ let Body = function(props) {
     onOpen, afterOpen, LoadingScreen,
     ...otherProps
   } = props;
-
-  let {
-    isSaving,
-    isContentReady,
-  } = model.val();
-
+  let { isSaving } = model.val();
   return (
     <Dialog
       {...otherProps}

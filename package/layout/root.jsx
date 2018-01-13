@@ -5,7 +5,7 @@ import { view as NavDrawer, init as navDrawerInit, isPopup } from './navDrawer';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Slot, getSlotContent } from '../slot/';
 import MdMenu from 'react-icons/lib/md/menu';
-
+import { enableScroll, disableScroll } from '../utils/scrollState';
 
 let name = 'Root';
 
@@ -15,16 +15,13 @@ let init = function() {
   };
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type === 'toggleNavDrawer') {
-    let newState = !model.navDrawerModel.isOpen.val();
-    model.navDrawerModel.isOpen.set(newState);
-    if ( isPopup() ) {
-      newState? disableScroll() : enableScroll();
-    }
+let update = function({ model }) {
+  let newState = !model.navDrawerModel.isOpen.val();
+  model.navDrawerModel.isOpen.set(newState);
+  if ( isPopup() ) {
+    newState? disableScroll() : enableScroll();
   }
 };
-
 
 let view = createClass({
   renderNavDrawerToggle() {

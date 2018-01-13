@@ -15,10 +15,8 @@ let init = function() {
   return null; // selected option's value
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type == 'change') {
-    model.set(payload);
-  }
+let update = function({ payload, model }) {
+  model.set(payload);
 };
 
 let view = createClass({
@@ -48,8 +46,6 @@ let view = createClass({
     let {
       model,
       dispatch,
-      children,
-      fullWidth = true,
       floatingLabel = '',
       options, // [{ value, label }]
       readOnly = false,
@@ -57,7 +53,7 @@ let view = createClass({
       ...otherProps
     } = this.props;
 
-    let selectedOption = options.find(i => i.value == model.val());
+    let selectedOption = options.find(i => i.value === model.val());
     let selectedLabel = selectedOption? selectedOption.label : undefined;
     let selectedValue = selectedOption? selectedOption.value : undefined;
 

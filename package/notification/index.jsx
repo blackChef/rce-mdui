@@ -14,24 +14,21 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type == 'hide') {
-    model.set(false);
-  }
+let update = function({ model }) {
+  model.set(false);
 };
 
 let view = createClass({
   componentDidMount() {
-    document.body.appendChild(this.refs.main);
+    document.body.appendChild(this.mainRef);
   },
 
   componentWillUnmount() {
-    this.refs.main.remove();
+    this.mainRef.remove();
   },
 
   close() {
     let { onClose = () => {}, dispatch } = this.props;
-
     dispatch('hide');
     onClose();
   },
@@ -60,7 +57,7 @@ let view = createClass({
 
     return (
       <div className="notification_placeholder" style={{ display: 'none' }}>
-        <div className={classNames} ref="main">
+        <div className={classNames} ref={e => this.mainRef = e}>
           <div className="notification_card">
             <div className="notification_header">
               <div className="notification_header_left">

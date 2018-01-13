@@ -1,28 +1,33 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-
+import omit from 'lodash/omit';
 
 
 let name = 'Label';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let view = function(props) {
   let {
-    model, dispatch, dispatcher, type = 'default', children, className = '',
+    type = 'default',
+    children,
+    className = '',
     ...otherProps
   } = props;
 
   let classNames = `label label--${type} ${className}`;
 
   return (
-    <div className={classNames} {...otherProps}>{children}</div>
+    <div
+      {...omit(otherProps, ['model', 'dispatch', 'dispatcher'])}
+      className={classNames}
+    >
+      {children}
+    </div>
   );
 };
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

@@ -10,10 +10,8 @@ let init = function() {
   return 0; //active index
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type == 'changeTab') {
-    model.set(payload);
-  }
+let update = function({ payload, model }) {
+  model.set(payload);
 };
 
 let view = createClass({
@@ -27,7 +25,13 @@ let view = createClass({
     }
   },
   render() {
-    let { model, dispatch, dispatcher, children, className = '', transitionName = 'slideUp' } = this.props;
+    let {
+      model,
+      dispatch,
+      children,
+      className = '',
+      transitionName = 'slideUp'
+    } = this.props;
     let tabPanes = getSlots(children, 'tabPane');
     let curIndex = model.val();
 

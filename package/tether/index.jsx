@@ -13,7 +13,7 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ type, model }) {
   if (type === 'show') {
     model.set(true);
   } else {
@@ -72,9 +72,7 @@ let view = createClass({
   createTetherInstance() {
     let {
       popupDOM,
-      refs: {
-        triggerContainer
-      },
+      triggerContainer,
       props: {
         attachment,
         targetAttachment,
@@ -90,7 +88,7 @@ let view = createClass({
   },
 
   insertPopupDOM() {
-    let { popupContainer } = this.refs;
+    let { popupContainer } = this;
     let popupDOM = popupContainer.firstChild;
     document.body.appendChild(popupDOM);
     popupContainer.remove();
@@ -155,9 +153,7 @@ let view = createClass({
       tetherInstance,
       hidePopup,
       tryDisableScroll,
-      refs: {
-        triggerContainer: triggerDOM
-      }
+      triggerContainer: triggerDOM
     } = this;
 
     beforeShow({ triggerDOM, popupDOM });
@@ -185,13 +181,10 @@ let view = createClass({
 
     let {
       tetherInstance,
-      closePopup,
       removeESCListener,
       popupDOM,
       tryEnableScroll,
-      refs: {
-        triggerContainer: triggerDOM
-      }
+      triggerContainer: triggerDOM
     } = this;
 
     beforeHide({ triggerDOM, popupDOM });
@@ -223,11 +216,13 @@ let view = createClass({
     let _popup = React.cloneElement(popup, childProps);
 
     return (
-      <div className="tether_triggerContainer" ref="triggerContainer">
+      <div className="tether_triggerContainer"
+        ref={e => this.triggerContainer = e}
+      >
         {_trigger}
         {
           isPopupMounted &&
-          <div ref="popupContainer">{_popup}</div>
+          <div ref={e => this.popupContainer = e}>{_popup}</div>
         }
       </div>
     );

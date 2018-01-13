@@ -7,8 +7,8 @@ const THUMB_WIDTH = 14; // px
 const MARKER_WIDTH = 1; // px
 const MARKER_COLOR = '#333333';
 
-let makeGradient = function({ marks, min, max, inputWidth }) {
-  let colorStops = marks.map(function({ value, label }) {
+let makeGradient = function({ marks, min, max }) {
+  let colorStops = marks.map(function({ value }) {
     if (value === min) {
       let leftPos = `0%`;
       let rightPos = `calc(0% + ${MARKER_WIDTH}px)`;
@@ -53,14 +53,13 @@ let name = 'RangeInput';
 let init = function(props = {}) {
   let {
     min = 0,
-    max = 100,
     defaultValue = min,
   } = props;
 
   return defaultValue;
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ model, payload }) {
   model.set(payload);
 };
 
@@ -118,11 +117,8 @@ let view = createClass({
 
   render() {
     let {
-      dispatch,
-      dispatcher,
       model,
       className = '',
-      marks,
       ...otherProps
     } = this.props;
 

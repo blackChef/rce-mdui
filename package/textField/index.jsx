@@ -13,7 +13,7 @@ let init = function() {
   return '';
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ payload, model }) {
   model.set(payload);
 };
 
@@ -54,21 +54,15 @@ let view = createClass({
   },
 
   componentDidMount() {
-    let main = findDOMNode(this.refs.main);
+    let main = findDOMNode(this.mainRef);
     this.inputDOM = main.querySelector('.textField_field');
   },
 
   render() {
     let {
-      model,
-      dispatch,
-      dispatcher,
       floatingLabel = '',
       fixedFloatingLabel = false,
       hint = '',
-      onChange,
-      value,
-      delay,
       ...otherProps
     } = this.props;
 
@@ -77,7 +71,7 @@ let view = createClass({
     return (
       <Component
         {...otherProps}
-        ref="main"
+        ref={e => this.mainRef = e}
         floatingLabel={floatingLabel}
         fixedFloatingLabel={fixedFloatingLabel}
         hint={hint}

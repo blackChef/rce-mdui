@@ -11,8 +11,6 @@ let init = function() {
   return null;
 };
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let view = createClass({
   update(apiCall) {
     if (apiCall === null || apiCall === undefined) {
@@ -78,5 +76,5 @@ let view = createClass({
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

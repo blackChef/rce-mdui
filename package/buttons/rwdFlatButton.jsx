@@ -8,8 +8,6 @@ let name = 'iconButton';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let view = function(props) {
   let {
     children,
@@ -30,5 +28,5 @@ let view = function(props) {
 };
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

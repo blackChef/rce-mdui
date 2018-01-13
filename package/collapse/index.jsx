@@ -13,7 +13,7 @@ let init = function() {
   return false; // is open
 };
 
-let update = function({ type, payload, model, dispatch }) {
+let update = function({ model }) {
   model.set( !model.val() );
 };
 
@@ -51,7 +51,7 @@ let view = createClass({
   },
 
   render() {
-    let { model, dispatch, dispatcher, children, className = '' } = this.props;
+    let { model, dispatcher, children, className = '' } = this.props;
     let getContent = getSlotContent(children);
     let header = getContent('header');
     let body = getContent('body');

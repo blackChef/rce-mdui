@@ -21,6 +21,7 @@ module.exports = {
   },
   rules: {
     "no-console": 0,
+    "no-extra-semi": 0,
     semi: 1,
     eqeqeq: 1,
     "no-unused-vars": 1,

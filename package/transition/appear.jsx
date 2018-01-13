@@ -7,11 +7,6 @@ let view = function(props) {
     timeout = 400,
     name = '',
     component = 'div',
-    transitionName,
-    transitionAppear,
-    transitionAppearTimeout,
-    transitionEnter,
-    transitionLeave,
     ...otherProps
   } = props;
 
@@ -22,6 +17,7 @@ let view = function(props) {
 
   return (
     <CSSTransitionGroup
+      {...otherProps}
       transitionName={names}
       transitionAppear={true}
       transitionAppearTimeout={timeout}
@@ -29,7 +25,6 @@ let view = function(props) {
       transitionLeave={false}
       className="reactTransitionHelper"
       component={component}
-      {...otherProps}
     >
       {children}
     </CSSTransitionGroup>

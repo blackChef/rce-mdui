@@ -13,8 +13,6 @@ let init = function() {
   return false;
 };
 
-let update = function({ type, payload, model, dispatch }) {};
-
 const isHoverable = checkIsHoverable();
 
 let Popup = function({ isShown, msg }) {
@@ -64,6 +62,6 @@ let view = createClass({
 });
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 view = createModelHolder(view, init());
 export { init, view };

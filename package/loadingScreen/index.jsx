@@ -9,10 +9,8 @@ let init = function() {
   return 'hide'; // status: hide, loading, success, failed
 };
 
-let update = function({ type, payload, model, dispatch }) {
-  if (type === 'setStatus') {
-    model.set(payload);
-  }
+let update = function({ payload, model }) {
+  model.set(payload);
 };
 
 let view = createClass({

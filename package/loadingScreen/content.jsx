@@ -13,8 +13,6 @@ let name = 'Content';
 
 let init = function() {};
 
-let update = function({ type, payload, model, dispatch }) {};
-
 let renderActions = function({ model, onRequestRetry, parentDispatch }) {
   if (model.val() === 'failed') {
     return (
@@ -112,5 +110,5 @@ let view = function(props) {
 
 
 
-view = createComponent({ name, view, update });
+view = createComponent({ name, view });
 export { init, view };

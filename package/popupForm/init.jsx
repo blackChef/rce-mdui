@@ -1,5 +1,3 @@
-import noop from 'lodash/noop';
-
 let init = function() {
   return {
     content: null,

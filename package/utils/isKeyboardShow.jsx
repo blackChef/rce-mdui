@@ -23,11 +23,11 @@ let isKeyboardShow = function(focusEventTarget) {
   let name = focusEventTarget.tagName.toLowerCase();
   let type = focusEventTarget.type;
 
-  if (name == 'textarea') {
+  if (name === 'textarea') {
     return true;
   }
 
-  if (name == 'input') {
+  if (name === 'input') {
     return !includes(unTypableInputs, type);
   }
 };
