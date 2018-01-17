@@ -28,7 +28,12 @@ let InputField = createClass({
   },
 
   render() {
-    let { autoResize = false, ...otherProps } = this.props;
+    let {
+      // eslint-disable-next-line no-unused-vars
+      model, dispatch, dispatcher,
+      autoResize = false,
+      ...otherProps
+    } = this.props;
 
     if (autoResize) {
       return (

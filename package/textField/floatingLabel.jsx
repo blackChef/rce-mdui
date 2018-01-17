@@ -53,6 +53,8 @@ let view = createClass({
       floatingLabel = '',
       onChange,
       className = '',
+      // eslint-disable-next-line no-unused-vars
+      fixedFloatingLabel,
       ...otherProps
     } = this.props;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
 import createComponent from 'rce-pattern/createComponent';
-import omit from 'lodash/omit';
 
 let name = 'chips';
 
@@ -29,8 +28,8 @@ let getSeletectVal = function(model, options, multi) {
 
 let view = function(props) {
   let {
-    model,
-    dispatch,
+    // eslint-disable-next-line no-unused-vars
+    model, dispatch, dispatcher,
     multi = true,
     placeholder = '请选择',
     searchable = false,
@@ -43,7 +42,7 @@ let view = function(props) {
 
   return (
     <Select
-      {...omit(otherProps, ['dispatcher'])}
+      {...otherProps}
       backspaceToRemoveMessage={''}
       placeholder={placeholder}
       searchable={searchable}

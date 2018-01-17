@@ -5,7 +5,6 @@ import { view as Simple } from './simple';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Icon } from '../icon/';
 import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down';
-import omit from 'lodash/omit';
 
 
 let name = 'textFieldBtn';
@@ -14,6 +13,8 @@ let init = function() {};
 
 let view = function(props) {
   let {
+    // eslint-disable-next-line no-unused-vars
+    model, dispatch, dispatcher,
     className = '',
     value = '',
     floatingLabel = '',
@@ -32,7 +33,7 @@ let view = function(props) {
 
   return (
     <div className={`textFieldBtn ${className}`}>
-      <button  {...omit(otherProps, ['model', 'dispatch', 'dispatcher'])}
+      <button  {...otherProps}
         type="button"
         onClick={onClick}
         className="textFieldBtn_btn"

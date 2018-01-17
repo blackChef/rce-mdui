@@ -1,6 +1,5 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import omit from 'lodash/omit';
 
 let name = 'toggle';
 
@@ -13,12 +12,16 @@ let update = function({ payload, model }) {
 };
 
 let view = function(props) {
-  let { model, dispatch, ...otherProps } = props;
+  let {
+    // eslint-disable-next-line no-unused-vars
+    model, dispatch, dispatcher,
+    ...otherProps
+  } = props;
 
   return (
     <div className="toggle">
       <input
-        {...omit(otherProps, ['dispatcher'])}
+        {...otherProps}
         type="checkbox"
         checked={model.val()}
         onChange={event => dispatch('toggle', event.target.checked)}

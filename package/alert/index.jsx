@@ -24,7 +24,8 @@ let CloseBtn = function({ tryToClose, okLabel }) {
 
 let view = function(props) {
   let {
-    model,
+    // eslint-disable-next-line no-unused-vars
+    model, dispatch, dispatcher,
     children,
     okLabel = '确定',
     closeOnBgClick = false,

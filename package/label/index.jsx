@@ -1,6 +1,5 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import omit from 'lodash/omit';
 
 
 let name = 'Label';
@@ -9,6 +8,8 @@ let init = function() {};
 
 let view = function(props) {
   let {
+    // eslint-disable-next-line no-unused-vars
+    model, dispatch, dispatcher,
     type = 'default',
     children,
     className = '',
@@ -19,7 +20,7 @@ let view = function(props) {
 
   return (
     <div
-      {...omit(otherProps, ['model', 'dispatch', 'dispatcher'])}
+      {...otherProps}
       className={classNames}
     >
       {children}

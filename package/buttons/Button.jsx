@@ -1,6 +1,5 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import omit from 'lodash/omit';
 
 let name = 'button';
 
@@ -12,12 +11,14 @@ let view = function(props) {
     className,
     tagName: ButtonTag = 'button',
     type = 'button',
+    // eslint-disable-next-line no-unused-vars
+    model, dispatch, dispatcher,
     ...otherProps
   } = props;
 
   return (
     <ButtonTag
-      {...omit(otherProps, ['model', 'dispatch', 'dispatcher'])}
+      {...otherProps}
       type={type}
       className={className}
     >

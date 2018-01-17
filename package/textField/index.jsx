@@ -67,14 +67,14 @@ let view = createClass({
     } = this.props;
 
     let Component = floatingLabel === '' ? Simple : FloatingLabel;
+    let componentProps = floatingLabel === '' ?
+      { hint } : { hint, floatingLabel, fixedFloatingLabel };
 
     return (
       <Component
         {...otherProps}
+        {...componentProps}
         ref={e => this.mainRef = e}
-        floatingLabel={floatingLabel}
-        fixedFloatingLabel={fixedFloatingLabel}
-        hint={hint}
         defaultValue={this.defaultValue}
         onChange={this.onChange}
       />
