@@ -85,7 +85,7 @@ let view = createClass({
     let time = model.time.val();
 
     return (
-      <div>
+      <React.Fragment>
         <Dialog
           className="dialog--noContentSidePadding dateTimeRangePicker_dialog"
           model={model.show}
@@ -105,7 +105,7 @@ let view = createClass({
           onClick={dispatcher('showPicker')}
           value={timeFormatter(time)}
         />
-      </div>
+      </React.Fragment>
     );
   },
 });
