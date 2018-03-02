@@ -35,21 +35,11 @@ let onDisableScroll = function(callback) {
 
 let getIsScrollDisabled = () => isDisabled;
 
-let enableScroll = function() {
-  if (!isDisabled) {
-    return;
-  }
-
+let removeStyle = function() {
   let main = document.querySelector(mainSelector);
   let mainBody = document.querySelector(mainBodySelector);
 
-  requireDisableScrollCount -= 1;
-
-  if (
-    requireDisableScrollCount === 0 &&
-    main &&
-    mainBody
-  ) {
+  if (main && mainBody) {
     main.style.height = '';
     main.style.overflow = '';
 
@@ -61,6 +51,18 @@ let enableScroll = function() {
 
     main.dataset.isScrollDisabled = false;
     setSt(currentScrollTop);
+  }
+};
+
+let enableScroll = function() {
+  if (!isDisabled) {
+    return;
+  }
+
+  requireDisableScrollCount -= 1;
+
+  if (requireDisableScrollCount === 0) {
+    removeStyle();
 
     isDisabled = false;
     onEnableCallbacks.forEach(function(item) {
@@ -106,6 +108,12 @@ let init = function({
   mainSelector = _mainSelector;
   mainBodySelector = _mainBodySelector;
   styleType = _styleType;
+  requireDisableScrollCount = 0;
+  currentScrollTop = 0;
+  onEnableCallbacks = [];
+  onDisableCallbacks = [];
+  isDisabled = false;
+  removeStyle();
 };
 
 export {
