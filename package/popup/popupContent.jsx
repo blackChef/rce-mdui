@@ -50,6 +50,10 @@ let view = createClass({
       openAnimationDuration = 400,
     } = props;
 
+    // fix iOS input messed up in fixed dialog bug
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+
     onOpen();
     disableScroll();
     increaseDepth(this.contentRef);
@@ -65,9 +69,10 @@ let view = createClass({
       closeAnimationDuration = 400,
     } = props;
 
-    let { removeESCListener } = this;
+    document.body.style.position = '';
+    document.body.style.width = '';
 
-    removeESCListener();
+    this.removeESCListener();
     onClose();
 
     setTimeout(() => {
