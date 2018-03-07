@@ -1,120 +1,116 @@
+let defaultState = {
+ mainSelector: null,
+ mainBodySelector: null,
+ styleType: 'transform',
+ isDisabled: false,
+ requireDisableScrollCount: 0,
+ currentScrollTop: 0,
+ onEnableCallbacks: [],
+ onDisableCallbacks: [],
+};
 
+let state = {};
+
+
+let onEvent = function(key) {
+  return function(callback) {
+    let id = Date.now();
+    state[key] = state[key].concat({ id, callback });
+    return function() {
+      state[key] = state[key].filter(i => i.id !== id);
+    };
+  };
+};
+
+let runEventCallbacks = function(key) {
+  state[key].forEach(i => i.callback());
+};
+
+let onEnableScroll = onEvent('onEnableCallbacks');
+
+let onDisableScroll = onEvent('onDisableCallbacks');
 
 let getSt = function() {
-  return document.documentElement.scrollTop || document.body.scrollTop || 0;
+  return document.documentElement.scrollTop ||
+    document.body.scrollTop || 0;
 };
 
 let setSt = function(st) {
-  document.documentElement.scrollTop = document.body.scrollTop = st;
+  document.documentElement.scrollTop =
+    document.body.scrollTop = st;
 };
-
-
-let mainSelector, mainBodySelector;
-let styleType = 'transform';
-let isDisabled = false;
-let requireDisableScrollCount = 0;
-let currentScrollTop = 0;
-let onEnableCallbacks = [];
-let onDisableCallbacks = [];
-
-let onEnableScroll = function(callback) {
-  let id = Date.now();
-  onEnableCallbacks = onEnableCallbacks.concat({ id, callback });
-  return function() {
-    onEnableCallbacks = onEnableCallbacks.filter(i => i.id !== id);
-  };
-};
-
-let onDisableScroll = function(callback) {
-  let id = Date.now();
-  onDisableCallbacks = onDisableCallbacks.concat({ id, callback });
-  return function() {
-    onDisableCallbacks = onDisableCallbacks.filter(i => i.id !== id);
-  };
-};
-
-let getIsScrollDisabled = () => isDisabled;
 
 let removeStyle = function() {
-  let main = document.querySelector(mainSelector);
-  let mainBody = document.querySelector(mainBodySelector);
+  let main = document.querySelector(state.mainSelector);
+  let mainBody = document.querySelector(state.mainBodySelector);
 
   if (main && mainBody) {
     main.style.height = '';
     main.style.overflow = '';
 
-    if (styleType === 'transform') {
+    if (state.styleType === 'transform') {
       mainBody.style.transform = ``;
-    } else if (styleType === 'margin') {
+    } else if (state.styleType === 'margin') {
       mainBody.style.marginTop = ``;
     }
 
     main.dataset.isScrollDisabled = false;
-    setSt(currentScrollTop);
+
+    // restore previous scroll position
+    setSt(state.currentScrollTop);
   }
 };
 
-let enableScroll = function() {
-  if (!isDisabled) {
-    return;
-  }
+let applyStyle = function() {
+  let main = document.querySelector(state.mainSelector);
+  let mainBody = document.querySelector(state.mainBodySelector);
 
-  requireDisableScrollCount -= 1;
+  if (main && mainBody) {
+    state.currentScrollTop = getSt();
 
-  if (requireDisableScrollCount === 0) {
-    removeStyle();
-
-    isDisabled = false;
-    onEnableCallbacks.forEach(function(item) {
-      item.callback();
-    });
-  }
-};
-
-let disableScroll = function() {
-  let main = document.querySelector(mainSelector);
-  let mainBody = document.querySelector(mainBodySelector);
-  requireDisableScrollCount += 1;
-
-  // `count === 1` means that it's the first time that we want to disable scroll
-  if (
-    requireDisableScrollCount === 1 &&
-    main &&
-    mainBody
-  ) {
-    currentScrollTop = getSt();
     main.dataset.isScrollDisabled = true;
     main.style.height = '100vh';
     main.style.overflow = 'hidden';
 
-    if (styleType === 'transform') {
-      mainBody.style.transform = `translateY(-${currentScrollTop}px)`;
-    } else if (styleType === 'margin') {
-      mainBody.style.marginTop = `-${currentScrollTop}px`;
+    if (state.styleType === 'transform') {
+      mainBody.style.transform = `translateY(-${state.currentScrollTop}px)`;
+    } else if (state.styleType === 'margin') {
+      mainBody.style.marginTop = `-${state.currentScrollTop}px`;
     }
-
-    isDisabled = true;
-    onDisableCallbacks.forEach(function(item) {
-      item.callback();
-    });
   }
 };
 
-let init = function({
-  mainSelector: _mainSelector,
-  mainBodySelector: _mainBodySelector,
-  styleType: _styleType = 'transform', // transform | margin
-}) {
-  mainSelector = _mainSelector;
-  mainBodySelector = _mainBodySelector;
-  styleType = _styleType;
-  requireDisableScrollCount = 0;
-  currentScrollTop = 0;
-  onEnableCallbacks = [];
-  onDisableCallbacks = [];
-  isDisabled = false;
+let enableScroll = function() {
+  if (!state.isDisabled) {
+    return;
+  }
+
+  state.requireDisableScrollCount -= 1;
+
+  if (state.requireDisableScrollCount === 0) {
+    removeStyle();
+    state.isDisabled = false;
+    runEventCallbacks('onEnableCallbacks');
+  }
+};
+
+let disableScroll = function() {
+  state.requireDisableScrollCount += 1;
+
+  // `count === 1` means that it's the first time that we want to disable scroll
+  if (state.requireDisableScrollCount === 1) {
+    applyStyle();
+    state.isDisabled = true;
+    runEventCallbacks('onDisableCallbacks');
+  }
+};
+
+let init = function({ mainSelector, mainBodySelector, styleType}) {
+  state = { ...defaultState, mainSelector, mainBodySelector, styleType };
   removeStyle();
 };
+
+let getIsScrollDisabled = () => state.isDisabled;
 
 export {
   init,
