@@ -50,15 +50,16 @@ let view = createClass({
       openAnimationDuration = 400,
     } = props;
 
+    onOpen();
+    disableScroll();
+
     // fix iOS input messed up in fixed dialog bug
+    // this should be done after scroll is disabled
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
 
-    onOpen();
-    disableScroll();
     increaseDepth(this.contentRef);
     this.removeESCListener = addESCListener(this.tryToClose);
-
     setTimeout(afterOpen, openAnimationDuration);
   },
 
@@ -69,14 +70,16 @@ let view = createClass({
       closeAnimationDuration = 400,
     } = props;
 
-    document.body.style.position = '';
-    document.body.style.width = '';
-
     this.removeESCListener();
     onClose();
 
     setTimeout(() => {
       afterClose();
+
+      // this should be done before scroll is enabled
+      document.body.style.position = '';
+      document.body.style.width = '';
+
       enableScroll();
       decreaseDepth(this.contentRef);
     }, closeAnimationDuration);
