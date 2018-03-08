@@ -21,6 +21,7 @@ let update = function({ type, model }) {
   }
 };
 
+
 let view = createClass({
   componentDidMount() {
     if ( this.props.model.val() ) {
@@ -43,6 +44,28 @@ let view = createClass({
     if (willClose) this.willClose(nextProps);
   },
 
+  workAroundIOSInputBug(isOpen) {
+    if (this.isIOS === undefined) {
+      let userAgent = window.navigator.userAgent;
+      let r1 = /cfnetwork\/.+darwin/i;
+      let r2 = /ip[honead]+(?:.*os\s([\w]+)*\slike\smac|;\sopera)/i;
+      this.isIOS = r1.test(userAgent) || r2.test(userAgent);
+    }
+
+    if (!this.isIOS === false) return;
+
+    // fix iOS cursor messed up when focus in a input inside a fixed dialog
+    if (isOpen) {
+      // this should be done after scroll is disabled
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      // this should be done before scroll is enabled
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+  },
+
   willOpen(props = this.props) {
     let {
       onOpen = noop,
@@ -52,13 +75,8 @@ let view = createClass({
 
     onOpen();
     disableScroll();
-
-    // fix iOS input messed up in fixed dialog bug
-    // this should be done after scroll is disabled
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-
     increaseDepth(this.contentRef);
+    this.workAroundIOSInputBug(true);
     this.removeESCListener = addESCListener(this.tryToClose);
     setTimeout(afterOpen, openAnimationDuration);
   },
@@ -75,11 +93,7 @@ let view = createClass({
 
     setTimeout(() => {
       afterClose();
-
-      // this should be done before scroll is enabled
-      document.body.style.position = '';
-      document.body.style.width = '';
-
+      this.workAroundIOSInputBug(false);
       enableScroll();
       decreaseDepth(this.contentRef);
     }, closeAnimationDuration);
