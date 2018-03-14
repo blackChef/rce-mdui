@@ -1,7 +1,7 @@
 let defaultState = {
  mainSelector: null,
  mainBodySelector: null,
- styleType: 'transform',
+ styleType: 'margin',
  isDisabled: false,
  requireDisableScrollCount: 0,
  currentScrollTop: 0,
@@ -105,8 +105,8 @@ let disableScroll = function() {
   }
 };
 
-let init = function({ mainSelector, mainBodySelector, styleType}) {
-  state = { ...defaultState, mainSelector, mainBodySelector, styleType };
+let init = function(props) {
+  state = { ...defaultState, ...props };
   removeStyle();
 };
 

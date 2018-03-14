@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import { view as AppBar } from '../appBar/';
@@ -50,27 +51,41 @@ let Front = function(props) {
   );
 };
 
-let view = function(props) {
-  let {
-    model,
-    className = '',
-    ...otherProps
-  } = props;
 
-  return (
-    <Popup
-      {...otherProps}
-      className={`dialogView ${className}`}
-      model={model}
-      openAnimationDuration={300}
-      closeAnimationDuration={300}
-      bgProps={{ className: 'dialogView_background' }}
-    >
-      <Front {...props} />
-    </Popup>
-  );
-};
+let view = createClass({
+  onOpen() {
+    document.body.classList.add('is_dialogViewOpen');
+    this.props.onOpen && this.props.onOpen();
+  },
 
+  onClose() {
+    document.body.classList.remove('is_dialogViewOpen');
+    this.props.close && this.props.close();
+  },
+
+  render() {
+    let {
+      model,
+      className = '',
+      ...otherProps
+    } = this.props;
+
+    return (
+      <Popup
+        {...otherProps}
+        onOpen={this.onOpen}
+        onClose={this.onClose}
+        className={`dialogView ${className}`}
+        model={model}
+        openAnimationDuration={350}
+        closeAnimationDuration={350}
+        bgProps={{ className: 'dialogView_background' }}
+      >
+        <Front {...this.props} />
+      </Popup>
+    );
+  },
+});
 
 
 view = createComponent({ name, view });
