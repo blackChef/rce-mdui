@@ -54,12 +54,20 @@ let Front = function(props) {
 
 let view = createClass({
   onOpen() {
-    document.body.classList.add('is_dialogViewOpen');
+    // If a dialogView already add class to body,
+    // we leave that dialogView to control body's class.
+    if (!document.body.classList.contains('is_dialogViewOpen')) {
+      document.body.classList.add('is_dialogViewOpen');
+      this.addClassTobody = true;
+    }
+
     this.props.onOpen && this.props.onOpen();
   },
 
   onClose() {
-    document.body.classList.remove('is_dialogViewOpen');
+    if (this.addClassTobody) {
+      document.body.classList.remove('is_dialogViewOpen');
+    }
     this.props.close && this.props.close();
   },
 
