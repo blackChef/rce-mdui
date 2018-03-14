@@ -78,6 +78,9 @@ let view = createClass({
   },
   render() {
     let { children, count, onRequestDeselectAll, className = '' } = this.props;
+
+    if (!children) return null;
+
     let classNames = setClassNames(`contextualBar ${className}`, {
       'is_active': count > 0,
     });
