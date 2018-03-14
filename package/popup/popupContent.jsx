@@ -52,7 +52,7 @@ let view = createClass({
       this.isIOS = r1.test(userAgent) || r2.test(userAgent);
     }
 
-    if (!this.isIOS === false) return;
+    if (this.isIOS === false) return;
 
     // fix iOS cursor messed up when focus in a input inside a fixed dialog
     if (isOpen) {
