@@ -68,11 +68,22 @@ let view = createClass({
     this.form = elem;
   },
 
+  onFocus(event) {
+    // Virtual keyboard may block content.
+    // Try to scroll focused content into view after keyboard is shown.
+    // 500ms is the time of keyboard animation
+    let target = event.target;
+    setTimeout(function() {
+      target.scrollIntoViewIfNeeded();
+    }, 500);
+  },
+
   Form(props) {
     let { formId, onFormSubmit } = this;
     return (
       <form
         {...props}
+        onFocus={this.onFocus}
         ref={this.setForm}
         id={formId}
         onSubmit={onFormSubmit}
