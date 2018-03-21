@@ -23,6 +23,12 @@ let update = function({ type, model }) {
 
 
 let view = createClass({
+  getInitialState() {
+    return {
+      openAnimationState: '',
+      closeAnimationState: '',
+    };
+  },
   componentDidMount() {
     if ( this.props.model.val() ) {
       this.willOpen();
@@ -30,6 +36,8 @@ let view = createClass({
   },
 
   componentWillUnmount() {
+    this.isUnMounted = true;
+
     // if it's still opened, unmount should trigger onClose callback
     if ( this.props.model.val() ) {
       this.willClose();
@@ -78,7 +86,12 @@ let view = createClass({
     increaseDepth(this.contentRef);
     this.workAroundIOSInputBug(true);
     this.removeESCListener = addESCListener(this.tryToClose);
-    setTimeout(afterOpen, openAnimationDuration);
+
+    this.setState({ openAnimationState: 'start' });
+    setTimeout(() => {
+      this.setState({ openAnimationState: 'end' });
+      afterOpen();
+    }, openAnimationDuration);
   },
 
   willClose(props = this.props) {
@@ -90,12 +103,16 @@ let view = createClass({
 
     this.removeESCListener();
     onClose();
+    this.setState({ closeAnimationState: 'start' });
 
     setTimeout(() => {
       afterClose();
       this.workAroundIOSInputBug(false);
       enableScroll();
       decreaseDepth(this.contentRef);
+      if (!this.isUnMounted) {
+        this.setState({ closeAnimationState: 'end' });
+      }
     }, closeAnimationDuration);
   },
 
@@ -109,14 +126,18 @@ let view = createClass({
   renderFront() {
     let { tryToClose } = this;
     let { forceOpen, children } = this.props;
+    let { openAnimationState, closeAnimationState } = this.state;
     return React.cloneElement(children, {
       forceOpen,
       tryToClose,
+      openAnimationState,
+      closeAnimationState,
     });
   },
 
   renderBg() {
     let {
+      bgClassName = '',
       bgProps = {},
       closeOnBgClick = true
     } = this.props;
@@ -125,7 +146,7 @@ let view = createClass({
     return (
       <div
         { ...otherProps }
-        className={`popup_background ${className}`}
+        className={`popup_background ${bgClassName} ${className}`}
         onClick={closeOnBgClick ? tryToClose : noop}
       />
     );
