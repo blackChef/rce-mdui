@@ -33,7 +33,7 @@ let view = createClass({
     let nextStatus = nextProps.model.val();
     let {
       dispatch,
-      delay = 500,
+      delay = 300,
       showSuccessMsg = false,
       successMsgDuration = 800,
     } = this.props;

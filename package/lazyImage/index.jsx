@@ -52,6 +52,7 @@ let view = createClass({
         className={`lazyImage ${className}`}
         ref={e => this.containerRef = e}
         {...wrapperProps}
+        data-src={src}
       >
         <Placeholder width={width} height={height}/>
 
