@@ -11,12 +11,19 @@ let init = function() {
   return false;
 };
 
-let CancelBtn = function({ forceOpen, tryToClose, cancelLabel = '取消' }) {
+let CancelBtn = function({ forceOpen, onCancel, tryToClose, cancelLabel = '取消' }) {
+  let onClick = (() => {
+    if (onCancel) {
+      return () => onCancel(tryToClose);
+    }
+    return tryToClose;
+  })();
+
   return (
     <LinkButton
       className="linkButton--bounded linkButton--primary rightGutter_margin_half"
       disabled={forceOpen}
-      onClick={tryToClose}
+      onClick={onClick}
     >
       {cancelLabel}
     </LinkButton>
