@@ -19,8 +19,10 @@ let init = function() {
 
 let actions = {
   // { payload, model, dispatch, getLatestModel }
-  showPicker({ model }) {
-    model.show.set(true);
+  showPicker({ model, payload: { disabled, readOnly } }) {
+    if (!disabled && !readOnly) {
+      model.show.set(true);
+    }
   },
   confirm({ model, payload }) {
     model.time.set(+payload);
@@ -35,7 +37,7 @@ let update = function(props) {
 let Picker = createClass({
   componentDidMount() {
     let { elem } = this;
-    let { initialValue, romeOptions = {} } = this.props;
+    let { initialValue, ...romeOptions } = this.props;
     let options = Object.assign(romeOptions, {
       initialValue: new Date(initialValue),
       timeInterval: 3600,
@@ -80,7 +82,10 @@ let view = createClass({
       model,
       dispatcher,
       label,
+      floatingLabel = label,
       timeFormatter = identity,
+      disabled, readOnly,
+      ...otherProps
     } = this.props;
     let time = model.time.val();
 
@@ -93,6 +98,7 @@ let view = createClass({
         >
           <Slot name="content">
             <Picker
+              {...otherProps}
               initialValue={time}
               ref={e => this.picker = e}
             />
@@ -101,8 +107,8 @@ let view = createClass({
 
         <TextFieldBtn
           className="textFieldBtn--dropDown"
-          floatingLabel={label}
-          onClick={dispatcher('showPicker')}
+          floatingLabel={floatingLabel}
+          onClick={dispatcher('showPicker', { disabled, readOnly })}
           value={timeFormatter(time)}
         />
       </React.Fragment>
