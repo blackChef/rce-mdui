@@ -159,10 +159,12 @@ let view = createClass({
   },
 
   render() {
+    let { style } = this.props;
     return (
       <div
         className={this.getClassName()}
         ref={e => this.contentRef = e}
+        style={style}
       >
         {this.renderFront()}
         {this.renderBg()}

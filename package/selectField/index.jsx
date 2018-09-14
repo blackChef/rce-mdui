@@ -50,6 +50,7 @@ let view = createClass({
       options, // [{ value, label }]
       readOnly = false,
       disabled = false,
+      className = '',
       ...otherProps
     } = this.props;
 
@@ -75,7 +76,7 @@ let view = createClass({
 
 
     return (
-      <div className="selectField">
+      <div className={`selectField ${className}`}>
         <Menu
           {...otherProps}
           disabled={readOnly || disabled}
