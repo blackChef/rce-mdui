@@ -1,4 +1,5 @@
 import React from 'react';
+import createClass from 'create-react-class';
 import noop from 'lodash/noop';
 import createComponent from 'rce-pattern/createComponent';
 import { view as Transition } from '../transition/appear';
@@ -51,51 +52,73 @@ let renderContent = function(props) {
   }
 };
 
-let Body = function(props) {
-  let {
-    model, title, saveBtnProps = {},
-    formId, onOpen, afterOpen, LoadingScreen,
-    ...otherProps
-  } = props;
+let Body = createClass({
+  afterClose() {
+    let {
+      model,
+      resetModelAfterClose = false,
+      afterOpen = noop,
+    } = this.props;
 
-  let {
-    isSaving,
-    isContentReady,
-  } = model.val();
+    if (resetModelAfterClose) {
+      model.set( init() );
+    }
 
-  let {
-    children: saveBtnContent = '保存',
-    ...otherSaveBtnProps
-  } = saveBtnProps;
+    afterOpen();
+  },
+  render() {
+    let {
+      model, title, saveBtnProps = {},
+      formId, onOpen, afterOpen, LoadingScreen,
+      noSaveButton=false,
+      // eslint-disable-next-line no-unused-vars
+      resetModelAfterClose,
+      ...otherProps
+    } = this.props;
 
-  return (
-    <DialogView
-      {...otherProps}
-      model={model.show}
-      onOpen={onOpen}
-      afterOpen={afterOpen}
-      forceOpen={isSaving}
-    >
-      <Slot name="title">{title}</Slot>
+    let {
+      isSaving,
+      isContentReady,
+    } = model.val();
 
-      <Slot name="actions">
-        <LinkButton
-          {...otherSaveBtnProps}
-          disabled={!isContentReady || isSaving}
-          form={formId}
-          type="submit"
-        >
-          {saveBtnContent}
-        </LinkButton>
-      </Slot>
+    let {
+      children: saveBtnContent = '保存',
+      ...otherSaveBtnProps
+    } = saveBtnProps;
 
-      <Slot name="body">
-        <LoadingScreen/>
-        {renderContent(props)}
-      </Slot>
-    </DialogView>
-  );
-};
+    return (
+      <DialogView
+        {...otherProps}
+        model={model.show}
+        onOpen={onOpen}
+        afterOpen={afterOpen}
+        forceOpen={isSaving}
+        afterClose={this.afterClose}
+      >
+        <Slot name="title">{title}</Slot>
+
+        <Slot name="actions">
+          {
+            !noSaveButton &&
+            <LinkButton
+              {...otherSaveBtnProps}
+              disabled={!isContentReady || isSaving || otherSaveBtnProps.disabled}
+              form={formId}
+              type="submit"
+            >
+              {saveBtnContent}
+            </LinkButton>
+          }
+        </Slot>
+
+        <Slot name="body">
+          <LoadingScreen/>
+          {renderContent(this.props)}
+        </Slot>
+      </DialogView>
+    );
+  },
+});
 
 let view = function(props) {
   return (
