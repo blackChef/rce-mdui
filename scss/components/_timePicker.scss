@@ -1,0 +1,27 @@
+.timePicker {
+  &_display {
+    margin-bottom: $s_gutter;
+    display: flex;
+    justify-content: center;
+
+    &_hour, &_minute {
+      font-size: $s_font_display1;
+    }
+
+    &_hour {
+      &::after {
+        content: ':';
+      }
+    }
+  }
+
+  &_control {
+    &_input {
+      padding: $s_gutter/2 $s_gutter;
+
+      &_label {
+        margin-bottom: $s_gutter;
+      }
+    }
+  }
+}
