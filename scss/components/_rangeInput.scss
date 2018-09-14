@@ -38,8 +38,8 @@
 .rangeInput {
   // Thumb position and thumb width are relative.
   // If we change thumb width, we have to change javascript too.
-  $thumbWidth: 14px;
-  $trackHeight: 3px;
+  $thumbWidth: 28px;
+  -webkit-tap-highlight-colo: transparent;
 
   position: relative;
   display: flex;
@@ -51,14 +51,15 @@
     z-index: 3;
     @include resetRangeInput;
     @include styleRangeInputThumb {
-      @include circle($thumbWidth);
-      border-radius: 50%;
+      @include circle($thumbWidth/2);
       background-color: $c_primary;
+      border: $thumbWidth/4 solid lighten($c_primary, 40%);
+      box-sizing: content-box;
     };
   }
 
   &_track {
-    height: $trackHeight;
+    height: 4px;
     position: relative;
 
     &_front, &_bg, &_marks {
@@ -82,7 +83,7 @@
     }
 
     &_bg {
-      background-color: #B0B0B0;
+      background-color: $grey-300;
     }
   }
 

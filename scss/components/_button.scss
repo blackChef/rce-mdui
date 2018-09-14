@@ -9,9 +9,9 @@
   padding: 0;
 
   > .buttonContent {
+    line-height: 1;
     width: 100%;
     height: 100%;
-    line-height: 1;
     @include center;
   }
 
@@ -117,7 +117,6 @@
   @include flatButton;
   @include center;
   color: rgba(0, 0, 0, 0.38);
-
   .mdIcon {
     color: inherit;
   }
@@ -131,6 +130,10 @@
     .buttonContent {
       min-width: 4em;
     }
+  }
+
+  &--outline {
+    border: 1px solid;
   }
 }
 
@@ -220,6 +223,12 @@
 .paperButton {
   @include paperButton(2, 8);
   @include rectangleButton($s_gutter);
+
+  &--bounded {
+    .buttonContent {
+      min-width: 4em;
+    }
+  }
 }
 
 .fab {

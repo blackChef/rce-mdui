@@ -3,7 +3,7 @@ import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 
 
-const THUMB_WIDTH = 14; // px
+const THUMB_WIDTH = 28; // px
 const MARKER_WIDTH = 1; // px
 const MARKER_COLOR = '#333333';
 
@@ -119,6 +119,8 @@ let view = createClass({
     let {
       model,
       className = '',
+      // eslint-disable-next-line no-unused-vars
+      dispatch, dispatcher,
       ...otherProps
     } = this.props;
 
