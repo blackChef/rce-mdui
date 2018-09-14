@@ -17,18 +17,19 @@ let view = function(props) {
   let {
     // eslint-disable-next-line no-unused-vars
     model, dispatcher, dispatch,
+    style = "checkbox",
     ...otherProps
   } = props;
 
   return (
-    <div className="checkbox">
+    <div className={style}>
       <input
         {...otherProps}
         type="checkbox"
         checked={model.val()}
         onChange={dispatcher('toggle', isChecked)}
       />
-      <div className="checkbox_appearance"></div>
+      <div className={`${style}_appearance`}></div>
     </div>
   );
 };
