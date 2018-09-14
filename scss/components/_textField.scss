@@ -5,7 +5,6 @@
   justify-content: center;
   position: relative;
 
-
   &_field {
     @include resetInputField;
 
@@ -35,8 +34,7 @@
     position: relative;
     top: -1px;
     transform: scaleX(0);
-    transition: 300ms;
-
+    transition: transform 300ms;
   }
 
 
@@ -55,7 +53,7 @@
   }
 
   &_hint {
-    @include clipText;
+    // @include clipText;
 
     font-size: $s_font_caption;
     line-height: normal;
@@ -74,8 +72,25 @@
   }
 }
 
+.textField--simple {
+  &.is_clearable {
+    padding-right: 36px;
+  }
+
+  .textField_clearBtn {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 14px;
+  }
+}
+
 .textField--floatingLabel {
-  padding-top: 36px;
+  padding-top: 16px;
+
+  &.is_clearable .textField_field {
+    padding-right: 36px;
+  }
 
   .textField {
     &_floatingLabel {
@@ -83,9 +98,15 @@
       top: 0;
       color: $c_text_secondary;
       pointer-events: none;
-      transition: 225ms;
-      transform: translateY(35px);
+      transition: transform 225ms;
+      transform: translateY(16px);
+    }
 
+    &_clearBtn {
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      bottom: 6px;
     }
   }
 
@@ -93,7 +114,7 @@
     .textField {
       &_floatingLabel {
         font-size: $s_font_caption;
-        transform: translateY(16px)
+        transform: translateY(0)
       }
     }
   }
@@ -116,6 +137,8 @@
   }
 
   .mdIcon { display: none; }
+
+  .textField_clearBtn { display: none; }
 }
 
 .textFieldBtn--dropDown {

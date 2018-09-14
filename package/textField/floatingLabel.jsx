@@ -3,7 +3,7 @@ import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import InputField from './inputField';
-
+import { view as ClearBtn } from './clearBtn';
 
 
 let name = 'TextField--floatingLabel';
@@ -16,19 +16,15 @@ let view = createClass({
       isFocused: false,
     };
   },
-
   onFocus() {
     this.setState({ isFocused: true });
   },
-
   onBlur() {
     this.setState({ isFocused: false });
   },
-
   componentDidMount() {
     this.input = this.mainRef.querySelector('.textField_field');
   },
-
   isFloating() {
     if (this.props.fixedFloatingLabel) {
       return true;
@@ -46,7 +42,6 @@ let view = createClass({
     // initial render
     return this.props.defaultValue !== '';
   },
-
   render() {
     let {
       hint = '',
@@ -77,6 +72,7 @@ let view = createClass({
         <div className="textField_line"></div>
         <label className="textField_floatingLabel">{floatingLabel}</label>
         {hint && <div className="textField_hint">{hint}</div>}
+        <ClearBtn {...otherProps}/>
      </div>
     );
   },

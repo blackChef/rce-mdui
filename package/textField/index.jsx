@@ -17,7 +17,6 @@ let update = function({ payload, model }) {
   model.set(payload);
 };
 
-
 // Chines pinyin ime can be problematic.
 // We can't use model as valule directly, because model update is async,
 // break chinese pinyin ime.
@@ -27,7 +26,6 @@ let update = function({ payload, model }) {
 // windows: "a", "a'a", "啊啊";
 // ios: "a", "a a", '啊啊', "", "啊啊";
 // android: "啊啊"
-
 let view = createClass({
   componentWillReceiveProps(nextProps) {
     let nextModelVal = nextProps.model.val();
