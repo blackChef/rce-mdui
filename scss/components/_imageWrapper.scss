@@ -1,0 +1,33 @@
+.imageWrapper {
+  position: relative;
+  width: fit-content;
+  overflow: hidden;
+
+  &_placeholder {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    background-color: #E8E8E8;
+  }
+
+  img {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    visibility: hidden;
+    opacity: 0;
+    transition: 225ms;
+  }
+
+  &.is_loaded &_placeholder {
+    background-color: transparent;
+  }
+
+  &.is_loaded img {
+    visibility: visible;
+    opacity: 1;
+  }
+}
