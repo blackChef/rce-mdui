@@ -27,6 +27,8 @@ let view = createClass({
     return {
       openAnimationState: '',
       closeAnimationState: '',
+      shouldRender: false,
+      isOpen: false,
     };
   },
   componentDidMount() {
@@ -81,17 +83,23 @@ let view = createClass({
       openAnimationDuration = 400,
     } = props;
 
-    onOpen();
-    disableScroll();
-    increaseDepth(this.contentRef);
-    this.workAroundIOSInputBug(true);
-    this.removeESCListener = addESCListener(this.tryToClose);
+    let open = () => {
+      setTimeout(() => {
+        this.setState({ isOpen: true });
+        onOpen();
+        disableScroll();
+        increaseDepth(this.contentRef);
+        this.workAroundIOSInputBug(true);
+        this.removeESCListener = addESCListener(this.tryToClose);
+        this.setState({ openAnimationState: 'start' });
+        setTimeout(() => {
+          this.setState({ openAnimationState: 'end' });
+          afterOpen();
+        }, openAnimationDuration);
+      }, 20);
+    };
 
-    this.setState({ openAnimationState: 'start' });
-    setTimeout(() => {
-      this.setState({ openAnimationState: 'end' });
-      afterOpen();
-    }, openAnimationDuration);
+    this.setState({ shouldRender: true }, open);
   },
 
   willClose(props = this.props) {
@@ -99,12 +107,15 @@ let view = createClass({
       onClose = noop,
       afterClose = noop,
       closeAnimationDuration = 400,
+      unMountAfterClose = false,
     } = props;
 
     this.removeESCListener();
+    this.setState({
+      isOpen: false,
+      closeAnimationState: 'start'
+    });
     onClose();
-    this.setState({ closeAnimationState: 'start' });
-
     setTimeout(() => {
       afterClose();
       this.workAroundIOSInputBug(false);
@@ -112,6 +123,16 @@ let view = createClass({
       decreaseDepth(this.contentRef);
       if (!this.isUnMounted) {
         this.setState({ closeAnimationState: 'end' });
+      }
+
+      // Unmounting large DOM may cause performance problem,
+      // so it's disabled by default
+      if (unMountAfterClose) {
+        setTimeout(() => {
+          if (!this.isUnMounted) {
+            this.setState({ shouldRender: false });
+          }
+        }, 20);
       }
     }, closeAnimationDuration);
   },
@@ -153,13 +174,15 @@ let view = createClass({
   },
 
   getClassName() {
-    let { className = '', model } = this.props;
-    let isOpen = model.val();
+    let { className = '' } = this.props;
+    let { isOpen } = this.state;
     return `popup ${className} ${isOpen ? 'is_active' : ''}`;
   },
 
   render() {
     let { style } = this.props;
+    let { shouldRender } =  this.state;
+    if (!shouldRender) return null;
     return (
       <div
         className={this.getClassName()}
