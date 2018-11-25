@@ -18,11 +18,11 @@ let update = function({ model }) {
 };
 
 let view = createClass({
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     let { container, content } = this;
-    let checkOpen = matchValues('model.val', this.props, nextProps);
-    let willOpen = checkOpen(false, true);
-    let willClose = checkOpen(true, false);
+    let checkOpen = matchValues('model.val', this.props, prevProps);
+    let willOpen = checkOpen(true, false);
+    let willClose = checkOpen(false, true);
 
     if (willOpen) {
       container.classList.add('is_active');

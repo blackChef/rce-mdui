@@ -18,12 +18,12 @@ let update = function({ model }) {
 };
 
 let view = createClass({
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     let { dispatch, timeout = 1500 } = this.props;
 
     let willShow = matchValues(
-      'model.val', this.props, nextProps,
-      false, true
+      'model.val', this.props, prevProps,
+      true, false
     );
 
     if (willShow) {
@@ -44,7 +44,7 @@ let view = createClass({
   },
 
   render() {
-    let { model, msg, className = '' } = this.props;
+    let { model, msg, message = msg, className = '' } = this.props;
     let popupClassName = setClassNames(`flashMessage ${className}`, {
       'is_active': model.val()
     });
@@ -52,7 +52,7 @@ let view = createClass({
     return (
       <div className="flashMessage_placeholder" style={{ display: 'none' }}>
         <div className={popupClassName} ref={e => this.mainRef = e}>
-          <div className="flashMessage_front">{msg}</div>
+          <div className="flashMessage_front">{message}</div>
         </div>
       </div>
     );

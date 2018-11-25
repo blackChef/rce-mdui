@@ -28,9 +28,10 @@ let view = createClass({
   componentWillUnmount() {
     this.isMounted = false;
   },
-
-  componentWillReceiveProps(nextProps) {
-    let nextStatus = nextProps.model.val();
+  componentDidUpdate(prevProps) {
+    let prevStatus = prevProps.model.val();
+    let curStatus = this.props.model.val();
+    let isStatusBecame = targetStatus => prevStatus !== targetStatus && curStatus === targetStatus;
     let {
       dispatch,
       delay = 300,
@@ -38,19 +39,18 @@ let view = createClass({
       successMsgDuration = 800,
     } = this.props;
 
-    // if loading-process is fast, we dont want to show anything at all
-    if (nextStatus === 'loading') {
+    if (isStatusBecame('loading')) {
       this.setState({ startTime: Date.now() });
-
       setTimeout(() => {
-        let isLoading = this.props.model.val() === 'loading';
-        if (isLoading && this.isMounted) {
+        let afterDelayStatus = this.props.model.val();
+        if (afterDelayStatus === 'loading' && this.isMounted) {
           this.setState({ showContent: true });
         }
       }, delay);
+      return;
     }
 
-    else if (nextStatus === 'success') {
+    if (isStatusBecame('success')) {
       if (showSuccessMsg) {
         let endTime = Date.now();
         if (endTime - this.state.startTime > delay) {
@@ -63,26 +63,27 @@ let view = createClass({
         this.setState({ showContent: false });
         dispatch('setStatus', 'hide');
       }
+      return;
     }
 
-    else if(nextStatus === 'failed') {
+    if (isStatusBecame('failed')) {
       this.setState({ showContent: true });
+      return;
     }
 
-    else if (nextStatus === 'hide') {
+    if (isStatusBecame('hide')) {
       this.setState({ showContent: false });
+      return;
     }
   },
 
   render() {
-    let content = this.state.showContent ?
-      (
-        <Content {...this.props}
-          parentDispatch={this.props.dispatch}
-        />
-      ) : null;
-
-    return content;
+    if (!this.state.showContent) return null;
+    return (
+      <Content {...this.props}
+        parentDispatch={this.props.dispatch}
+      />
+    );
   },
 });
 

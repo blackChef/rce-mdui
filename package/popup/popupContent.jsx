@@ -46,12 +46,12 @@ let view = createClass({
     }
   },
 
-  componentWillReceiveProps(nextProps) {
-    let checkOpen = matchValues('model.val', this.props, nextProps);
-    let willOpen = checkOpen(false, true);
-    let willClose = checkOpen(true, false);
-    if (willOpen) this.willOpen(nextProps);
-    if (willClose) this.willClose(nextProps);
+  componentDidUpdate(prevProps) {
+    let checkOpen = matchValues('model.val', this.props, prevProps);
+    let willOpen = checkOpen(true, false);
+    let willClose = checkOpen(false, true);
+    if (willOpen) this.willOpen(this.props);
+    if (willClose) this.willClose(this.props);
   },
 
   workAroundIOSInputBug(isOpen) {

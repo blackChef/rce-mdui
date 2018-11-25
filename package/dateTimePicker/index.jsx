@@ -50,12 +50,12 @@ let Picker = createClass({
     this.instance.destroy();
   },
 
-  componentWillReceiveProps(nextProps) {
-    let nextModel = nextProps.model;
+  componentDidUpdate(prevProps) {
+    let prevModel = prevProps.model;
     let curModel = this.props.model;
 
-    if (nextModel !== curModel) {
-      this.instance.setValue(nextModel.time.val());
+    if (prevModel !== curModel) {
+      this.instance.setValue(curModel.time.val());
     }
   },
 

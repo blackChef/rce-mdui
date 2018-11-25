@@ -15,9 +15,8 @@ let update = function({ payload, model }) {
 };
 
 let view = createClass({
-  componentWillReceiveProps(nextProps) {
-    // if count of tabPanes changes
-    let { model, children, dispatch } = nextProps;
+  componentDidUpdate() {
+    let { model, children, dispatch } = this.props;
     let tabPanes = getSlots(children, 'tabPane');
     let curIndex = model.val();
     if (curIndex > tabPanes.length - 1) {

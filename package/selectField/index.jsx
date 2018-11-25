@@ -34,8 +34,8 @@ let view = createClass({
     }
   },
 
-  componentWillReceiveProps(nextProps) {
-    this.selectFirstIfNonIsSelected(nextProps.options);
+  componentDidUpdate() {
+    this.selectFirstIfNonIsSelected(this.props.options);
   },
 
   componentDidMount() {

@@ -4,7 +4,6 @@ import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
-import { matchValues } from '../utils/checkProps';
 import addESCListener from '../utils/escState';
 import MdClose from 'react-icons/lib/md/close';
 
@@ -63,16 +62,21 @@ let Count = createClass({
 });
 
 let view = createClass({
-  componentWillReceiveProps(nextProps) {
-    let checkCount = matchValues('count', this.props, nextProps);
-    let isGotoActive = checkCount(0, nextCount => nextCount > 0);
-    let isGotoInActive = checkCount(curCount => curCount > 0, 0);
+  componentDidMount() {
+    let isCurActive = this.props.count > 0;
+    if (isCurActive) {
+      this.removeESCListener = addESCListener(this.props.onRequestDeselectAll);
+    }
+  },
+  componentDidUpdate(prevProps) {
+    let isGotoActive = prevProps.count === 0 && this.props.count > 0;
+    let isGotoInactive = prevProps.count > 0 && this.props.count === 0;
 
-    if (isGotoActive) {
+    if (isGotoActive && !this.removeESCListener) {
       this.removeESCListener = addESCListener(this.props.onRequestDeselectAll);
     }
 
-    if (isGotoInActive) {
+    if (isGotoInactive) {
       this.removeESCListener();
     }
   },
@@ -91,7 +95,7 @@ let view = createClass({
           <IconButton
             className="contextualBar_control_closeButton iconButton--white"
             icon={MdClose}
-            onClick={ onRequestDeselectAll }
+            onClick={onRequestDeselectAll}
           />
           <Count count={count}/>
         </div>
