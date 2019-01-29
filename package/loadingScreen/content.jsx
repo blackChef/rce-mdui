@@ -13,10 +13,23 @@ let name = 'Content';
 
 let init = function() {};
 
-let renderActions = function({ model, onRequestRetry, parentDispatch }) {
+let renderActions = function(props) {
+  let {
+    model,
+    parentDispatch,
+    onRequestRetry,
+    onRequestCancel = () => parentDispatch('setStatus', 'hide'),
+  } = props;
   if (model.val() === 'failed') {
     return (
       <div className="loadingScreen_actions">
+        <LinkButton
+          className="linkButton--bounded"
+          onClick={onRequestCancel}
+        >
+          取消
+        </LinkButton>
+
         {
           typeof onRequestRetry === 'function' &&
           <LinkButton
@@ -26,12 +39,6 @@ let renderActions = function({ model, onRequestRetry, parentDispatch }) {
             重试
           </LinkButton>
         }
-        <LinkButton
-          className="linkButton--accent linkButton--bounded"
-          onClick={() => parentDispatch('setStatus', 'hide')}
-        >
-          取消
-        </LinkButton>
       </div>
     );
   }
