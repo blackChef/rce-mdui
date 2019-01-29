@@ -18,16 +18,23 @@ let init = function() {
 let Popup = function({ hidePopup, isShown, children }) {
   let items = getSlots(children, 'item')
     .map(function(item, index) {
-      let { onClick = noop, children } = item.props;
+      let {
+        onClick = noop,
+        children,
+        Component = 'div',
+        className = '',
+        ...otherProps
+      } = item.props;
       let onItemClick = () => { onClick(); hidePopup(); };
       return (
-        <div
+        <Component
           key={index}
           onClick={onItemClick}
-          className="menu_item"
+          className={'menu_item ' + className}
+          {...otherProps}
         >
           {children}
-        </div>
+        </Component>
       );
     });
 
