@@ -59,7 +59,7 @@ let view = createClass({
     let selectedValue = selectedOption? selectedOption.value : undefined;
 
     let optionItems = options.map(function({ value, label }) {
-      let classNames = setClassNames({
+      let classNames = setClassNames('surroundGutter_padding', {
         u_text_appAccent: value === selectedValue
       });
 
