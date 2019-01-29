@@ -39,16 +39,30 @@ let view = createClass({
   componentWillMount() {
     this.defaultValue = this.props.model.val();
 
-    let { dispatch, delay = 100 } = this.props;
+    let onChange = (() => {
+      let { dispatch} = this.props;
 
-    // debounce updating model, so no chinese ime issue on ios
-    let updateModel = debounce(value => {
-      dispatch('change', value);
-    }, delay);
+      let r1 = /cfnetwork\/.+darwin/i;
+      let r2 = /ip[honead]+(?:.*os\s([\w]+)*\slike\smac|;\sopera)/i;
+      let isIOS = r1.test(window.navigator.userAgent) || r2.test(window.navigator.userAgent);
 
-    this.onChange = function(event) {
-      updateModel(event.target.value);
-    };
+      if (isIOS) {
+        // debounce updating model, so no chinese ime issue on ios
+        let updateModel = debounce(value => {
+          dispatch('change', value);
+        }, 100);
+
+        return function(event) {
+          updateModel(event.target.value);
+        };
+      }
+
+      return function(event) {
+        dispatch('change', event.target.value);
+      };
+    })();
+
+    this.onChange = onChange;
   },
 
   componentDidMount() {
