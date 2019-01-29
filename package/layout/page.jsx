@@ -112,20 +112,26 @@ let view = createClass({
   },
 
   render() {
-    let { children, className = '' } = this.props;
+    let { children, className = '', noHeader = false } = this.props;
+    let header = (() => {
+      if (noHeader) return null;
 
-    let headerProps = {
-      header_navButton: this.getSlotContent(children, 'header_navButton'),
-      header_appLogo: this.getSlotContent(children, 'header_appLogo'),
-      header_title: this.getSlotContent(children, 'header_title'),
-      header_actions: this.getSlotContent(children, 'header_actions'),
-      header_other: this.getSlotContent(children, 'header_other'),
-      contextualBarProps: getSlot(children, 'header_contextualBar').props,
-    };
+      let headerProps = {
+        header_navButton: this.getSlotContent(children, 'header_navButton'),
+        header_appLogo: this.getSlotContent(children, 'header_appLogo'),
+        header_title: this.getSlotContent(children, 'header_title'),
+        header_actions: this.getSlotContent(children, 'header_actions'),
+        header_other: this.getSlotContent(children, 'header_other'),
+        contextualBarProps: getSlot(children, 'header_contextualBar').props,
+      };
+
+      return <Header {...headerProps}/>;
+    })();
+
     let body = this.getSlotContent(children, 'body');
     return (
       <div className={`layout_main ${className}`}>
-        <Header {...headerProps}/>
+        {header}
         <Body body={body}/>
       </div>
     );
