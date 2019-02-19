@@ -19,11 +19,12 @@
 
     visibility: hidden;
     opacity: 0;
-    transition: 225ms;
+    transition: 300ms;
   }
 
   &.is_loaded &_placeholder {
     background-color: transparent;
+    transition: 300ms;
   }
 
   &.is_loaded img {
