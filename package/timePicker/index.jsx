@@ -59,7 +59,11 @@ let view = createClass({
       dispatcher,
       floatingLabel,
       disabled,
-      readOnly
+      readOnly,
+      okLabel,
+      cancelLabel,
+      hourLabel,
+      minuteLabel,
     } = this.props;
     let { confirmedTime: { hour, minute } } = this.state;
     let display = `${padTime(hour)}:${padTime(minute)}`;
@@ -70,9 +74,11 @@ let view = createClass({
           model={model.isShown}
           onConfirm={this.onConfirm}
           onCancel={this.onCancel}
+          okLabel={okLabel}
+          cancelLabel={cancelLabel}
         >
           <Slot name="content">
-            <Picker hour={model.hour} minute={model.minute}/>
+            <Picker hour={model.hour} minute={model.minute} hourLabel={hourLabel} minuteLabel={minuteLabel}/>
           </Slot>
         </Dialog>
 

@@ -19,6 +19,8 @@ let renderActions = function(props) {
     parentDispatch,
     onRequestRetry,
     onRequestCancel = () => parentDispatch('setStatus', 'hide'),
+    cancelBtnLabel = '取消',
+    retryBtnLabel = '重试',
   } = props;
   if (model.val() === 'failed') {
     return (
@@ -27,7 +29,7 @@ let renderActions = function(props) {
           className="linkButton--bounded"
           onClick={onRequestCancel}
         >
-          取消
+          {cancelBtnLabel}
         </LinkButton>
 
         {
@@ -36,7 +38,7 @@ let renderActions = function(props) {
             className="linkButton--accent linkButton--bounded"
             onClick={onRequestRetry}
           >
-            重试
+            {retryBtnLabel}
           </LinkButton>
         }
       </div>

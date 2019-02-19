@@ -30,17 +30,23 @@ let view = createClass({
     this.unobserveImage = onEnter(this.containerRef, this.showImage);
   },
 
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  },
+
   showImage() {
-    this.setState({ shouldShowImage: true });
     this.unobserveImage();
+    !this.isUnmounted && this.setState({ shouldShowImage: true });
   },
 
   onLoad(event) {
-    let { naturalWidth, naturalHeight } = event.target;
-    this.setState({
-      isLoaded: true,
-      naturalWidth, naturalHeight,
-    });
+    if (!this.isUnmounted) {
+      let { naturalWidth, naturalHeight } = event.target;
+      this.setState({
+        isLoaded: true,
+        naturalWidth, naturalHeight,
+      });
+    }
   },
 
   render() {

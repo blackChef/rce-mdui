@@ -70,6 +70,7 @@ let Body = createClass({
     let {
       model, title, saveBtnProps = {},
       formId, onOpen, afterOpen, LoadingScreen,
+      saveBtnLabel = '保存',
       noSaveButton=false,
       // eslint-disable-next-line no-unused-vars
       resetModelAfterClose,
@@ -80,11 +81,6 @@ let Body = createClass({
       isSaving,
       isContentReady,
     } = model.val();
-
-    let {
-      children: saveBtnContent = '保存',
-      ...otherSaveBtnProps
-    } = saveBtnProps;
 
     return (
       <DialogView
@@ -101,12 +97,12 @@ let Body = createClass({
           {
             !noSaveButton &&
             <LinkButton
-              {...otherSaveBtnProps}
-              disabled={!isContentReady || isSaving || otherSaveBtnProps.disabled}
+              {...saveBtnProps}
+              disabled={!isContentReady || isSaving || saveBtnProps.disabled}
               form={formId}
               type="submit"
             >
-              {saveBtnContent}
+              {saveBtnLabel}
             </LinkButton>
           }
         </Slot>

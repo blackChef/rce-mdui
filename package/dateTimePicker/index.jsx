@@ -85,6 +85,8 @@ let view = createClass({
       floatingLabel = label,
       timeFormatter = identity,
       disabled, readOnly,
+      okLabel,
+      cancelLabel,
       ...otherProps
     } = this.props;
     let time = model.time.val();
@@ -95,6 +97,8 @@ let view = createClass({
           className="dialog--noContentSidePadding dateTimeRangePicker_dialog"
           model={model.show}
           onConfirm={this.confirm}
+          okLabel={okLabel}
+          cancelLabel={cancelLabel}
         >
           <Slot name="content">
             <Picker

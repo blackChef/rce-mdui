@@ -8,7 +8,7 @@ let name = 'Picker';
 
 let init = function() {};
 
-let view = function({ hour, minute }) {
+let view = function({ hour, minute, hourLabel = '小时', minuteLabel = '分钟' }) {
   return (
     <div className="timePicker">
       <div className="timePicker_display">
@@ -18,11 +18,11 @@ let view = function({ hour, minute }) {
 
       <div className="timePicker_control">
         <div className="timePicker_control_input">
-          <div className="timePicker_control_input_label">小时:</div>
+          <div className="timePicker_control_input_label">{hourLabel}:</div>
           <RangeInput min={0} max={23} model={hour}/>
         </div>
         <div className="timePicker_control_input">
-          <div className="timePicker_control_input_label">分钟:</div>
+          <div className="timePicker_control_input_label">{minuteLabel}:</div>
           <RangeInput min={0} max={59} model={minute}/>
         </div>
       </div>
