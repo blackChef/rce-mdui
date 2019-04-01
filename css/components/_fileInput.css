@@ -1,0 +1,7 @@
+.hiddenFileInput {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+}

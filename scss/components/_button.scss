@@ -30,6 +30,12 @@
   height: 36px;
   padding-left: $padding;
   padding-right: $padding;
+  font-size: $s_font_body;
+
+  &--small {
+    height: 24px;
+    font-size: $s_font_caption;
+  }
 }
 
 

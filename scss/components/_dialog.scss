@@ -2,6 +2,7 @@
   @include popup;
   @include center;
   padding: 24px 16px;
+
   @include respondTo_page(xsm) {
     padding: 24px 40px;
   };
@@ -9,7 +10,6 @@
   &_front {
     background: $c_paper;
     @include depth(24);
-    @include roundCorner;
     width: 100%;
     max-width: 56px * 6;
     max-height: 100%;
@@ -17,24 +17,20 @@
     flex-direction: column;
 
     opacity: 0;
-    transform: translateY($s_gutter);
+    transform: translateY(30px);
     transition-duration: 300ms;
-
     @at-root .dialog.is_active > & {
       transform: translateY(0);
       opacity: 1;
-      will-change: transform, opacity;
     }
   }
 
   &_background {
     background-color: $c_dialog_bg;
-
     opacity: 0;
-    transition: 120ms;
+    transition: 300ms;
     @at-root .dialog.is_active > & {
       opacity: 1;
-      will-change: opacity;
     }
   }
 

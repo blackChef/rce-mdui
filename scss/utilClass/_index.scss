@@ -5,6 +5,9 @@
 
 .u_display_flex, .u_display_flexbox {
   display: flex;
+  &--wrap {
+    flex-wrap: wrap;
+  }
 }
 
 .u_display_block {
@@ -50,7 +53,7 @@
 }
 
 .u_readable {
-  line-height: 2;
+  line-height: 1.5;
 }
 
 .u_resetLineHeight {
@@ -93,3 +96,16 @@ $positionList: (
   font-weight: bold;
 }
 
+.u_sticky_top {
+  position: sticky;
+  top: 0;
+}
+
+.u_sticky_left {
+  position: sticky;
+  left: 0;
+}
+
+.u_zIndex_dialog {
+  z-index: $z_dialog;
+}

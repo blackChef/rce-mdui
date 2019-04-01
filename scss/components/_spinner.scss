@@ -1,18 +1,17 @@
 .spinner {
-  animation: rotate 2s linear infinite;
+  animation: rotate 0.5s linear infinite;
   width: 60px;
   height: 60px;
   transform-origin: center center;
-
 }
 
 .path {
   stroke: $c_primary;
-  stroke-dasharray: 1, 200;
+  stroke-dasharray: 30, 30;
   stroke-dashoffset: 0;
   stroke-width: 2;
   stroke-linecap: round;
-  animation: dash 1.5s ease-in-out infinite;
+  // animation: dash 1.5s ease-in-out infinite;
 }
 
 @keyframes rotate {

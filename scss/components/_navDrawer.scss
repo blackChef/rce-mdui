@@ -68,7 +68,7 @@
 
   &_action {
     width: 100%;
-    @include reset_button;
+    @include resetButton;
 
     &_inner {
       display: flex;

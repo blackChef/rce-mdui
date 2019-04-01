@@ -73,7 +73,7 @@
 }
 
 .textField--simple {
-  &.is_clearable {
+  .textField_field {
     padding-right: 36px;
   }
 
@@ -88,11 +88,11 @@
 .textField--floatingLabel {
   padding-top: 16px;
 
-  &.is_clearable .textField_field {
-    padding-right: 36px;
-  }
-
   .textField {
+    &_field {
+      padding-right: 36px;
+    }
+
     &_floatingLabel {
       position: absolute;
       top: 0;
@@ -106,7 +106,7 @@
       position: absolute;
       z-index: 1;
       right: 0;
-      top: 6px;
+      bottom: 6px;
     }
   }
 

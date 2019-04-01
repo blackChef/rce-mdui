@@ -28,16 +28,6 @@
       }
     }
   }
-
-  &_body {
-    &_item {
-      display: none;
-
-      &.is_active {
-        display: block;
-      }
-    }
-  }
 }
 
 .tabs--scrollable {

@@ -34,6 +34,10 @@ $types: (
         #{$type}: $s_gutter * 3 / 4;
       }
 
+      .surroundGutter#{$breakPointStr}_#{$type}_quater {
+        #{$type}: $s_gutter/4;
+      }
+
       .surroundGutter#{$breakPointStr}_unset {
         #{$type}: unset;
       }
@@ -51,6 +55,11 @@ $types: (
       .sideGutter#{$breakPointStr}_#{$type}_3Quater {
         #{$type}-left: $s_gutter * 3 / 4;
         #{$type}-right: $s_gutter * 3 / 4;
+      }
+
+      .sideGutter#{$breakPointStr}_#{$type}_quater {
+        #{$type}-left: $s_gutter / 4;
+        #{$type}-right: $s_gutter / 4;
       }
 
       .sideGutter#{$breakPointStr}_unset {
@@ -73,6 +82,11 @@ $types: (
         #{$type}-bottom: $s_gutter * 3 / 4;
       }
 
+      .verticalGutter#{$breakPointStr}_#{$type}_quater {
+        #{$type}-top: $s_gutter / 4;
+        #{$type}-bottom: $s_gutter / 4;
+      }
+
       .verticalGutter#{$breakPointStr}_unset {
         #{$type}-top: unset;
         #{$type}-bottom: unset;
@@ -89,6 +103,10 @@ $types: (
 
         .#{$position}Gutter#{$breakPointStr}_#{$type}_3Quater {
           #{$type}-#{$position}: $s_gutter * 3 / 4;
+        }
+
+        .#{$position}Gutter#{$breakPointStr}_#{$type}_quater {
+          #{$type}-#{$position}: $s_gutter / 4;
         }
 
         .#{$position}Gutter#{$breakPointStr}_#{$type}_unset {

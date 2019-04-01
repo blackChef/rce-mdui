@@ -25,23 +25,12 @@
     align-items: center;
   }
 
-  .appLogo {
-    display: none;
-  }
-
-  .appLogo + .mdIcon {
-    display: none;
+  .actionBar {
+    max-width: $s_page_lg;
+    margin: 0 auto;
   }
 
   @include respondTo_page(lg) {
-    .appLogo {
-      display: flex;
-    }
-
-    .appLogo + .mdIcon {
-      display: flex;
-    }
-
     .actionBar_title {
       display: flex;
 

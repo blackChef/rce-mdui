@@ -2,8 +2,7 @@
 
 // settings, tools
 @import './settings/index.scss';
-@import './tools/index.scss';
-@import './commonStyleMixins/index.scss';
+@import './mixins/index.scss';
 
 // generic, base
 @import './generic/index.scss';
@@ -12,8 +11,10 @@
 @import './grids/index.scss';
 @import './transition/index.scss';
 
+// trumps
+@import './utilClass/index.scss';
+
 // components
-@import './components/appContainer';
 @import './components/mdIcon';
 @import './components/button';
 @import './components/navDrawer';
@@ -40,16 +41,12 @@
 @import './components/infoBanner';
 @import './components/toggle';
 @import './components/radio';
-@import './components/spinner';
+@import './components/timePicker';
 @import './components/tooltip';
 @import './components/flashMessage';
 @import './components/notification';
 @import './components/label';
+@import './components/fileInput';
 @import './components/rangeInput';
-@import './components/timePicker';
 @import './components/imageWrapper';
-
-// trumps
-@import './utilClass/index.scss';
-
 

@@ -12,6 +12,10 @@
   background-color: transparent ;
 }
 
+.u_bg_lightGrey {
+  background-color: #EEEEEE;
+}
+
 .u_text_primary {
   color: $c_text_primary ;
 }
@@ -22,4 +26,8 @@
 
 .u_text_tertiary {
   color: $c_text_tertiary ;
+}
+
+.u_text_danger {
+  color: red;
 }

@@ -1,14 +1,15 @@
 .infoBanner {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: $s_gutter;
 
   &:empty {
     padding: 0;
   }
 
-  &_content {
-
+  &_body {
+    max-width: $s_page_lg;
   }
 
   &--info {

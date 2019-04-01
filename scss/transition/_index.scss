@@ -1,7 +1,18 @@
 
 .slideUp {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY($s_gutter);
+
+  &_active {
+    transition: 300ms;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slideDown {
+  opacity: 0;
+  transform: translateY(-$s_gutter);
 
   &_active {
     transition: 300ms;
@@ -14,7 +25,7 @@
   opacity: 0;
 
   &_active {
-    transition: 300ms;
+    transition: 400ms;
     opacity: 1;
   }
 }
@@ -23,9 +34,28 @@
   opacity: 1;
 
   &_active {
-    transition: 300ms;
+    transition: 400ms;
     opacity: 0;
   }
 }
 
+.slideFromRight {
+  opacity: 0;
+  transform: translateX(20px);
+  &_active {
+    transition: 300ms;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.slideFromLeft {
+  opacity: 0;
+  transform: translateX(-100px);
+  &_active {
+    transition: 300ms;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
 

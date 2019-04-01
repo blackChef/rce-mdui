@@ -36,14 +36,14 @@
     @at-root .dialogView.is_active > & {
       opacity: 1;
       transform: translateY(0);
-      will-change: opacity, transform;
+
     }
   }
 
   &_background {
     background: $c_dialog_bg;
     opacity: 0;
-    transition-duration: 150ms;
+    transition-duration: 300ms;
 
     @at-root .dialogView.is_active > & {
       opacity: 1;
@@ -91,6 +91,12 @@
 .dialogView--xlg {
   .dialogView_front {
     max-width: $s_page_xlg;
+  }
+}
+
+.dialogView--fullWidth {
+  .dialogView_front {
+    max-width: 100%;
   }
 }
 

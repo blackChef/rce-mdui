@@ -34,6 +34,10 @@
   }
 }
 
+.col--wrap {
+  min-width: 0;
+}
+
 .col.row.row,
 .row.row.cols {
   display: block;

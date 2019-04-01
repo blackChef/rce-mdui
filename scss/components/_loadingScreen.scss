@@ -22,17 +22,19 @@
   &_front {
     position: relative;
     z-index: 1;
-
+    padding: $s_gutter;
   }
 
   &_msg {
     margin-left: $s_gutter;
+    word-break: break-all;
   }
 
   &_info {
     display: flex;
     align-items: center;
     padding: $s_gutter;
+    padding-left: 0;
   }
 
   &_indicator {
@@ -43,12 +45,12 @@
     padding-top: $s_gutter;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    border-top: 1px solid $c_divider;
 
     button {
       margin-right: $s_gutter;
-      width: 50%;
-
+      background-color: rgba($c_accent, 0.05);
       &:last-of-type {
         margin-right: initial;
       }
@@ -74,13 +76,13 @@
   }
 }
 
-.loadingScreen--page {
-  position: fixed;
-}
-
 .loadingScreen--flat {
   background-color: none;
   position: relative;
+}
+
+.loadingScreen--page {
+  position: fixed;
 }
 
 .loadingScreen--dialog {
