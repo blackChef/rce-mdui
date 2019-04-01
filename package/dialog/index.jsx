@@ -2,6 +2,7 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlotContent } from '../slot/';
 import { view as Popup } from '../popup/';
+import './index.scss';
 
 let name = 'Dialog';
 

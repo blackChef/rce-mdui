@@ -5,6 +5,7 @@ import { getSlotContent } from '../slot/';
 import { matchValues } from '../utils/checkProps';
 import { view as Icon }  from '../icon';
 import MdKeyboardArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
+import './index.scss';
 
 
 let name = 'Collapse';

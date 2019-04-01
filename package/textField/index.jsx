@@ -5,6 +5,7 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Simple } from './simple';
 import debounce from 'lodash/debounce';
+import './index.scss';
 
 
 let name = 'TextField';

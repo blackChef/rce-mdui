@@ -6,6 +6,8 @@ import { view as IconButton } from '../buttons/iconButton';
 import { view as Slot, getSlotContent } from '../slot/';
 import MdMenu from 'react-icons/lib/md/menu';
 import { enableScroll, disableScroll } from '../utils/scrollState';
+import './index.scss';
+
 
 let name = 'Root';
 

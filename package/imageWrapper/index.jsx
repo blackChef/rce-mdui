@@ -4,6 +4,7 @@ import createComponent from 'rce-pattern/createComponent';
 import createModelHolder from 'rce-pattern/createModelHolder';
 import { onEnter } from './intersectionObserver';
 import setClassName from 'classnames';
+import './index.scss';
 
 
 let name = 'ImageWrapper';

@@ -1,8 +1,9 @@
+@import '../scss/mixins/_index.scss';
+
+
 .circularProgress {
   display: inline-flex;
   position: relative;
-
-
 
   &_number {
     position: absolute;

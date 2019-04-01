@@ -3,6 +3,8 @@ import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlots } from '../slot/';
 import { view as Transition } from '../transition/appear';
+import './index.scss';
+
 
 let name = 'tabs_remount';
 

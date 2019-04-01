@@ -2,6 +2,7 @@ import React from 'react';
 import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import { view as Content } from './content';
+import './index.scss';
 
 let name = 'loadingScreen';
 

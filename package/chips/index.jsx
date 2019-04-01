@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import createComponent from 'rce-pattern/createComponent';
+import './index.scss';
 
 let name = 'chips';
 

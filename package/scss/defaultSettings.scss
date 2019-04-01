@@ -1,8 +1,8 @@
-@import './fontSize';
-@import './breakPoints';
-@import './genericColors';
-@import './appTheme';
-@import './theme';
+@import './settings/fontSize';
+@import './settings/breakPoints';
+@import './settings/genericColors';
+@import './settings/appTheme';
+@import './settings/theme';
 
 // size
 $s_unit: 8px;

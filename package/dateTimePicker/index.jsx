@@ -6,6 +6,7 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as TextFieldBtn } from '../textField/button';
 import { view as Dialog } from '../confirm';
 import { view as Slot } from '../slot/';
+import './index.scss';
 
 
 let name = 'dateTimePicker';

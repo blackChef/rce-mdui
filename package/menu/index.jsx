@@ -7,6 +7,7 @@ import { getSlots } from '../slot/';
 import { view as Tether } from '../tether/';
 import { view as IconButton } from '../buttons/iconButton';
 import MdMoreVert from 'react-icons/lib/md/more-vert';
+import './index.scss';
 
 
 let name = 'Menu';

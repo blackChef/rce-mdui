@@ -1,5 +1,6 @@
-// https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+@import '../scss/mixins/_index.scss';
 
+// https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
 @mixin resetRangeInput() {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */

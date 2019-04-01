@@ -2,6 +2,7 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { getSlot, getSlotContent } from '../slot/';
 import { view as ContextualBar } from '../contextualBar';
+import './index.scss';
 
 let name = 'AppBar';
 

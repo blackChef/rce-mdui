@@ -5,6 +5,7 @@ import createComponent from 'rce-pattern/createComponent';
 import createModelHolder from 'rce-pattern/createModelHolder';
 import { view as Tether } from '../tether/';
 import checkIsHoverable from '../utils/isHoverable';
+import './index.scss';
 
 
 let name = 'Menu';

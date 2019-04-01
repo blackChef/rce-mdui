@@ -5,6 +5,7 @@ import { enableScroll, disableScroll } from '../utils/scrollState';
 import debounce from 'lodash/debounce';
 import {getSlotContent } from '../slot/';
 import matchScreenSize from '../utils/matchScreenSize';
+import './navDrawer.scss';
 
 
 let name = 'NavDrawer';

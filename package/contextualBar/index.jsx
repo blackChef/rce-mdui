@@ -6,6 +6,7 @@ import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
 import addESCListener from '../utils/escState';
 import MdClose from 'react-icons/lib/md/close';
+import './index.scss';
 
 
 let name = 'ContextualBar';

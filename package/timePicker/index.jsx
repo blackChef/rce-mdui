@@ -6,6 +6,7 @@ import { view as Slot } from '../slot/';
 import { view as TextFieldBtn } from '../textField/button';
 import { view as Picker } from './picker';
 import padTime from './padTime';
+import './index.scss';
 
 
 let name = 'TimePicker';

@@ -1,5 +1,7 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
+import './index.scss';
+
 
 let name = 'checkbox';
 

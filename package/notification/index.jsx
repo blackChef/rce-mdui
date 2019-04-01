@@ -5,6 +5,7 @@ import setClassNames from 'classnames';
 import { view as IconButton } from '../buttons/iconButton';
 import { getSlot, getSlotContent } from '../slot/';
 import MdClose from 'react-icons/lib/md/close';
+import './index.scss';
 
 
 

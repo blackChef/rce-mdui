@@ -4,6 +4,7 @@ import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import { matchValues } from '../utils/checkProps';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
+import './index.scss';
 
 
 

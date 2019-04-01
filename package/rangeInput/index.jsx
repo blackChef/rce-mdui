@@ -1,6 +1,7 @@
 import React from 'react';
 import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
+import './index.scss';
 
 
 const THUMB_WIDTH = 28; // px

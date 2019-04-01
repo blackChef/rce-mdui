@@ -8,6 +8,7 @@ import MdFirstPage from 'react-icons/lib/md/first-page';
 import MdChevronLeft from 'react-icons/lib/md/chevron-left';
 import MdChevronRight from 'react-icons/lib/md/chevron-right';
 import MdLastPage from 'react-icons/lib/md/last-page';
+import './index.scss';
 
 let name = 'pagination';
 

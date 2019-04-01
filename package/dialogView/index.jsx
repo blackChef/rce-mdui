@@ -7,6 +7,7 @@ import { view as Slot } from '../slot/';
 import { view as IconButton } from '../buttons/iconButton';
 import { view as Popup } from '../popup/';
 import CloseIcon from 'react-icons/lib/md/close';
+import './index.scss';
 
 
 

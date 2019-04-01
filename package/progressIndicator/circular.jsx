@@ -1,5 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
+import './circular.scss';
 
 
 let name = 'circularProgress';
