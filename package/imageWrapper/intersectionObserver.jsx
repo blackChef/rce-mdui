@@ -3,7 +3,8 @@ let observers = [
 ];
 
 let options = {
-  threshold: 0
+  threshold: 0,
+  rootMargin: '0% 0% 70% 0%'
 };
 
 let onChange = function(entries) {
@@ -13,7 +14,6 @@ let onChange = function(entries) {
     let observer = observers.find(i => i.elem === target);
 
     if (!observer) return;
-
     observer.callback();
   });
 };
