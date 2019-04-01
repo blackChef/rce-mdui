@@ -99,6 +99,7 @@ let Body = function(props) {
     model,
     title,
     onOpen, afterOpen, LoadingScreen,
+    _onOpen = noop, _afterOpen = noop,
     ...otherProps
   } = props;
   let { isSaving } = model.val();
@@ -106,8 +107,8 @@ let Body = function(props) {
     <Dialog
       {...otherProps}
       model={model.show}
-      onOpen={onOpen}
-      afterOpen={afterOpen}
+      onOpen={() => {onOpen(); _onOpen();}}
+      afterOpen={() => {afterOpen(); _afterOpen();}}
       forceOpen={isSaving}
     >
       <Slot name="title">{title}</Slot>
@@ -131,7 +132,7 @@ let Body = function(props) {
 let view = function(props) {
   return (
     <PopupForm {...props}>
-      <Body {...props}/>
+      <Body {...props} _afterOpen={props.afterOpen} _onOpen={props.onOpen}/>
     </PopupForm>
   );
 };
