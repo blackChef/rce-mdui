@@ -50,6 +50,7 @@ let view = createClass({
       className = '',
       // eslint-disable-next-line no-unused-vars
       fixedFloatingLabel,
+      shouldShowClearButton = true,
       ...otherProps
     } = this.props;
 
@@ -72,7 +73,10 @@ let view = createClass({
         <div className="textField_line"></div>
         <label className="textField_floatingLabel">{floatingLabel}</label>
         {hint && <div className="textField_hint">{hint}</div>}
-        <ClearBtn {...otherProps}/>
+        {
+          shouldShowClearButton &&
+          <ClearBtn {...otherProps}/>
+        }
      </div>
     );
   },
