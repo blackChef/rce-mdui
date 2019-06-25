@@ -1,5 +1,8 @@
-// generic, base
-@import './generic/index.scss';
+// itcss structure
+
+@import './init.scss';
+
+@import './reset/index.scss';
 
 // objects
 @import './grids/index.scss';
@@ -11,7 +14,3 @@
 // components
 @import './components/paper';
 @import './components/infoBanner';
-
-
-
-

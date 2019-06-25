@@ -1,5 +1,4 @@
-@import '../scss/mixins/_index.scss';
-@import './mixins';
+@import '../scss/init.scss';
 
 .iconButton {
   @include circleButton(32px);

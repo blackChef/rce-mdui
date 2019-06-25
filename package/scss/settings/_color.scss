@@ -1,0 +1,50 @@
+@import './md_colors/variables';
+
+// $c_primary: #F0775B;
+// $c_secondary: darken($c_primary, 3%);
+// $c_accent: #3e9056;
+
+$c_success: $green-500;
+$c_failed: $red-500;
+$c_info: $blue-500;
+
+$c_divider_black: rgba(black, 0.12);
+$c_divider_white: rgba(white, 0.12);
+
+$c_icon_black: rgba(black, 0.38);
+$c_icon_white: rgba(white, 0.38);
+
+$c_text_black_primary: rgba(black, 0.80);
+$c_text_black_secondary: rgba(black, 0.54);
+$c_text_black_tertiary: rgba(black, 0.38);
+
+$c_text_white_primary: rgba(white, 1);
+$c_text_white_secondary: rgba(white, 0.7);
+$c_text_white_tertiary: rgba(white, 0.5);
+
+$c_dialog_bg: rgba(black, 0.3);
+$c_bluegrey: #f2f3f5;
+
+$c_text_primary: $c_text_black_primary;
+$c_text_secondary: $c_text_black_secondary;
+$c_text_tertiary: $c_text_black_tertiary;
+
+$c_icon: $c_icon_black;
+$c_divider: $c_divider_black;
+
+$c_appBar_bg: $c_primary;
+$c_appBar_text: white;
+$c_bodyBg: #E6E6E6;
+$c_paper: white;
+$c_wechat_link: $c_accent;
+
+$colorMap: (
+  'white': white,
+  'black': black,
+  'appPrimary': $c_primary,
+  'appSecondary': $c_secondary,
+  'appAccent': $c_accent,
+  'success': $c_success,
+  'failed': $c_failed,
+  'info': $c_info,
+);

@@ -1,3 +1,4 @@
+
 // utils
 @mixin buttonBase() {
   text-transform: uppercase;
@@ -99,12 +100,7 @@
 
 @mixin flatButton() {
   @include buttonBase;
-  @if ($themeType == 'light') {
-    @include darkFlatBtn;
-  } @else {
-    @include lightFlatBtn;
-  }
-
+  @include darkFlatBtn;
   &--white {
     @include coloredFlatBtn(white);
   }
@@ -136,21 +132,10 @@
     @include depth($raisedDepth);
   }
 
-  // theme
-  @if ($themeType == 'light') {
-    &[disabled] {
-      background-color: rgba(black, 0.12);
-      color: rgba(black, 0.26);
-      @include depth(0);
-    }
-  }
-
-  @else {
-    &[disabled] {
-      background-color: rgba(white, 0.12);
-      color: rgba(white, 0.30);
-      @include depth(0);
-    }
+  &[disabled] {
+    background-color: rgba(black, 0.12);
+    color: rgba(black, 0.26);
+    @include depth(0);
   }
 
   &--white {

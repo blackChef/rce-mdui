@@ -1,21 +1,9 @@
-@import '../scss/mixins/_index.scss';
+@import '../scss/init.scss';
 
-$chips_item_bg: null;
-$chips_item_text: null;
-$chips_clearBtn_bg: null;
-$chips_clearBtn_text: null;
-
-@if ($themeType == 'light') {
-  $chips_item_bg: #E0E0E0;
-  $chips_item_text: $c_text_black_primary;
-  $chips_clearBtn_bg: #A6A6A6;
-  $chips_clearBtn_text: $c_text_white_secondary;
-} @else {
-  $chips_item_bg: #424242;
-  $chips_item_text: $c_text_white_primary;
-  $chips_clearBtn_bg: #303030;
-  $chips_clearBtn_text: $c_text_white_secondary;
-}
+$chips_item_bg: #E0E0E0;
+$chips_item_text: $c_text_black_primary;
+$chips_clearBtn_bg: #A6A6A6;
+$chips_clearBtn_text: $c_text_white_secondary;
 
 .Select {
   position: relative;

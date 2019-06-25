@@ -1,0 +1,29 @@
+@mixin reset_button() {
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+@mixin resetButton() {
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+@mixin resetInputField() {
+  -webkit-appearance: none;
+  line-height: normal;
+  border: none;
+  outline: none;
+  background: none;
+  box-shadow: none; // firefox add boxShadow to invalid input
+  overflow: hidden; // fix ios cursor may move out of box
+}
