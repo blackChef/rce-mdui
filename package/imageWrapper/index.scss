@@ -5,6 +5,9 @@
   width: fit-content;
   overflow: hidden;
 
+  // fix 容器设置圆角时，图片会先显示方形再被圆角切割
+  border-radius: inherit;
+
   &_placeholder {
     display: block;
     max-width: 100%;
@@ -13,6 +16,8 @@
   }
 
   img {
+    border-radius: inherit;
+
     z-index: 1;
     position: absolute;
     top: 50%;

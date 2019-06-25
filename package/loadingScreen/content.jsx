@@ -1,6 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
-import { view as Spinner } from '../progressIndicator/circular';
+import { view as Spinner } from '../spinner/';
 import { view as LinkButton } from '../buttons/linkButton';
 import { view as Icon } from '../icon/';
 import { view as Transition } from '../transition/enterLeave';

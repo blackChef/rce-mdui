@@ -1,31 +1,38 @@
 @import '../scss/init.scss';
 
-.circularProgress {
-  display: inline-flex;
-  position: relative;
+.spinner {
+  animation: rotate 0.5s linear infinite;
+  width: 60px;
+  height: 60px;
+  transform-origin: center center;
+}
 
-  &_number {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    @include circle;
-    @include center;
+.path {
+  stroke: $c_primary;
+  stroke-dasharray: 30, 30;
+  stroke-dashoffset: 0;
+  stroke-width: 2;
+  stroke-linecap: round;
+  // animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
   }
+}
 
-  &_img {
-    position: relative;
-    z-index: 1;
-
-    &_front {
-      stroke: $c_primary;
-      transition: stroke-dashoffset 300ms;
-    }
-
-    &_background {
-      stroke: $grey-400;
-    }
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
   }
 }
