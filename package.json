@@ -39,7 +39,7 @@
     "rce-pattern": "^0.6.7",
     "react": "16.2.0",
     "react-addons-css-transition-group": "^15.5.2",
-    "react-dom": "16.2.0",
+    "react-dom": "16.2.1",
     "react-icons": "^2.2.7",
     "react-select": "^1.0.0-rc.5",
     "react-textarea-autosize": "^4.1.0",
