@@ -55,11 +55,11 @@ let Body = createComponent({
   name: 'PageBody',
   view({ body }) {
     return (
-      <main className="layout_main_body">
+      <div className="layout_main_body">
         <div className="layout_main_body_inner">
           {body}
         </div>
-      </main>
+      </div>
     );
   }
 });
@@ -75,7 +75,7 @@ let view = createClass({
     initZIndexState(30);
   },
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let { children, variableSlots = [], constantSlots = [] } = this.props;
 
     let slots = [
@@ -113,6 +113,7 @@ let view = createClass({
 
   render() {
     let { children, className = '', noHeader = false } = this.props;
+
     let header = (() => {
       if (noHeader) return null;
 
@@ -129,10 +130,13 @@ let view = createClass({
     })();
 
     let body = this.getSlotContent(children, 'body');
+    let other = this.getSlotContent(children, 'other');
+
     return (
       <div className={`layout_main ${className}`}>
         {header}
         <Body body={body}/>
+        {other}
       </div>
     );
   },

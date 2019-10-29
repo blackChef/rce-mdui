@@ -7,7 +7,7 @@ import './index.scss';
 let name = 'loadingScreen';
 
 let init = function() {
-  return 'hide'; // status: hide, loading, success, failed
+  return 'hide'; // status: hide, loading, successful, failed
 };
 
 let update = function({ payload, model }) {
@@ -51,7 +51,7 @@ let view = createClass({
       return;
     }
 
-    if (isStatusBecame('success')) {
+    if (isStatusBecame('successful')) {
       if (showSuccessMsg) {
         let endTime = Date.now();
         if (endTime - this.state.startTime > delay) {

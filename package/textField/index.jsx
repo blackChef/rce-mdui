@@ -28,7 +28,7 @@ let update = function({ payload, model }) {
 // ios: "a", "a a", '啊啊', "", "啊啊";
 // android: "啊啊"
 let view = createClass({
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let nextModelVal = nextProps.model.val();
     let domValue = this.inputDOM.value;
 
@@ -37,7 +37,7 @@ let view = createClass({
     }
   },
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.defaultValue = this.props.model.val();
 
     let onChange = (() => {

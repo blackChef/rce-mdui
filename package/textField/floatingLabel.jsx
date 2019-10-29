@@ -50,7 +50,7 @@ let view = createClass({
       className = '',
       // eslint-disable-next-line no-unused-vars
       fixedFloatingLabel,
-      shouldShowClearButton = true,
+      shouldShowClearButton = false,
       ...otherProps
     } = this.props;
 
