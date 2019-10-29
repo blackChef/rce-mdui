@@ -57,4 +57,5 @@ let view = function({ children, className = '' }) {
 
 
 view = createComponent({ name, view });
+export default view;
 export { init, view };

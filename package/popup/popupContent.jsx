@@ -199,4 +199,5 @@ let view = createClass({
 
 
 view = createComponent({ name, init, view, update });
+export default view;
 export { init, view };

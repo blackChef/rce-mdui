@@ -19,4 +19,5 @@ let view = function(props) {
 
 
 view = createComponent({ name, view });
+export default view;
 export { init, view };

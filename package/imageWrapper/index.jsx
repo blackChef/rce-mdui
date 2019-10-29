@@ -114,4 +114,5 @@ let view = createClass({
 
 view = createComponent({ name, view });
 view = createModelHolder(view, init);
+export default view;
 export { init, view };

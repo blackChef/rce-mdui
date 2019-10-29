@@ -31,4 +31,5 @@ let view = function({ hour, minute, hourLabel = '小时', minuteLabel = '分钟'
 };
 
 view = createComponent({ name, view });
+export default view;
 export { init, view };

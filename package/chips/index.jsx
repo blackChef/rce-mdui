@@ -58,5 +58,7 @@ let view = function(props) {
 };
 
 view = createComponent({ name, view, update, cursorProps: ['options'] });
+export default view;
 export { init, view };
+
 

@@ -69,4 +69,5 @@ let view = function(props) {
 };
 
 view = createComponent({ name, view, update });
+export default view;
 export { init, view };
