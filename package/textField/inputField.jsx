@@ -4,17 +4,17 @@ import Textarea from 'react-textarea-autosize';
 import addESCListener from '../utils/escState';
 import noop from 'lodash/noop';
 
-let InputField = createClass({
+const InputField = createClass({
   onFocus(event) {
-    let { onFocus = noop } = this.props;
+    const { onFocus = noop } = this.props;
     onFocus(event);
 
-    let inputDOM = event.target;
+    const inputDOM = event.target;
     this.removeESCListener = addESCListener(() => inputDOM.blur());
   },
 
   onBlur(event) {
-    let { onBlur = noop } = this.props;
+    const { onBlur = noop } = this.props;
     onBlur(event);
     this.tryRemoveESCListener();
   },
@@ -28,7 +28,7 @@ let InputField = createClass({
   },
 
   render() {
-    let {
+    const {
       // eslint-disable-next-line no-unused-vars
       model, dispatch, dispatcher,
       autoResize = false,

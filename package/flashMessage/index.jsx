@@ -8,21 +8,21 @@ import './index.scss';
 
 
 
-let name = 'flashMessage';
+const name = 'flashMessage';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let update = function({ model }) {
+const update = function({ model }) {
   model.set(false);
 };
 
 let view = createClass({
   componentDidUpdate(prevProps) {
-    let { dispatch, timeout = 1500 } = this.props;
+    const { dispatch, timeout = 1500 } = this.props;
 
-    let willShow = matchValues(
+    const willShow = matchValues(
       'model.val', this.props, prevProps,
       true, false
     );
@@ -45,8 +45,8 @@ let view = createClass({
   },
 
   render() {
-    let { model, msg, message = msg, className = '' } = this.props;
-    let popupClassName = setClassNames(`flashMessage ${className}`, {
+    const { model, msg, message = msg, className = '' } = this.props;
+    const popupClassName = setClassNames(`flashMessage ${className}`, {
       'is_active': model.val()
     });
 

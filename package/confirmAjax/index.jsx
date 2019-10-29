@@ -2,16 +2,16 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import { view as Dialog, init as dialogInit } from '../dialogForm/';
 
-let name = 'ConfirmAjax';
+const name = 'ConfirmAjax';
 
-let init = dialogInit;
+const init = dialogInit;
 
-let Content = function({ msg }) {
+const Content = function({ msg }) {
   return <div className="u_fontSize_title">{msg}</div>;
 };
 
 let view  = function(props) {
-  let {
+  const {
     model,
     apiCall,
     ...otherProps

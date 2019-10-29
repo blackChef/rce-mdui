@@ -5,14 +5,14 @@ import { view as Slot, getSlotContent } from '../slot/';
 import { view as LinkButton } from '../buttons/linkButton';
 import noop from 'lodash/noop';
 
-let name = 'Confirm';
+const name = 'Confirm';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let CancelBtn = function({ forceOpen, onCancel, tryToClose, cancelLabel = '取消' }) {
-  let onClick = (() => {
+const CancelBtn = function({ forceOpen, onCancel, tryToClose, cancelLabel = '取消' }) {
+  const onClick = (() => {
     if (onCancel) {
       return () => onCancel(tryToClose);
     }
@@ -31,7 +31,7 @@ let CancelBtn = function({ forceOpen, onCancel, tryToClose, cancelLabel = '取�
 };
 
 
-let OkBtn = function({ forceOpen, tryToClose, onConfirm = noop, okLabel = '确认' }) {
+const OkBtn = function({ forceOpen, tryToClose, onConfirm = noop, okLabel = '确认' }) {
   return (
     <LinkButton
       className="linkButton--bounded linkButton--primary"
@@ -44,13 +44,13 @@ let OkBtn = function({ forceOpen, tryToClose, onConfirm = noop, okLabel = '确�
 };
 
 let view = function(props) {
-  let {
+  const {
     model,
     children,
     ...otherProps
   } = props;
 
-  let content = getSlotContent(children, 'content');
+  const content = getSlotContent(children, 'content');
 
   return (
     <DialogSimple {...otherProps} model={model} >

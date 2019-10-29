@@ -6,9 +6,9 @@ import InputField from './inputField';
 import { view as ClearBtn } from './clearBtn';
 
 
-let name = 'TextField--floatingLabel';
+const name = 'TextField--floatingLabel';
 
-let init = function() {};
+const init = function() {};
 
 let view = createClass({
   getInitialState() {
@@ -43,7 +43,7 @@ let view = createClass({
     return this.props.defaultValue !== '';
   },
   render() {
-    let {
+    const {
       hint = '',
       floatingLabel = '',
       onChange,
@@ -54,7 +54,7 @@ let view = createClass({
       ...otherProps
     } = this.props;
 
-    let classNames = setClassNames(`textField textField--floatingLabel ${className}`, {
+    const classNames = setClassNames(`textField textField--floatingLabel ${className}`, {
       is_floating: this.isFloating(),
       is_readOnly: otherProps.readOnly,
       is_disabled: otherProps.disabled,

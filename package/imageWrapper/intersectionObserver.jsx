@@ -1,17 +1,17 @@
-let observers = [
+const observers = [
   // { elem, callback }
 ];
 
-let options = {
+const options = {
   threshold: 0,
   rootMargin: '0% 0% 70% 0%'
 };
 
-let onChange = function(entries) {
+const onChange = function(entries) {
   entries.forEach(function({ target, intersectionRatio }) {
     if (intersectionRatio === 0) return;
 
-    let observer = observers.find(i => i.elem === target);
+    const observer = observers.find(i => i.elem === target);
 
     if (!observer) return;
     observer.callback();
@@ -19,9 +19,9 @@ let onChange = function(entries) {
 };
 
 
-let io = new IntersectionObserver(onChange, options);
+const io = new IntersectionObserver(onChange, options);
 
-let onEnter = function(elem, callback) {
+const onEnter = function(elem, callback) {
   io.observe(elem);
   observers.push({ elem, callback });
   return function unobserve() {

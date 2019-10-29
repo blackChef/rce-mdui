@@ -2,18 +2,18 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import './index.scss';
 
-let name = 'toggle';
+const name = 'toggle';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let update = function({ payload, model }) {
+const update = function({ payload, model }) {
   model.set(payload);
 };
 
 let view = function(props) {
-  let {
+  const {
     // eslint-disable-next-line no-unused-vars
     model, dispatch, dispatcher,
     ...otherProps

@@ -9,13 +9,13 @@ import { view as Menu } from '../menu/';
 
 
 
-let name = 'selectField';
+const name = 'selectField';
 
-let init = function() {
+const init = function() {
   return null; // selected option's value
 };
 
-let update = function({ payload, model }) {
+const update = function({ payload, model }) {
   model.set(payload);
 };
 
@@ -23,9 +23,9 @@ let view = createClass({
   selectFirstIfNonIsSelected(newOptions) {
     if (!newOptions.length) return;
 
-    let { model, dispatch } = this.props;
-    let selectedValue = model.val();
-    let optionValues = newOptions.map(function(item) {
+    const { model, dispatch } = this.props;
+    const selectedValue = model.val();
+    const optionValues = newOptions.map(function(item) {
       return item.value;
     });
 
@@ -43,7 +43,7 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       model,
       dispatch,
       floatingLabel = '',
@@ -54,12 +54,12 @@ let view = createClass({
       ...otherProps
     } = this.props;
 
-    let selectedOption = options.find(i => i.value === model.val());
-    let selectedLabel = selectedOption? selectedOption.label : undefined;
-    let selectedValue = selectedOption? selectedOption.value : undefined;
+    const selectedOption = options.find(i => i.value === model.val());
+    const selectedLabel = selectedOption? selectedOption.label : undefined;
+    const selectedValue = selectedOption? selectedOption.value : undefined;
 
-    let optionItems = options.map(function({ value, label }) {
-      let classNames = setClassNames('surroundGutter_padding', {
+    const optionItems = options.map(function({ value, label }) {
+      const classNames = setClassNames('surroundGutter_padding', {
         u_text_appAccent: value === selectedValue
       });
 

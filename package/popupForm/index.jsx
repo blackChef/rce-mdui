@@ -6,7 +6,7 @@ import update from './update';
 import uniqueId from 'lodash/uniqueId';
 import { view as LoadingScreen } from '../loadingScreen/';
 
-let name = 'PopupForm';
+const name = 'PopupForm';
 
 let view = createClass({
   componentDidMount() {
@@ -14,7 +14,7 @@ let view = createClass({
       this.onOpen();
     }
 
-    let formId = uniqueId(name);
+    const formId = uniqueId(name);
 
     this.formId = formId;
 
@@ -22,7 +22,7 @@ let view = createClass({
     // https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer/suggestions/7327649-add-support-for-the-form-attribute
     if ( navigator.userAgent.includes('Edge') ) {
       this.triggerFormSubmit = function() {
-        let submitBtn = event.target.closest(`[form="${formId}"]`);
+        const submitBtn = event.target.closest(`[form="${formId}"]`);
         if (submitBtn !== null) {
           document.querySelector(`#${formId}`).dispatchEvent(new Event("submit"));
         }
@@ -39,7 +39,7 @@ let view = createClass({
   },
 
   getData() {
-    let { apiCalls, dispatch } = this.props;
+    const { apiCalls, dispatch } = this.props;
     dispatch('getData', apiCalls);
   },
 
@@ -59,8 +59,8 @@ let view = createClass({
   },
 
   save() {
-    let { form } = this;
-    let { dispatch, apiCalls, onSave, validate } = this.props;
+    const { form } = this;
+    const { dispatch, apiCalls, onSave, validate } = this.props;
     dispatch('save', { apiCalls, onSave, validate, form });
   },
 
@@ -79,7 +79,7 @@ let view = createClass({
   // },
 
   Form(props) {
-    let { formId, onFormSubmit } = this;
+    const { formId, onFormSubmit } = this;
     return (
       <form
         {...props}
@@ -92,7 +92,7 @@ let view = createClass({
   },
 
   LoadingScreen(props) {
-    let {
+    const {
       isSaving,
       loadingScreenModel: {
         status,
@@ -101,10 +101,10 @@ let view = createClass({
       }
     } = this.props.model;
 
-    let { className, ...otherProps } = props;
-    let { getData, save } = this;
+    const { className, ...otherProps } = props;
+    const { getData, save } = this;
 
-    let requestTypes = {
+    const requestTypes = {
       save: {
         retry: save,
         loadingMsg: '保存中'
@@ -115,7 +115,7 @@ let view = createClass({
       }
     };
 
-    let { loadingMsg, retry } = requestTypes[requestType.val()];
+    const { loadingMsg, retry } = requestTypes[requestType.val()];
 
     return (
       <LoadingScreen
@@ -130,7 +130,7 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       Form, formId, onOpen, afterOpen, getData,
       LoadingScreen
     } = this;

@@ -6,13 +6,13 @@ import setClassNames from 'classnames';
 import { view as ClearBtn } from './clearBtn';
 
 
-let name = 'TextField--simple';
+const name = 'TextField--simple';
 
-let init = function() {};
+const init = function() {};
 
 let view = createClass({
   render() {
-    let {
+    const {
       hint = '',
       onChange,
       className = '',
@@ -22,7 +22,7 @@ let view = createClass({
       ...otherProps
     } = this.props;
 
-    let classNames = setClassNames(`textField textField--simple ${className}`, {
+    const classNames = setClassNames(`textField textField--simple ${className}`, {
       is_readOnly: otherProps.readOnly,
       is_disabled: otherProps.disabled,
     });

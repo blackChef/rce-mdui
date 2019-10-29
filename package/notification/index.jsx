@@ -9,13 +9,13 @@ import './index.scss';
 
 
 
-let name = 'notification';
+const name = 'notification';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let update = function({ model }) {
+const update = function({ model }) {
   model.set(false);
 };
 
@@ -29,30 +29,30 @@ let view = createClass({
   },
 
   close() {
-    let { onClose = () => {}, dispatch } = this.props;
+    const { onClose = () => {}, dispatch } = this.props;
     dispatch('hide');
     onClose();
   },
 
   render() {
-    let {
+    const {
       model,
       children,
       className = '',
     } = this.props;
 
-    let getRawSlot = getSlot(children);
-    let title = getRawSlot('title').props.content;
-    let meta = getRawSlot('meta').props.content;
+    const getRawSlot = getSlot(children);
+    const title = getRawSlot('title').props.content;
+    const meta = getRawSlot('meta').props.content;
 
-    let getContent = getSlotContent(children);
-    let icon = getContent('icon');
-    let content = getContent('content');
-    let actions = getContent('actions').map(function(item, index) {
+    const getContent = getSlotContent(children);
+    const icon = getContent('icon');
+    const content = getContent('content');
+    const actions = getContent('actions').map(function(item, index) {
       return <div key={index} className="notification_actions_item">{item}</div>;
     });
 
-    let classNames = setClassNames(`notification ${className}`, {
+    const classNames = setClassNames(`notification ${className}`, {
       'is_active': model.val()
     });
 

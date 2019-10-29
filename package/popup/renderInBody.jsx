@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom';
 import createClass from 'create-react-class';
 
-let RenderInBody = createClass({
+const RenderInBody = createClass({
   displayName: 'RenderInBody',
 
   render() {
-    let { children } = this.props;
+    const { children } = this.props;
     return ReactDOM.createPortal(children, document.body);
   },
 });

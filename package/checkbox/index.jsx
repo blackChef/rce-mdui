@@ -3,20 +3,20 @@ import createComponent from 'rce-pattern/createComponent';
 import './index.scss';
 
 
-let name = 'checkbox';
+const name = 'checkbox';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let update = function({ payload, model }) {
+const update = function({ payload, model }) {
   model.set(payload);
 };
 
-let isChecked = event => event.target.checked;
+const isChecked = event => event.target.checked;
 
 let view = function(props) {
-  let {
+  const {
     // eslint-disable-next-line no-unused-vars
     model, dispatcher, dispatch,
     style = "checkbox",

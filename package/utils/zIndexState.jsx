@@ -1,19 +1,19 @@
 
 let highestZIndex = 0;
 
-let increaseDepth = function(elem) {
+const increaseDepth = function(elem) {
   highestZIndex += 1;
   if (!elem) return;
   elem.style.zIndex = highestZIndex;
 };
 
-let decreaseDepth = function(elem) {
+const decreaseDepth = function(elem) {
   highestZIndex -= 1;
   if (!elem) return;
   elem.style.zIndex = '';
 };
 
-let init = function(bazeZIndex) {
+const init = function(bazeZIndex) {
   highestZIndex = bazeZIndex;
 };
 

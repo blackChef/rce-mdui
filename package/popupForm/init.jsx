@@ -1,4 +1,4 @@
-let init = function() {
+const init = function() {
   return {
     content: null,
     selectOptions: null,

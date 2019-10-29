@@ -9,13 +9,13 @@ import { enableScroll, disableScroll } from '../utils/scrollState';
 
 
 
-let name = 'Popup';
+const name = 'Popup';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let update = function({ type, model }) {
+const update = function({ type, model }) {
   if (type === 'close') {
     model.set(false);
   }
@@ -47,18 +47,18 @@ let view = createClass({
   },
 
   componentDidUpdate(prevProps) {
-    let checkOpen = matchValues('model.val', this.props, prevProps);
-    let willOpen = checkOpen(true, false);
-    let willClose = checkOpen(false, true);
+    const checkOpen = matchValues('model.val', this.props, prevProps);
+    const willOpen = checkOpen(true, false);
+    const willClose = checkOpen(false, true);
     if (willOpen) this.willOpen(this.props);
     if (willClose) this.willClose(this.props);
   },
 
   workAroundIOSInputBug(isOpen) {
     if (this.isIOS === undefined) {
-      let userAgent = window.navigator.userAgent;
-      let r1 = /cfnetwork\/.+darwin/i;
-      let r2 = /ip[honead]+(?:.*os\s([\w]+)*\slike\smac|;\sopera)/i;
+      const userAgent = window.navigator.userAgent;
+      const r1 = /cfnetwork\/.+darwin/i;
+      const r2 = /ip[honead]+(?:.*os\s([\w]+)*\slike\smac|;\sopera)/i;
       this.isIOS = r1.test(userAgent) || r2.test(userAgent);
     }
 
@@ -77,13 +77,13 @@ let view = createClass({
   },
 
   willOpen(props = this.props) {
-    let {
+    const {
       onOpen = noop,
       afterOpen = noop,
       openAnimationDuration = 400,
     } = props;
 
-    let open = () => {
+    const open = () => {
       setTimeout(() => {
         this.setState({ isOpen: true });
         onOpen();
@@ -103,7 +103,7 @@ let view = createClass({
   },
 
   willClose(props = this.props) {
-    let {
+    const {
       onClose = noop,
       afterClose = noop,
       closeAnimationDuration = 400,
@@ -138,16 +138,16 @@ let view = createClass({
   },
 
   tryToClose() {
-    let { forceOpen, dispatch } = this.props;
+    const { forceOpen, dispatch } = this.props;
     if (!forceOpen) {
       dispatch('close');
     }
   },
 
   renderFront() {
-    let { tryToClose } = this;
-    let { forceOpen, children } = this.props;
-    let { openAnimationState, closeAnimationState } = this.state;
+    const { tryToClose } = this;
+    const { forceOpen, children } = this.props;
+    const { openAnimationState, closeAnimationState } = this.state;
     return React.cloneElement(children, {
       forceOpen,
       tryToClose,
@@ -157,13 +157,13 @@ let view = createClass({
   },
 
   renderBg() {
-    let {
+    const {
       bgClassName = '',
       bgProps = {},
       closeOnBgClick = true
     } = this.props;
-    let { className = '', ...otherProps } = bgProps;
-    let { tryToClose } = this;
+    const { className = '', ...otherProps } = bgProps;
+    const { tryToClose } = this;
     return (
       <div
         { ...otherProps }
@@ -174,14 +174,14 @@ let view = createClass({
   },
 
   getClassName() {
-    let { className = '' } = this.props;
-    let { isOpen } = this.state;
+    const { className = '' } = this.props;
+    const { isOpen } = this.state;
     return `popup ${className} ${isOpen ? 'is_active' : ''}`;
   },
 
   render() {
-    let { style } = this.props;
-    let { shouldRender } =  this.state;
+    const { style } = this.props;
+    const { shouldRender } =  this.state;
     if (!shouldRender) return null;
     return (
       <div

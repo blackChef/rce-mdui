@@ -1,6 +1,6 @@
 import includes from 'lodash/includes';
 
-let unTypableInputs = [
+const unTypableInputs = [
   'button',
   'checkbox',
   'color',
@@ -19,9 +19,9 @@ let unTypableInputs = [
 ];
 
 
-let isKeyboardShow = function(focusEventTarget) {
-  let name = focusEventTarget.tagName.toLowerCase();
-  let type = focusEventTarget.type;
+const isKeyboardShow = function(focusEventTarget) {
+  const name = focusEventTarget.tagName.toLowerCase();
+  const type = focusEventTarget.type;
 
   if (name === 'textarea') {
     return true;

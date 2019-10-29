@@ -11,14 +11,14 @@ import './index.scss';
 
 
 
-let name = 'DialogView';
+const name = 'DialogView';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let Front = function(props) {
-  let {
+const Front = function(props) {
+  const {
     children,
     appBarProps = { className: 'appBar--shadow' },
     forceOpen,
@@ -26,7 +26,7 @@ let Front = function(props) {
     navButtonIcon = CloseIcon
   } = props;
 
-  let body = getSlotContent(children, 'body');
+  const body = getSlotContent(children, 'body');
 
   return (
     <div className="dialogView_front">
@@ -73,7 +73,7 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       model,
       className = '',
       ...otherProps

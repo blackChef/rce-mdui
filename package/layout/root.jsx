@@ -9,16 +9,16 @@ import { enableScroll, disableScroll } from '../utils/scrollState';
 import './index.scss';
 
 
-let name = 'Root';
+const name = 'Root';
 
-let init = function() {
+const init = function() {
   return {
     navDrawerModel: navDrawerInit(),
   };
 };
 
-let update = function({ model }) {
-  let newState = !model.navDrawerModel.isOpen.val();
+const update = function({ model }) {
+  const newState = !model.navDrawerModel.isOpen.val();
   model.navDrawerModel.isOpen.set(newState);
   if ( isPopup() ) {
     newState? disableScroll() : enableScroll();
@@ -27,7 +27,7 @@ let update = function({ model }) {
 
 let view = createClass({
   renderNavDrawerToggle() {
-    let { dispatcher } = this.props;
+    const { dispatcher } = this.props;
     return (
       <IconButton
         icon={MdMenu}
@@ -37,7 +37,7 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       model,
       children,
       pageElement: rawPageElem,
@@ -45,7 +45,7 @@ let view = createClass({
       pageElemProps
     } = this.props;
 
-    let pageElement = React.cloneElement(
+    const pageElement = React.cloneElement(
       rawPageElem,
       {
         ...pageElemProps,
@@ -54,11 +54,11 @@ let view = createClass({
       }
     );
 
-    let getContent = getSlotContent(children);
-    let navDrawer_header = getContent('navDrawer_header');
-    let navDrawer_body = getContent('navDrawer_body');
-    let navDrawer_footer = getContent('navDrawer_footer');
-    let otherContent = getContent('other');
+    const getContent = getSlotContent(children);
+    const navDrawer_header = getContent('navDrawer_header');
+    const navDrawer_body = getContent('navDrawer_body');
+    const navDrawer_footer = getContent('navDrawer_footer');
+    const otherContent = getContent('other');
 
     return (
       <div className={`layout ${model.navDrawerModel.isOpen.val() ? 'is_drawerOpen' : ''}`}>

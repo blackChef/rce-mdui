@@ -4,9 +4,9 @@ import { view as RangeInput } from '../rangeInput/';
 import padTime from './padTime';
 
 
-let name = 'Picker';
+const name = 'Picker';
 
-let init = function() {};
+const init = function() {};
 
 let view = function({ hour, minute, hourLabel = '小时', minuteLabel = '分钟' }) {
   return (

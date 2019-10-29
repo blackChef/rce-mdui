@@ -2,12 +2,12 @@ import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import './index.scss';
 
-let name = 'button';
+const name = 'button';
 
-let init = function() {};
+const init = function() {};
 
 let view = function(props) {
-  let {
+  const {
     children,
     className,
     tagName: ButtonTag = 'button',

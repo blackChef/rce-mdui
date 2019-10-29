@@ -3,31 +3,31 @@ import createClass from 'create-react-class';
 import curry from 'lodash/curry';
 import memoize from 'lodash/memoize';
 
-let view = createClass({
+const view = createClass({
   displayName: 'Slot',
   render: function() {
     return null;
   },
 });
 
-let toArray = memoize(function(children) {
+const toArray = memoize(function(children) {
   return  React.Children.toArray(children);
 });
 
-let getChildrenWithName = function(children, name) {
+const getChildrenWithName = function(children, name) {
   return toArray(children).filter(function(item) {
-    let itemName = item.type.displayName ? item.type.displayName : item.type.name;
+    const itemName = item.type.displayName ? item.type.displayName : item.type.name;
     return itemName === name;
   });
 };
 
-let getSlots = curry(function(children, name) {
+const getSlots = curry(function(children, name) {
   return getChildrenWithName(children, 'Slot')
     .filter(i => i.props.name === name);
 });
 
-let getSlot = curry(function(children, name) {
-  let slots = getSlots(children, name);
+const getSlot = curry(function(children, name) {
+  const slots = getSlots(children, name);
 
   // read props won't throw error
   if (slots[0] === undefined) {
@@ -37,8 +37,8 @@ let getSlot = curry(function(children, name) {
   return slots[0];
 });
 
-let getSlotContent = curry(function(children, name) {
-  let slots = getSlots(children, name);
+const getSlotContent = curry(function(children, name) {
+  const slots = getSlots(children, name);
 
   if (slots.length === 0) {
     return [];

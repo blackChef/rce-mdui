@@ -10,9 +10,9 @@ import MdChevronRight from 'react-icons/lib/md/chevron-right';
 import MdLastPage from 'react-icons/lib/md/last-page';
 import './index.scss';
 
-let name = 'pagination';
+const name = 'pagination';
 
-let init = () => {};
+const init = () => {};
 
 // let isEven = function(num) {
 //   return parseInt(num / 2, 10) * 2 === num;
@@ -92,7 +92,7 @@ let init = () => {};
 //   return { before, after };
 // };
 
-let FirstPageBtn = createComponent({
+const FirstPageBtn = createComponent({
   name: 'FirstPageBtn',
   view({ parentProps: { currentPage, requestFirstPage } }) {
     return (
@@ -105,7 +105,7 @@ let FirstPageBtn = createComponent({
   }
 });
 
-let PrevPageBtn = createComponent({
+const PrevPageBtn = createComponent({
   name: 'PrevPageBtn',
   view({ parentProps: { currentPage, requestPrevPage } }) {
     return (
@@ -118,7 +118,7 @@ let PrevPageBtn = createComponent({
   }
 });
 
-let NextPageBtn = createComponent({
+const NextPageBtn = createComponent({
   name: 'NextPageBtn',
   view({ parentProps: { currentPage, pageCount, requestNextPage } }) {
     return (
@@ -131,7 +131,7 @@ let NextPageBtn = createComponent({
   }
 });
 
-let LastPageBtn = createComponent({
+const LastPageBtn = createComponent({
   name: 'LastPageBtn',
   view({ parentProps: { currentPage, pageCount, requestLastPage } }) {
     return (
@@ -145,7 +145,7 @@ let LastPageBtn = createComponent({
 });
 
 let view = function(props) {
-  let {
+  const {
     currentPage,
     pageCount,
   } = props;

@@ -7,11 +7,11 @@ import { view as Slot } from '../slot/';
 import { view as LinkButton } from '../buttons/linkButton';
 import { view as PopupForm, init as popupFormInit } from '../popupForm/';
 
-let name = 'DialogForm';
-let init = popupFormInit;
-let update = noop;
+const name = 'DialogForm';
+const init = popupFormInit;
+const update = noop;
 
-let renderMsg = function(model) {
+const renderMsg = function(model) {
   if (model.isInvalid.val()) {
     return (
       <aside className="infoBanner infoBanner--error">
@@ -21,8 +21,8 @@ let renderMsg = function(model) {
   }
 };
 
-let renderContent = function(props) {
-  let {
+const renderContent = function(props) {
+  const {
     model,
     content,
     Form,
@@ -31,13 +31,13 @@ let renderContent = function(props) {
     transitionType = "slideUp"
   } = props;
 
-  let { isContentReady, isOpenAnimationEnd } = model.val();
+  const { isContentReady, isOpenAnimationEnd } = model.val();
 
   if (
       showContentImmediately ||
       (isContentReady && isOpenAnimationEnd)
     ) {
-    let body = React.cloneElement(content, {
+    const body = React.cloneElement(content, {
       reloadDialog: getData,
       model: model.content,
       selectOptions: model.selectOptions.val(),
@@ -56,12 +56,12 @@ let renderContent = function(props) {
   }
 };
 
-let OkBtn = function(props) {
-  let {
+const OkBtn = function(props) {
+  const {
     model, formId, okLabel = '确认'
   } = props;
 
-  let {
+  const {
     isSaving,
     isContentReady,
   } = model.val();
@@ -78,11 +78,11 @@ let OkBtn = function(props) {
   );
 };
 
-let CancelBtn = function(props) {
-  let {
+const CancelBtn = function(props) {
+  const {
     model, forceOpen, tryToClose, cancelLabel = '取消'
   } = props;
-  let { isSaving } = model.val();
+  const { isSaving } = model.val();
   return (
     <LinkButton
       className="linkButton--bounded linkButton--primary rightGutter_margin_half"
@@ -94,15 +94,15 @@ let CancelBtn = function(props) {
   );
 };
 
-let Body = function(props) {
-  let {
+const Body = function(props) {
+  const {
     model,
     title,
     onOpen, afterOpen, LoadingScreen,
     _onOpen = noop, _afterOpen = noop,
     ...otherProps
   } = props;
-  let { isSaving } = model.val();
+  const { isSaving } = model.val();
   return (
     <Dialog
       {...otherProps}

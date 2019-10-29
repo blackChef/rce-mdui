@@ -10,11 +10,11 @@ import { init as initZIndexState } from '../utils/zIndexState';
 import MdChevronRight from 'react-icons/lib/md/chevron-right';
 
 
-let name = 'Page';
+const name = 'Page';
 
-let init = function() {};
+const init = function() {};
 
-let Header = createComponent({
+const Header = createComponent({
   name: 'PageHeader',
   view({
     header_navButton,
@@ -51,7 +51,7 @@ let Header = createComponent({
   }
 });
 
-let Body = createComponent({
+const Body = createComponent({
   name: 'PageBody',
   view({ body }) {
     return (
@@ -66,7 +66,7 @@ let Body = createComponent({
 
 let view = createClass({
   componentDidMount() {
-    let { scrollStateProps = {} } = this.props;
+    const { scrollStateProps = {} } = this.props;
     initScrollState({
       mainSelector: '.layout_main',
       mainBodySelector: '.layout_main_body',
@@ -76,9 +76,9 @@ let view = createClass({
   },
 
   UNSAFE_componentWillMount() {
-    let { children, variableSlots = [], constantSlots = [] } = this.props;
+    const { children, variableSlots = [], constantSlots = [] } = this.props;
 
-    let slots = [
+    const slots = [
       'header_actions',
       'header_navButton',
       'header_appLogo',
@@ -95,7 +95,7 @@ let view = createClass({
       _constantSlots = constantSlots;
     }
 
-    let constantSlotsMap = _constantSlots.reduce(function(preVal, slotName) {
+    const constantSlotsMap = _constantSlots.reduce(function(preVal, slotName) {
       return {
         ...preVal,
         [slotName]: getSlotContent(children, slotName)
@@ -112,12 +112,12 @@ let view = createClass({
   },
 
   render() {
-    let { children, className = '', noHeader = false } = this.props;
+    const { children, className = '', noHeader = false } = this.props;
 
-    let header = (() => {
+    const header = (() => {
       if (noHeader) return null;
 
-      let headerProps = {
+      const headerProps = {
         header_navButton: this.getSlotContent(children, 'header_navButton'),
         header_appLogo: this.getSlotContent(children, 'header_appLogo'),
         header_title: this.getSlotContent(children, 'header_title'),
@@ -129,8 +129,8 @@ let view = createClass({
       return <Header {...headerProps}/>;
     })();
 
-    let body = this.getSlotContent(children, 'body');
-    let other = this.getSlotContent(children, 'other');
+    const body = this.getSlotContent(children, 'body');
+    const other = this.getSlotContent(children, 'other');
 
     return (
       <div className={`layout_main ${className}`}>

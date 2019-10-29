@@ -3,23 +3,23 @@ import Select from 'react-select';
 import createComponent from 'rce-pattern/createComponent';
 import './index.scss';
 
-let name = 'chips';
+const name = 'chips';
 
-let init = function() {
+const init = function() {
   return []; // selected option value
 };
 
-let update = function({ payload, model }) {
-  let selectedItems = Array.isArray(payload)? payload : [payload];
-  let newModel = selectedItems.map(item => item.value);
+const update = function({ payload, model }) {
+  const selectedItems = Array.isArray(payload)? payload : [payload];
+  const newModel = selectedItems.map(item => item.value);
   model.set(newModel);
 };
 
-let getSeletectVal = function(model, options, multi) {
-  let val = model.val() || [];
+const getSeletectVal = function(model, options, multi) {
+  const val = model.val() || [];
   if (val.length) {
-    let ret = val.map(function(value) {
-      let { label } = options.find(i => i.value === value);
+    const ret = val.map(function(value) {
+      const { label } = options.find(i => i.value === value);
       return { value, label };
     });
 
@@ -28,7 +28,7 @@ let getSeletectVal = function(model, options, multi) {
 };
 
 let view = function(props) {
-  let {
+  const {
     // eslint-disable-next-line no-unused-vars
     model, dispatch, dispatcher,
     multi = true,
@@ -39,7 +39,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let selectedValue = getSeletectVal(model, options, multi);
+  const selectedValue = getSeletectVal(model, options, multi);
 
   return (
     <Select

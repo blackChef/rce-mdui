@@ -4,9 +4,9 @@ import RenderInBody from './renderInBody';
 import { view as PopupContent, init as popupContentInit } from './popupContent';
 
 
-let name = 'Popup';
+const name = 'Popup';
 
-let init = popupContentInit;
+const init = popupContentInit;
 
 let view = function(props) {
   return (

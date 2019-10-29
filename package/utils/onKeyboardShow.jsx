@@ -5,14 +5,14 @@ import debounce from 'lodash/debounce';
 // When keyboard shows, it takes up some height of viewport.
 // Then it tries to move focused content to the bottom of viewport (scroll).
 
-let initialWindowHeight = window.innerHeight;
-let onKeyboardShow = function(callback) {
+const initialWindowHeight = window.innerHeight;
+const onKeyboardShow = function(callback) {
   if (window.innerHeight === initialWindowHeight) return;
   let isScrolled = false;
   setTimeout(() => {
     if (!isScrolled) callback();
   }, 20);
-  let onScroll = debounce(() => {
+  const onScroll = debounce(() => {
     if (!isScrolled) {
       isScrolled = true;
       return;
@@ -23,22 +23,22 @@ let onKeyboardShow = function(callback) {
   window.addEventListener('scroll', onScroll, false);
 };
 
-let moveAnchorIntoView = function(targetOffsetBottom = 0) {
-  let selection = window.getSelection();
+const moveAnchorIntoView = function(targetOffsetBottom = 0) {
+  const selection = window.getSelection();
   if (selection.anchorNode === null) return;
 
-  let range = selection.getRangeAt(0);
+  const range = selection.getRangeAt(0);
   // Get 0 for range.getBoundingClientRect when focusing on empty block
-  let rangeClientBottom = range.getBoundingClientRect().bottom
+  const rangeClientBottom = range.getBoundingClientRect().bottom
     || range.endContainer.getBoundingClientRect().bottom;
-  let offsetBottom = window.innerHeight - rangeClientBottom;
+  const offsetBottom = window.innerHeight - rangeClientBottom;
   if (offsetBottom < targetOffsetBottom) {
     window.scrollBy(0, (targetOffsetBottom - offsetBottom));
   }
 };
 
-let moveAnchorIntoViewWhenKeyboardShow = function(targetOffsetBottom) {
-  let onResize = function() {
+const moveAnchorIntoViewWhenKeyboardShow = function(targetOffsetBottom) {
+  const onResize = function() {
     onKeyboardShow(() => moveAnchorIntoView(targetOffsetBottom));
   };
   window.addEventListener('resize', onResize, false);

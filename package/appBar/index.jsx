@@ -4,12 +4,12 @@ import { getSlot, getSlotContent } from '../slot/';
 import { view as ContextualBar } from '../contextualBar';
 import './index.scss';
 
-let name = 'AppBar';
+const name = 'AppBar';
 
-let init = function() {};
+const init = function() {};
 
-let renderContextualBar = function(appBarChildren) {
-  let slot = getSlot(appBarChildren, 'contextualBar');
+const renderContextualBar = function(appBarChildren) {
+  const slot = getSlot(appBarChildren, 'contextualBar');
   return (
     <ContextualBar {...slot.props}/>
   );
@@ -17,10 +17,10 @@ let renderContextualBar = function(appBarChildren) {
 
 
 let view = function({ children, className = '' }) {
-  let getContent = getSlotContent(children);
-  let navButton = getContent('navButton');
-  let title = getContent('title');
-  let actions = getContent('actions').map(function(item, index) {
+  const getContent = getSlotContent(children);
+  const navButton = getContent('navButton');
+  const title = getContent('title');
+  const actions = getContent('actions').map(function(item, index) {
     return (
       <div
         key={index}
@@ -30,7 +30,7 @@ let view = function({ children, className = '' }) {
       </div>
     );
   });
-  let otherContent = getContent('other');
+  const otherContent = getContent('other');
 
   return (
     <header className={`appBar ${className}`}>

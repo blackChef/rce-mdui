@@ -4,11 +4,11 @@ import init from './init';
 import makePromise from '../utils/emptyPromise';
 
 // model updating uses 1 tick delay, so we have to use 2 ticks here
-let resolve = makePromise({ type: 'resolve', ticks: 2 });
+const resolve = makePromise({ type: 'resolve', ticks: 2 });
 
-let actions = {
+const actions = {
   getData({ payload = {}, dispatch, getLatestModel }) {
-    let {
+    const {
       getContent = resolve,
       getSelectOptions = resolve,
       setContent = noop,
@@ -23,7 +23,7 @@ let actions = {
       getSelectOptions()
 
     ]).then(function([res1, res2]) {
-      let newModel = getLatestModel();
+      const newModel = getLatestModel();
       setContent(res1, newModel.content);
       setSelectOptions(res2, newModel.selectOptions);
       dispatch('setFetchingStatus', { status: 'success', requestType: 'getData' });
@@ -40,23 +40,23 @@ let actions = {
   },
 
   save({ payload, model, dispatch }) {
-    let {
+    const {
       form,
       apiCalls,
       onSave = noop,
       validate = () => true
     } = payload;
 
-    let content = model.content.val();
+    const content = model.content.val();
 
-    let validateResult = validate(content);
+    const validateResult = validate(content);
     if (validateResult !== true) {
       model.isInvalid.set(true);
       model.invalidMsg.set(validateResult);
       return;
     }
 
-    let { saveContent = resolve } = apiCalls;
+    const { saveContent = resolve } = apiCalls;
 
     dispatch('setIsSaving', true);
     dispatch('setFetchingStatus', { status: 'loading', requestType: 'save' });
@@ -90,7 +90,7 @@ let actions = {
   },
 
   setFetchingStatus({ payload, model }) {
-    let curVal = model.loadingScreenModel.val();
+    const curVal = model.loadingScreenModel.val();
     model.loadingScreenModel.set( merge({}, curVal, payload) );
   },
 
@@ -111,7 +111,7 @@ let actions = {
 };
 
 
-let update = function(props) {
+const update = function(props) {
   actions[props.type](props);
 };
 

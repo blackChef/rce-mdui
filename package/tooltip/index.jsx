@@ -8,15 +8,15 @@ import checkIsHoverable from '../utils/isHoverable';
 import './index.scss';
 
 
-let name = 'Menu';
+const name = 'Menu';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
 const isHoverable = checkIsHoverable();
 
-let Popup = function({ isShown, msg }) {
+const Popup = function({ isShown, msg }) {
   return (
     <div className={`tooltip ${isShown ? 'is_active' : ''}`}>
       <div className="tooltip_front">{msg}</div>
@@ -24,10 +24,10 @@ let Popup = function({ isShown, msg }) {
   );
 };
 
-let showPopupIfHoverable = showPopup => isHoverable ? showPopup : noop;
+const showPopupIfHoverable = showPopup => isHoverable ? showPopup : noop;
 
-let Trigger = function(props) {
-  let {
+const Trigger = function(props) {
+  const {
     showPopup,
     hidePopup,
     msg,

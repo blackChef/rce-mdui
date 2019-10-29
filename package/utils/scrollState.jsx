@@ -1,4 +1,4 @@
-let defaultState = {
+const defaultState = {
  mainSelector: null,
  mainBodySelector: null,
  styleType: 'margin',
@@ -12,9 +12,9 @@ let defaultState = {
 let state = {};
 
 
-let onEvent = function(key) {
+const onEvent = function(key) {
   return function(callback) {
-    let id = Date.now();
+    const id = Date.now();
     state[key] = state[key].concat({ id, callback });
     return function() {
       state[key] = state[key].filter(i => i.id !== id);
@@ -22,27 +22,27 @@ let onEvent = function(key) {
   };
 };
 
-let runEventCallbacks = function(key) {
+const runEventCallbacks = function(key) {
   state[key].forEach(i => i.callback());
 };
 
-let onEnableScroll = onEvent('onEnableCallbacks');
+const onEnableScroll = onEvent('onEnableCallbacks');
 
-let onDisableScroll = onEvent('onDisableCallbacks');
+const onDisableScroll = onEvent('onDisableCallbacks');
 
-let getSt = function() {
+const getSt = function() {
   return document.documentElement.scrollTop ||
     document.body.scrollTop || 0;
 };
 
-let setSt = function(st) {
+const setSt = function(st) {
   document.documentElement.scrollTop =
     document.body.scrollTop = st;
 };
 
-let removeStyle = function() {
-  let main = document.querySelector(state.mainSelector);
-  let mainBody = document.querySelector(state.mainBodySelector);
+const removeStyle = function() {
+  const main = document.querySelector(state.mainSelector);
+  const mainBody = document.querySelector(state.mainBodySelector);
 
   if (main && mainBody) {
     main.style.height = '';
@@ -61,9 +61,9 @@ let removeStyle = function() {
   }
 };
 
-let applyStyle = function() {
-  let main = document.querySelector(state.mainSelector);
-  let mainBody = document.querySelector(state.mainBodySelector);
+const applyStyle = function() {
+  const main = document.querySelector(state.mainSelector);
+  const mainBody = document.querySelector(state.mainBodySelector);
 
   if (main && mainBody) {
     state.currentScrollTop = getSt();
@@ -80,7 +80,7 @@ let applyStyle = function() {
   }
 };
 
-let enableScroll = function() {
+const enableScroll = function() {
   if (!state.isDisabled) {
     return;
   }
@@ -94,7 +94,7 @@ let enableScroll = function() {
   }
 };
 
-let disableScroll = function() {
+const disableScroll = function() {
   state.requireDisableScrollCount += 1;
 
   // `count === 1` means that it's the first time that we want to disable scroll
@@ -105,12 +105,12 @@ let disableScroll = function() {
   }
 };
 
-let init = function(props) {
+const init = function(props) {
   state = { ...defaultState, ...props };
   removeStyle();
 };
 
-let getIsScrollDisabled = () => state.isDisabled;
+const getIsScrollDisabled = () => state.isDisabled;
 
 export {
   init,

@@ -9,9 +9,9 @@ import padTime from './padTime';
 import './index.scss';
 
 
-let name = 'TimePicker';
+const name = 'TimePicker';
 
-let init = function() {
+const init = function() {
   return {
     isShown: false,
     hour: 0,
@@ -19,7 +19,7 @@ let init = function() {
   };
 };
 
-let actions = {
+const actions = {
   // { payload, model, dispatch, getLatestModel }
   showPicker({ model, payload: { disabled, readOnly } }) {
     if (!disabled && !readOnly) {
@@ -32,19 +32,19 @@ let actions = {
   }
 };
 
-let update = function(props) {
-  let { type, ...otherProps } = props;
+const update = function(props) {
+  const { type, ...otherProps } = props;
   actions[type](otherProps);
 };
 
 
 let view = createClass({
   getInitialState() {
-    let { hour, minute } = this.props.model.val();
+    const { hour, minute } = this.props.model.val();
     return { confirmedTime: { hour, minute } };
   },
   onConfirm(closeDialog) {
-    let { hour, minute } = this.props.model.val();
+    const { hour, minute } = this.props.model.val();
     this.setState({ confirmedTime: { hour, minute } });
     closeDialog();
   },
@@ -55,7 +55,7 @@ let view = createClass({
     }, 300);
   },
   render() {
-    let {
+    const {
       model,
       dispatcher,
       floatingLabel,
@@ -66,8 +66,8 @@ let view = createClass({
       hourLabel,
       minuteLabel,
     } = this.props;
-    let { confirmedTime: { hour, minute } } = this.state;
-    let display = `${padTime(hour)}:${padTime(minute)}`;
+    const { confirmedTime: { hour, minute } } = this.state;
+    const display = `${padTime(hour)}:${padTime(minute)}`;
     return (
       <React.Fragment>
         <Dialog

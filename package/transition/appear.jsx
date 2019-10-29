@@ -1,8 +1,8 @@
 import React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-let view = function(props) {
-  let {
+const view = function(props) {
+  const {
     children,
     timeout = 400,
     name = '',
@@ -11,7 +11,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let names = {
+  const names = {
     appear: name,
     appearActive: `${name}_active`
   };

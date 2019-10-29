@@ -10,23 +10,23 @@ import MdMoreVert from 'react-icons/lib/md/more-vert';
 import './index.scss';
 
 
-let name = 'Menu';
+const name = 'Menu';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let Popup = function({ hidePopup, isShown, children }) {
-  let items = getSlots(children, 'item')
+const Popup = function({ hidePopup, isShown, children }) {
+  const items = getSlots(children, 'item')
     .map(function(item, index) {
-      let {
+      const {
         onClick = noop,
         children,
         Component = 'div',
         className = '',
         ...otherProps
       } = item.props;
-      let onItemClick = () => { onClick(); hidePopup(); };
+      const onItemClick = () => { onClick(); hidePopup(); };
       return (
         <Component
           key={index}
@@ -49,8 +49,8 @@ let Popup = function({ hidePopup, isShown, children }) {
   );
 };
 
-let Trigger = function(props) {
-  let {
+const Trigger = function(props) {
+  const {
     triggerElement = <IconButton icon={MdMoreVert}/>,
     showPopup,
   } = props;
@@ -69,15 +69,15 @@ let Trigger = function(props) {
 
 let view = createClass({
   stretch({ popupDOM, triggerDOM }) {
-    let { fullWidth } = this.props;
+    const { fullWidth } = this.props;
     if (fullWidth) {
       popupDOM.style.width = `${triggerDOM.clientWidth}px`;
     }
   },
   render() {
-    let { fullWidth } = this.props;
-    let attachment = fullWidth ? 'top center' : 'top right';
-    let targetAttachment = fullWidth ? 'bottom center' : 'top right';
+    const { fullWidth } = this.props;
+    const attachment = fullWidth ? 'top center' : 'top right';
+    const targetAttachment = fullWidth ? 'bottom center' : 'top right';
 
     return (
       <Tether

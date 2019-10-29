@@ -4,13 +4,13 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as Content } from './content';
 import './index.scss';
 
-let name = 'loadingScreen';
+const name = 'loadingScreen';
 
-let init = function() {
+const init = function() {
   return 'hide'; // status: hide, loading, successful, failed
 };
 
-let update = function({ payload, model }) {
+const update = function({ payload, model }) {
   model.set(payload);
 };
 
@@ -30,10 +30,10 @@ let view = createClass({
     this.isMounted = false;
   },
   componentDidUpdate(prevProps) {
-    let prevStatus = prevProps.model.val();
-    let curStatus = this.props.model.val();
-    let isStatusBecame = targetStatus => prevStatus !== targetStatus && curStatus === targetStatus;
-    let {
+    const prevStatus = prevProps.model.val();
+    const curStatus = this.props.model.val();
+    const isStatusBecame = targetStatus => prevStatus !== targetStatus && curStatus === targetStatus;
+    const {
       dispatch,
       delay = 300,
       showSuccessMsg = false,
@@ -43,7 +43,7 @@ let view = createClass({
     if (isStatusBecame('loading')) {
       this.setState({ startTime: Date.now() });
       setTimeout(() => {
-        let afterDelayStatus = this.props.model.val();
+        const afterDelayStatus = this.props.model.val();
         if (afterDelayStatus === 'loading' && this.isMounted) {
           this.setState({ showContent: true });
         }
@@ -53,7 +53,7 @@ let view = createClass({
 
     if (isStatusBecame('successful')) {
       if (showSuccessMsg) {
-        let endTime = Date.now();
+        const endTime = Date.now();
         if (endTime - this.state.startTime > delay) {
           this.setState({ showContent: true });
           setTimeout(() => {

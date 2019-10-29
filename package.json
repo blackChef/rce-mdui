@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "makePackage": "cd ./tool && node makePackage",
     "dev": "set NODE_ENV=\"dev\"&&webpack --debug --output-pathinfo --watch",
-    "build": "set NODE_ENV=\"production\"&&webpack --progress",
-    "lint": "eslint \"package/**\" -o eslint.result"
+    "build": "set NODE_ENV=\"production\"&&webpack --progress"
   },
   "author": "blackChef",
   "repository": "https://github.com/blackChef/rce-mdui.git",
@@ -30,16 +29,16 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^1.0.1",
-    "webpack": "^3.8.1"
+    "webpack": "^4.41.2"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.2",
     "lodash": "^4.6.1",
     "rce-pattern": "^0.6.7",
-    "react": "16.2.0",
+    "react": "16.11.0",
     "react-addons-css-transition-group": "^15.5.2",
-    "react-dom": "16.2.0",
+    "react-dom": "16.11.0",
     "react-icons": "^2.2.7",
     "react-select": "^1.0.0-rc.5",
     "react-textarea-autosize": "^4.1.0",

@@ -1,5 +1,5 @@
 export default function(type) {
-  let sizes = {
+  const sizes = {
     xxsmall: 0,
     xsmall: 360,
     small: 480,

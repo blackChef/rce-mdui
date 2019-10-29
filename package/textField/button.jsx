@@ -7,12 +7,12 @@ import { view as Icon } from '../icon/';
 import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down';
 
 
-let name = 'textFieldBtn';
+const name = 'textFieldBtn';
 
-let init = function() {};
+const init = function() {};
 
 let view = function(props) {
-  let {
+  const {
     // eslint-disable-next-line no-unused-vars
     model, dispatch, dispatcher,
     className = '',

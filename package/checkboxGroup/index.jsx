@@ -7,16 +7,16 @@ import { getSlots } from '../slot/';
 import { view as Checkbox } from '../checkbox/';
 
 
-let name = 'CheckboxGroup';
+const name = 'CheckboxGroup';
 
-let init = function(type = 'multiple') {
+const init = function(type = 'multiple') {
   return type === 'multiple' ?
     [/* selected item's id */] :
     null; // selected item's id
 };
 
-let update = function({ type, payload, model }) {
-  let { id, isChecked } = payload;
+const update = function({ type, payload, model }) {
+  const { id, isChecked } = payload;
   if (type === 'toggle_multiple') {
     if (!isChecked) {
       cRemove(model, i => i === id);
@@ -34,14 +34,14 @@ let update = function({ type, payload, model }) {
   }
 };
 
-let renderCheckbox = function(dispatch, type, model, id) {
-  let isChecked = function() {
+const renderCheckbox = function(dispatch, type, model, id) {
+  const isChecked = function() {
     return type === 'multiple' ?
       model.val().includes(id) :
       model.val() === id;
   };
 
-  let toggle = function(isChecked) {
+  const toggle = function(isChecked) {
     dispatch(`toggle_${type}`, { id, isChecked });
   };
 
@@ -50,7 +50,7 @@ let renderCheckbox = function(dispatch, type, model, id) {
 
 
 let view = function(props) {
-  let {
+  const {
     model,
     dispatch,
     children,
@@ -58,10 +58,10 @@ let view = function(props) {
     containerComponent = <div />
   } = props;
 
-  let items = getSlots(children, 'item')
+  const items = getSlots(children, 'item')
     .map(function(item, index) {
-      let { children, id = index } = item.props;
-      let checkbox = renderCheckbox(dispatch, type, model, id);
+      const { children, id = index } = item.props;
+      const checkbox = renderCheckbox(dispatch, type, model, id);
       return React.cloneElement(children, { checkbox, key: id });
     });
 

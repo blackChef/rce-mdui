@@ -7,13 +7,13 @@ import addESCListener from '../utils/escState';
 import { increaseDepth, decreaseDepth } from '../utils/zIndexState';
 import { enableScroll, disableScroll } from '../utils/scrollState';
 
-let name = 'Tether';
+const name = 'Tether';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let update = function({ type, model }) {
+const update = function({ type, model }) {
   if (type === 'show') {
     model.set(true);
   } else {
@@ -21,14 +21,14 @@ let update = function({ type, model }) {
   }
 };
 
-let createTether = function(props) {
-  let {
+const createTether = function(props) {
+  const {
     attachment = 'top center',
     targetAttachment = 'bottom center',
     target,
     element
   } = props;
-  let tetherInstance = new TetherClass({
+  const tetherInstance = new TetherClass({
     attachment,
     targetAttachment,
     target,
@@ -56,21 +56,21 @@ let view = createClass({
   removeESCListener: null,
 
   tryEnableScroll() {
-    let { shouldDisableScroll = true } = this.props;
+    const { shouldDisableScroll = true } = this.props;
     if (shouldDisableScroll) {
       enableScroll();
     }
   },
 
   tryDisableScroll() {
-    let { shouldDisableScroll = true } = this.props;
+    const { shouldDisableScroll = true } = this.props;
     if (shouldDisableScroll) {
       disableScroll();
     }
   },
 
   createTetherInstance() {
-    let {
+    const {
       popupDOM,
       triggerContainer,
       props: {
@@ -88,8 +88,8 @@ let view = createClass({
   },
 
   insertPopupDOM() {
-    let { popupContainer } = this;
-    let popupDOM = popupContainer.firstChild;
+    const { popupContainer } = this;
+    const popupDOM = popupContainer.firstChild;
     document.body.appendChild(popupDOM);
     popupContainer.remove();
     this.popupDOM = popupDOM;
@@ -107,7 +107,7 @@ let view = createClass({
   },
 
   tryInitTether(callback) {
-    let {
+    const {
       tetherInstance,
       insertPopupDOM,
       createTetherInstance
@@ -126,14 +126,14 @@ let view = createClass({
   },
 
   showPopup() {
-    let {
+    const {
       model,
       disabled = false,
     } = this.props;
 
     if ( disabled || model.val() ) return;
 
-    let {
+    const {
       afterTetherInited,
       tryInitTether
     } = this;
@@ -142,13 +142,13 @@ let view = createClass({
   },
 
   afterTetherInited() {
-    let {
+    const {
       dispatch,
       beforeShow = noop,
       afterShow = noop,
     } = this.props;
 
-    let {
+    const {
       popupDOM,
       tetherInstance,
       hidePopup,
@@ -169,7 +169,7 @@ let view = createClass({
   },
 
   hidePopup() {
-    let {
+    const {
       dispatch,
       model,
       popupCloseAnimDuration = 300,
@@ -179,7 +179,7 @@ let view = createClass({
 
     if ( !model.val() ) return;
 
-    let {
+    const {
       tetherInstance,
       removeESCListener,
       popupDOM,
@@ -201,19 +201,19 @@ let view = createClass({
   },
 
   render() {
-    let { trigger, popup, model, ...otherProps } = this.props;
-    let { showPopup, hidePopup } = this;
-    let { isPopupMounted } = this.state;
+    const { trigger, popup, model, ...otherProps } = this.props;
+    const { showPopup, hidePopup } = this;
+    const { isPopupMounted } = this.state;
 
-    let childProps = {
+    const childProps = {
       ...otherProps,
       showPopup,
       hidePopup,
       isShown: model.val(),
     };
 
-    let _trigger = React.cloneElement(trigger, childProps);
-    let _popup = React.cloneElement(popup, childProps);
+    const _trigger = React.cloneElement(trigger, childProps);
+    const _popup = React.cloneElement(popup, childProps);
 
     return (
       <div className="tether_triggerContainer"

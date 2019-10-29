@@ -6,37 +6,37 @@ import { view as Transition } from '../transition/appear';
 import './index.scss';
 
 
-let name = 'tabs_remount';
+const name = 'tabs_remount';
 
-let init = function() {
+const init = function() {
   return 0; //active index
 };
 
-let update = function({ payload, model }) {
+const update = function({ payload, model }) {
   model.set(payload);
 };
 
 let view = createClass({
   componentDidUpdate() {
-    let { model, children, dispatch } = this.props;
-    let tabPanes = getSlots(children, 'tabPane');
-    let curIndex = model.val();
+    const { model, children, dispatch } = this.props;
+    const tabPanes = getSlots(children, 'tabPane');
+    const curIndex = model.val();
     if (curIndex > tabPanes.length - 1) {
       dispatch('changeTab', tabPanes.length - 1);
     }
   },
   render() {
-    let {
+    const {
       model,
       dispatch,
       children,
       className = '',
       transitionName = 'slideUp'
     } = this.props;
-    let tabPanes = getSlots(children, 'tabPane');
-    let curIndex = model.val();
+    const tabPanes = getSlots(children, 'tabPane');
+    const curIndex = model.val();
 
-    let headerItems = tabPanes.map(function(item, index) {
+    const headerItems = tabPanes.map(function(item, index) {
       return (
         <div
           key={index}
@@ -49,7 +49,7 @@ let view = createClass({
     });
 
     // model may not change now
-    let curPane = curIndex > tabPanes.length - 1 ?
+    const curPane = curIndex > tabPanes.length - 1 ?
       tabPanes[tabPanes.length - 1].props.children :
       tabPanes[curIndex].props.children;
 

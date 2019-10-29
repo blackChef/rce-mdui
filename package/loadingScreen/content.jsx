@@ -9,12 +9,12 @@ import MdCheckCircle from 'react-icons/lib/md/check-circle';
 
 
 
-let name = 'Content';
+const name = 'Content';
 
-let init = function() {};
+const init = function() {};
 
-let renderActions = function(props) {
-  let {
+const renderActions = function(props) {
+  const {
     model,
     parentDispatch,
     onRequestRetry,
@@ -46,7 +46,7 @@ let renderActions = function(props) {
   }
 };
 
-let LoadingInfo = function({ msg = '请稍候' }) {
+const LoadingInfo = function({ msg = '请稍候' }) {
   return (
     <div className="loadingScreen_info">
       <div className="loadingScreen_indicator">
@@ -58,7 +58,7 @@ let LoadingInfo = function({ msg = '请稍候' }) {
   );
 };
 
-let FailedInfo = function({ msg = '出错了' }) {
+const FailedInfo = function({ msg = '出错了' }) {
   return (
     <div className="loadingScreen_info u_text_failed">
       <div className="loadingScreen_indicator">
@@ -72,7 +72,7 @@ let FailedInfo = function({ msg = '出错了' }) {
   );
 };
 
-let SuccessInfo = function({ msg = '加载成功' }) {
+const SuccessInfo = function({ msg = '加载成功' }) {
   return (
     <div className="loadingScreen_info u_text_success">
       <div className="loadingScreen_indicator">
@@ -86,7 +86,7 @@ let SuccessInfo = function({ msg = '加载成功' }) {
   );
 };
 
-let renderInfo = function({ model, loadingMsg, failedMsg, successMsg }) {
+const renderInfo = function({ model, loadingMsg, failedMsg, successMsg }) {
   switch (model.val()) {
     case 'loading':
       return <LoadingInfo msg={loadingMsg} />;
@@ -100,7 +100,7 @@ let renderInfo = function({ model, loadingMsg, failedMsg, successMsg }) {
 };
 
 let view = function(props) {
-  let { model, className = '' } = props;
+  const { model, className = '' } = props;
 
   return (
     <Transition

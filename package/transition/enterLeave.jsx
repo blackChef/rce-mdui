@@ -1,8 +1,8 @@
 import React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-let view = function(props) {
-  let {
+const view = function(props) {
+  const {
     children,
     enterName = '',
     leaveName = '',
@@ -13,7 +13,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let names = {
+  const names = {
     enter: enterName,
     enterActive: `${enterName}_active`,
     leave: leaveName,

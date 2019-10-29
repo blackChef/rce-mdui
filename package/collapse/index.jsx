@@ -8,22 +8,22 @@ import MdKeyboardArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
 import './index.scss';
 
 
-let name = 'Collapse';
+const name = 'Collapse';
 
-let init = function() {
+const init = function() {
   return false; // is open
 };
 
-let update = function({ model }) {
+const update = function({ model }) {
   model.set( !model.val() );
 };
 
 let view = createClass({
   componentDidUpdate(prevProps) {
-    let { container, content } = this;
-    let checkOpen = matchValues('model.val', this.props, prevProps);
-    let willOpen = checkOpen(true, false);
-    let willClose = checkOpen(false, true);
+    const { container, content } = this;
+    const checkOpen = matchValues('model.val', this.props, prevProps);
+    const willOpen = checkOpen(true, false);
+    const willClose = checkOpen(false, true);
 
     if (willOpen) {
       container.classList.add('is_active');
@@ -33,7 +33,7 @@ let view = createClass({
 
     } else if (willClose) {
       content.classList.remove('is_active');
-      let removeContainerClass = function() {
+      const removeContainerClass = function() {
         container.classList.remove('is_active');
         content.removeEventListener('transitionend', removeContainerClass);
       };
@@ -42,8 +42,8 @@ let view = createClass({
   },
 
   componentDidMount() {
-    let isOpen = this.props.model.val();
-    let { container, content } = this;
+    const isOpen = this.props.model.val();
+    const { container, content } = this;
 
     if (isOpen) {
       container.classList.add('is_active');
@@ -52,10 +52,10 @@ let view = createClass({
   },
 
   render() {
-    let { model, dispatcher, children, className = '' } = this.props;
-    let getContent = getSlotContent(children);
-    let header = getContent('header');
-    let body = getContent('body');
+    const { model, dispatcher, children, className = '' } = this.props;
+    const getContent = getSlotContent(children);
+    const header = getContent('header');
+    const body = getContent('body');
 
     return (
       <div className={`collapse ${className} ${model.val() ? 'is_active' : ''}`}>

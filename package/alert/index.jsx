@@ -5,13 +5,13 @@ import { view as Slot, getSlotContent } from '../slot/';
 import { view as LinkButton } from '../buttons/linkButton';
 
 
-let name = 'Alert';
+const name = 'Alert';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let CloseBtn = function({ tryToClose, okLabel }) {
+const CloseBtn = function({ tryToClose, okLabel }) {
   return (
     <LinkButton
       className="linkButton--primary linkButton--bounded"
@@ -23,7 +23,7 @@ let CloseBtn = function({ tryToClose, okLabel }) {
 };
 
 let view = function(props) {
-  let {
+  const {
     // eslint-disable-next-line no-unused-vars
     model, dispatch, dispatcher,
     children,
@@ -32,7 +32,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let content = getSlotContent(children, 'content');
+  const content = getSlotContent(children, 'content');
 
   return (
     <DialogSimple {...otherProps}

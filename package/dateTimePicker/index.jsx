@@ -9,16 +9,16 @@ import { view as Slot } from '../slot/';
 import './index.scss';
 
 
-let name = 'dateTimePicker';
+const name = 'dateTimePicker';
 
-let init = function() {
+const init = function() {
   return {
     show: false,
     time: Date.now(),
   };
 };
 
-let actions = {
+const actions = {
   // { payload, model, dispatch, getLatestModel }
   showPicker({ model, payload: { disabled, readOnly } }) {
     if (!disabled && !readOnly) {
@@ -30,16 +30,16 @@ let actions = {
   },
 };
 
-let update = function(props) {
-  let { type, ...otherProps } = props;
+const update = function(props) {
+  const { type, ...otherProps } = props;
   actions[type](otherProps);
 };
 
-let Picker = createClass({
+const Picker = createClass({
   componentDidMount() {
-    let { elem } = this;
-    let { initialValue, ...romeOptions } = this.props;
-    let options = Object.assign(romeOptions, {
+    const { elem } = this;
+    const { initialValue, ...romeOptions } = this.props;
+    const options = Object.assign(romeOptions, {
       initialValue: new Date(initialValue),
       timeInterval: 3600,
     });
@@ -52,8 +52,8 @@ let Picker = createClass({
   },
 
   componentDidUpdate(prevProps) {
-    let prevModel = prevProps.model;
-    let curModel = this.props.model;
+    const prevModel = prevProps.model;
+    const curModel = this.props.model;
 
     if (prevModel !== curModel) {
       this.instance.setValue(curModel.time.val());
@@ -73,13 +73,13 @@ let Picker = createClass({
 
 let view = createClass({
   confirm(closeDialog) {
-    let time = this.picker.getDate();
+    const time = this.picker.getDate();
     this.props.dispatch('confirm', time);
     closeDialog();
   },
 
   render() {
-    let {
+    const {
       model,
       dispatcher,
       label,
@@ -90,7 +90,7 @@ let view = createClass({
       cancelLabel,
       ...otherProps
     } = this.props;
-    let time = model.time.val();
+    const time = model.time.val();
 
     return (
       <React.Fragment>

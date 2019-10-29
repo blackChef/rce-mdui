@@ -8,17 +8,17 @@ import matchScreenSize from '../utils/matchScreenSize';
 import './navDrawer.scss';
 
 
-let name = 'NavDrawer';
+const name = 'NavDrawer';
 
-let isPopup = () => !matchScreenSize('large');
+const isPopup = () => !matchScreenSize('large');
 
-let init = function() {
+const init = function() {
   return {
     isOpen: !isPopup(),
   };
 };
 
-let update = function({ model }) {
+const update = function({ model }) {
   model.isOpen.set(false);
   if ( isPopup() ) {
     enableScroll();
@@ -34,13 +34,13 @@ let view = createClass({
 
   componentDidMount() {
     this.toggleScrollWhenLayoutChange = debounce(() => {
-      let { model } = this.props;
-      let curIsPopup = isPopup();
-      let prevIsPopup = this.state.isPopup;
+      const { model } = this.props;
+      const curIsPopup = isPopup();
+      const prevIsPopup = this.state.isPopup;
 
       this.setState({ isPopup: curIsPopup });
 
-      let isOpen = model.isOpen.val();
+      const isOpen = model.isOpen.val();
 
       if (!isOpen) return;
 
@@ -60,14 +60,14 @@ let view = createClass({
 
   closeDrawerBeforeDispatchClick(event) {
     if ( isPopup() ) {
-      let { dispatch } = this.props;
-      let { frontRef } = this;
-      let { currentTarget } = event;
+      const { dispatch } = this.props;
+      const { frontRef } = this;
+      const { currentTarget } = event;
 
       event.preventDefault();
       dispatch('close');
 
-      let dispatchClick = function() {
+      const dispatchClick = function() {
         currentTarget.dispatchEvent( new MouseEvent('click') );
         frontRef.removeEventListener('transitionend', dispatchClick);
       };
@@ -77,8 +77,8 @@ let view = createClass({
   },
 
   cloneChildrenWithProps(children) {
-    let { closeDrawerBeforeDispatchClick } = this;
-    let childProps = { closeDrawerBeforeDispatchClick };
+    const { closeDrawerBeforeDispatchClick } = this;
+    const childProps = { closeDrawerBeforeDispatchClick };
 
     return React.Children.map(
       children,
@@ -87,19 +87,19 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       className = '',
       dispatcher,
       children
     } = this.props;
 
-    let { cloneChildrenWithProps } = this;
+    const { cloneChildrenWithProps } = this;
 
-    let header = cloneChildrenWithProps(
+    const header = cloneChildrenWithProps(
       getSlotContent(children, 'header')
     );
 
-    let body = cloneChildrenWithProps(
+    const body = cloneChildrenWithProps(
       getSlotContent(children, 'body')
     );
 

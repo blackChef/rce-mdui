@@ -3,12 +3,12 @@ import createComponent from 'rce-pattern/createComponent';
 import './index.scss';
 
 
-let name = 'Label';
+const name = 'Label';
 
-let init = function() {};
+const init = function() {};
 
 let view = function(props) {
-  let {
+  const {
     // eslint-disable-next-line no-unused-vars
     model, dispatch, dispatcher,
     type = 'default',
@@ -17,7 +17,7 @@ let view = function(props) {
     ...otherProps
   } = props;
 
-  let classNames = `label label--${type} ${className}`;
+  const classNames = `label label--${type} ${className}`;
 
   return (
     <div

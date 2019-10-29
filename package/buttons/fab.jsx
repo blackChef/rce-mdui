@@ -4,19 +4,19 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as Icon } from '../icon/';
 import { view as Button } from './Button';
 
-let name = 'fab';
+const name = 'fab';
 
-let init = function() {};
+const init = function() {};
 
 let view = function(props) {
-  let {
+  const {
     children,
     icon,
     className,
     ...otherProps
   } = props;
 
-  let content = icon ? <Icon icon={icon} /> : children;
+  const content = icon ? <Icon icon={icon} /> : children;
 
   return (
     <Button {...otherProps} className={`fab ${className}`}>

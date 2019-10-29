@@ -8,11 +8,11 @@ import { view as Slot } from '../slot/';
 import { view as LinkButton } from '../buttons/linkButton';
 import { view as PopupForm, init as popupFormInit } from '../popupForm/';
 
-let name = 'DialogViewForm';
-let init = popupFormInit;
-let update = noop;
+const name = 'DialogViewForm';
+const init = popupFormInit;
+const update = noop;
 
-let renderMsg = function(model) {
+const renderMsg = function(model) {
   if (model.isInvalid.val()) {
     return (
       <aside className="infoBanner infoBanner--error">
@@ -22,8 +22,8 @@ let renderMsg = function(model) {
   }
 };
 
-let renderContent = function(props) {
-  let {
+const renderContent = function(props) {
+  const {
     model,
     content,
     getData,
@@ -31,10 +31,10 @@ let renderContent = function(props) {
     transitionType = 'slideUp'
   } = props;
 
-  let { isContentReady, isOpenAnimationEnd } = model.val();
+  const { isContentReady, isOpenAnimationEnd } = model.val();
 
   if (isContentReady && isOpenAnimationEnd) {
-    let body = React.cloneElement(content, {
+    const body = React.cloneElement(content, {
       reloadDialog: getData,
       model: model.content,
       selectOptions: model.selectOptions,
@@ -52,9 +52,9 @@ let renderContent = function(props) {
   }
 };
 
-let Body = createClass({
+const Body = createClass({
   afterClose() {
-    let {
+    const {
       model,
       resetModelAfterClose = false,
       afterOpen = noop,
@@ -67,7 +67,7 @@ let Body = createClass({
     afterOpen();
   },
   render() {
-    let {
+    const {
       model, title, saveBtnProps = {},
       formId, onOpen, afterOpen, LoadingScreen,
       saveBtnLabel = '保存',
@@ -77,7 +77,7 @@ let Body = createClass({
       ...otherProps
     } = this.props;
 
-    let {
+    const {
       isSaving,
       isContentReady,
     } = model.val();

@@ -2,26 +2,26 @@ import remove from 'lodash/remove';
 import last from 'lodash/last';
 
 
-let listeners = [];
+const listeners = [];
 
-let addListener = function(callback) {
-  let id = Date.now();
+const addListener = function(callback) {
+  const id = Date.now();
   listeners.push({ id, callback });
 
-  let removeListener = function() {
+  const removeListener = function() {
     remove(listeners, i => i.id === id);
   };
 
   return removeListener;
 };
 
-let onKeyPress = function(event) {
+const onKeyPress = function(event) {
   if (event.key === 'Escape' && listeners.length !== 0) {
     last(listeners).callback();
   }
 };
 
-let init = function() {
+const init = function() {
   document.addEventListener('keyup', onKeyPress, false);
 };
 

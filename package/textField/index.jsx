@@ -8,13 +8,13 @@ import debounce from 'lodash/debounce';
 import './index.scss';
 
 
-let name = 'TextField';
+const name = 'TextField';
 
-let init = function() {
+const init = function() {
   return '';
 };
 
-let update = function({ payload, model }) {
+const update = function({ payload, model }) {
   model.set(payload);
 };
 
@@ -29,8 +29,8 @@ let update = function({ payload, model }) {
 // android: "啊啊"
 let view = createClass({
   UNSAFE_componentWillReceiveProps(nextProps) {
-    let nextModelVal = nextProps.model.val();
-    let domValue = this.inputDOM.value;
+    const nextModelVal = nextProps.model.val();
+    const domValue = this.inputDOM.value;
 
     if (nextModelVal !== domValue) {
       this.inputDOM.value = nextModelVal;
@@ -40,16 +40,16 @@ let view = createClass({
   UNSAFE_componentWillMount() {
     this.defaultValue = this.props.model.val();
 
-    let onChange = (() => {
-      let { dispatch} = this.props;
+    const onChange = (() => {
+      const { dispatch} = this.props;
 
-      let r1 = /cfnetwork\/.+darwin/i;
-      let r2 = /ip[honead]+(?:.*os\s([\w]+)*\slike\smac|;\sopera)/i;
-      let isIOS = r1.test(window.navigator.userAgent) || r2.test(window.navigator.userAgent);
+      const r1 = /cfnetwork\/.+darwin/i;
+      const r2 = /ip[honead]+(?:.*os\s([\w]+)*\slike\smac|;\sopera)/i;
+      const isIOS = r1.test(window.navigator.userAgent) || r2.test(window.navigator.userAgent);
 
       if (isIOS) {
         // debounce updating model, so no chinese ime issue on ios
-        let updateModel = debounce(value => {
+        const updateModel = debounce(value => {
           dispatch('change', value);
         }, 100);
 
@@ -67,20 +67,20 @@ let view = createClass({
   },
 
   componentDidMount() {
-    let main = findDOMNode(this.mainRef);
+    const main = findDOMNode(this.mainRef);
     this.inputDOM = main.querySelector('.textField_field');
   },
 
   render() {
-    let {
+    const {
       floatingLabel = '',
       fixedFloatingLabel = false,
       hint = '',
       ...otherProps
     } = this.props;
 
-    let Component = floatingLabel === '' ? Simple : FloatingLabel;
-    let componentProps = floatingLabel === '' ?
+    const Component = floatingLabel === '' ? Simple : FloatingLabel;
+    const componentProps = floatingLabel === '' ?
       { hint } : { hint, floatingLabel, fixedFloatingLabel };
 
     return (

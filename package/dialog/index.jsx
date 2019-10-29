@@ -4,24 +4,24 @@ import { getSlotContent } from '../slot/';
 import { view as Popup } from '../popup/';
 import './index.scss';
 
-let name = 'Dialog';
+const name = 'Dialog';
 
-let init = function() {
+const init = function() {
   return false;
 };
 
-let Front = function(props) {
-  let {
+const Front = function(props) {
+  const {
     children,
     tryToClose,
     forceOpen
   } = props;
 
-  let getContent = getSlotContent(children);
-  let title = getContent('title');
-  let content = getContent('content');
-  let other = getContent('other');
-  let actions = getContent('actions').map(function(item) {
+  const getContent = getSlotContent(children);
+  const title = getContent('title');
+  const content = getContent('content');
+  const other = getContent('other');
+  const actions = getContent('actions').map(function(item) {
     return React.cloneElement(item, {
       tryToClose,
       forceOpen,
@@ -47,7 +47,7 @@ let Front = function(props) {
 };
 
 let view = function(props) {
-  let {
+  const {
     model,
     className = '',
     ...otherProps

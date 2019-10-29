@@ -8,11 +8,11 @@ const THUMB_WIDTH = 28; // px
 const MARKER_WIDTH = 1; // px
 const MARKER_COLOR = '#333333';
 
-let makeGradient = function({ marks, min, max }) {
-  let colorStops = marks.map(function({ value }) {
+const makeGradient = function({ marks, min, max }) {
+  const colorStops = marks.map(function({ value }) {
     if (value === min) {
-      let leftPos = `0%`;
-      let rightPos = `calc(0% + ${MARKER_WIDTH}px)`;
+      const leftPos = `0%`;
+      const rightPos = `calc(0% + ${MARKER_WIDTH}px)`;
 
       return (
         `${MARKER_COLOR} ${leftPos},`+
@@ -22,8 +22,8 @@ let makeGradient = function({ marks, min, max }) {
     }
 
     if (value === max) {
-      let leftPos = `calc(100% - ${MARKER_WIDTH}px)`;
-      let rightPos = `100%`;
+      const leftPos = `calc(100% - ${MARKER_WIDTH}px)`;
+      const rightPos = `100%`;
 
       return (
         `transparent ${leftPos},` +
@@ -32,10 +32,10 @@ let makeGradient = function({ marks, min, max }) {
       );
     }
 
-    let centerPos = (value - min) / (max - min) * 100 + '%';
-    let halfMarkWidth = MARKER_WIDTH / 2;
-    let leftPos = `calc(${centerPos} - ${halfMarkWidth}px)`;
-    let rightPos = `calc(${centerPos} + ${halfMarkWidth}px)`;
+    const centerPos = (value - min) / (max - min) * 100 + '%';
+    const halfMarkWidth = MARKER_WIDTH / 2;
+    const leftPos = `calc(${centerPos} - ${halfMarkWidth}px)`;
+    const rightPos = `calc(${centerPos} + ${halfMarkWidth}px)`;
 
     return (
       `transparent ${leftPos},` +
@@ -49,10 +49,10 @@ let makeGradient = function({ marks, min, max }) {
 };
 
 
-let name = 'RangeInput';
+const name = 'RangeInput';
 
-let init = function(props = {}) {
-  let {
+const init = function(props = {}) {
+  const {
     min = 0,
     defaultValue = min,
   } = props;
@@ -60,7 +60,7 @@ let init = function(props = {}) {
   return defaultValue;
 };
 
-let update = function({ model, payload }) {
+const update = function({ model, payload }) {
   model.set(payload);
 };
 
@@ -73,13 +73,13 @@ let view = createClass({
   },
 
   getThumbPosition() {
-    let { inputElem } = this.state;
+    const { inputElem } = this.state;
     if (inputElem === null) {
       return 0;
     }
 
-    let inputWidth = inputElem.clientWidth;
-    let progress = this.getProgress();
+    const inputWidth = inputElem.clientWidth;
+    const progress = this.getProgress();
 
     // browser use this formula to compute thumb position:
     // position = inputWidth * progress - thumbWidth * progress
@@ -87,8 +87,8 @@ let view = createClass({
   },
 
   getProgress() {
-    let { model, min = 0, max = 100 } = this.props;
-    let ret = (model.val() - min) / (max - min);
+    const { model, min = 0, max = 100 } = this.props;
+    const ret = (model.val() - min) / (max - min);
     return +(ret.toFixed(6));
   },
 
@@ -97,7 +97,7 @@ let view = createClass({
       return;
     }
 
-    let {
+    const {
       marks = [ /* { value: Number, label: String } */ ],
       min = 0,
       max = 100,
@@ -117,7 +117,7 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       model,
       className = '',
       // eslint-disable-next-line no-unused-vars
@@ -125,9 +125,9 @@ let view = createClass({
       ...otherProps
     } = this.props;
 
-    let { markGradient } = this.state;
-    let progress = this.getProgress();
-    let thumbPosition = this.getThumbPosition();
+    const { markGradient } = this.state;
+    const progress = this.getProgress();
+    const thumbPosition = this.getThumbPosition();
 
     return (
       <div className={`rangeInput ${className}`}>

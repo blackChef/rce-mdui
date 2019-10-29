@@ -3,12 +3,12 @@ import createComponent from 'rce-pattern/createComponent';
 
 import { view as Button } from './Button';
 
-let name = 'linkButton';
+const name = 'linkButton';
 
-let init = function() {};
+const init = function() {};
 
 let view = function(props) {
-  let {
+  const {
     children,
     className,
     ...otherProps

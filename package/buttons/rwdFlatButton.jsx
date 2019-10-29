@@ -4,12 +4,12 @@ import { view as Icon } from '../icon/';
 import { view as Button } from './Button';
 
 
-let name = 'iconButton';
+const name = 'iconButton';
 
-let init = function() {};
+const init = function() {};
 
 let view = function(props) {
-  let {
+  const {
     children,
     icon,
     className,

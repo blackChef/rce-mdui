@@ -9,17 +9,17 @@ import MdClose from 'react-icons/lib/md/close';
 import './index.scss';
 
 
-let name = 'ContextualBar';
+const name = 'ContextualBar';
 
-let init = function() {};
+const init = function() {};
 
-let renderActionItem = function(item, index) {
+const renderActionItem = function(item, index) {
   return <div key={index} className="contextualBar_actions_item">{item}</div>;
 };
 
-let renderActionsForSingleItem = function(count, children) {
+const renderActionsForSingleItem = function(count, children) {
   if (count === 1) {
-    let slots = getSlotContent(children, 'single');
+    const slots = getSlotContent(children, 'single');
 
     return (
       <div className="contextualBar_actions_single">
@@ -29,9 +29,9 @@ let renderActionsForSingleItem = function(count, children) {
   }
 };
 
-let renderActionsForMultipleItems = function(count, children) {
+const renderActionsForMultipleItems = function(count, children) {
   if (count > 0) {
-    let slots = getSlotContent(children, 'multiple');
+    const slots = getSlotContent(children, 'multiple');
 
     return (
       <div className="contextualBar_actions_multiple">
@@ -41,7 +41,7 @@ let renderActionsForMultipleItems = function(count, children) {
   }
 };
 
-let Count = createClass({
+const Count = createClass({
   shouldComponentUpdate(nextProps) {
     // we don't want to see count number changes into 0
     if (nextProps.count === 0) {
@@ -51,7 +51,7 @@ let Count = createClass({
     return true;
   },
   render() {
-    let { count } = this.props;
+    const { count } = this.props;
     return (
       <div className="contextualBar_control_count">
         <div className="contextualBar_control_count_prefix">已选择</div>
@@ -64,14 +64,14 @@ let Count = createClass({
 
 let view = createClass({
   componentDidMount() {
-    let isCurActive = this.props.count > 0;
+    const isCurActive = this.props.count > 0;
     if (isCurActive) {
       this.removeESCListener = addESCListener(this.props.onRequestDeselectAll);
     }
   },
   componentDidUpdate(prevProps) {
-    let isGotoActive = prevProps.count === 0 && this.props.count > 0;
-    let isGotoInactive = prevProps.count > 0 && this.props.count === 0;
+    const isGotoActive = prevProps.count === 0 && this.props.count > 0;
+    const isGotoInactive = prevProps.count > 0 && this.props.count === 0;
 
     if (isGotoActive && !this.removeESCListener) {
       this.removeESCListener = addESCListener(this.props.onRequestDeselectAll);
@@ -82,11 +82,11 @@ let view = createClass({
     }
   },
   render() {
-    let { children, count, onRequestDeselectAll, className = '' } = this.props;
+    const { children, count, onRequestDeselectAll, className = '' } = this.props;
 
     if (!children) return null;
 
-    let classNames = setClassNames(`contextualBar ${className}`, {
+    const classNames = setClassNames(`contextualBar ${className}`, {
       'is_active': count > 0,
     });
 

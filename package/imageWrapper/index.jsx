@@ -7,11 +7,11 @@ import setClassName from 'classnames';
 import './index.scss';
 
 
-let name = 'ImageWrapper';
+const name = 'ImageWrapper';
 
-let init = function() {};
+const init = function() {};
 
-let Placeholder = createComponent({
+const Placeholder = createComponent({
   view({ width, height }) {
     return <canvas className="imageWrapper_placeholder" width={width} height={height}/>;
   }
@@ -42,7 +42,7 @@ let view = createClass({
 
   onLoad(event) {
     if (!this.isUnmounted) {
-      let { naturalWidth, naturalHeight } = event.target;
+      const { naturalWidth, naturalHeight } = event.target;
       this.setState({
         isLoaded: true,
         naturalWidth, naturalHeight,
@@ -51,7 +51,7 @@ let view = createClass({
   },
 
   render() {
-    let {
+    const {
       src, width, height,
       alt = '',
       imgProps = {},
@@ -61,27 +61,27 @@ let view = createClass({
       cover = true,
     } = this.props;
 
-    let {
+    const {
       shouldShowImage,
       isLoaded,
       naturalWidth,
       naturalHeight,
     } = this.state;
 
-    let classNames = setClassName(`imageWrapper ${className}`, {
+    const classNames = setClassName(`imageWrapper ${className}`, {
       is_loaded: isLoaded
     });
 
-    let imgSrc = (() => {
+    const imgSrc = (() => {
       if (!lazy) return src;
       if (shouldShowImage) return src;
       return '';
     })();
 
-    let imgStyle = (() => {
+    const imgStyle = (() => {
       if (!cover) return { width: `${width}px`, height: `${height}px` };
-      let targetRatio = width / height;
-      let naturalRatio = naturalWidth / naturalHeight;
+      const targetRatio = width / height;
+      const naturalRatio = naturalWidth / naturalHeight;
       if (naturalRatio > targetRatio) {
         return { width: `auto`, height: `100%` };
       }

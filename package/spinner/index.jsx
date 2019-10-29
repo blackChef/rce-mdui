@@ -3,11 +3,11 @@ import createComponent from 'rce-pattern/createComponent';
 import './index.scss';
 
 
-let name = 'Spinner';
+const name = 'Spinner';
 
-let init = function() {};
+const init = function() {};
 
-let update = function() {};
+const update = function() {};
 
 let view = function() {
   return (

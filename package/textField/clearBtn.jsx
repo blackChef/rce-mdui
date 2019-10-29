@@ -4,9 +4,9 @@ import createClass from 'create-react-class';
 import { view as IconButton } from '../buttons/iconButton';
 import ClearIcon from 'react-icons/lib/md/clear';
 
-let name = 'ClearBtn';
+const name = 'ClearBtn';
 
-let init = function() {};
+const init = function() {};
 
 let view = createClass({
   clearContent(event) {
@@ -16,7 +16,7 @@ let view = createClass({
     this.props.model.set('');
   },
   render() {
-    let { readOnly, disabled, model } = this.props;
+    const { readOnly, disabled, model } = this.props;
     if (readOnly || disabled || model.val() === '') {
       return null;
     }
