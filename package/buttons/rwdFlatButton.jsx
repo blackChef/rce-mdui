@@ -4,7 +4,7 @@ import { view as Icon } from '../icon/';
 import { view as Button } from './Button';
 
 
-const name = 'iconButton';
+const name = 'rwdFlatButton';
 
 const init = function() {};
 

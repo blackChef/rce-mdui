@@ -35,7 +35,7 @@ const renderActions = function(props) {
         {
           typeof onRequestRetry === 'function' &&
           <LinkButton
-            className="linkButton--accent linkButton--bounded"
+            className="linkButton--accent linkButton--bounded leftGutter_margin_half"
             onClick={onRequestRetry}
           >
             {retryBtnLabel}

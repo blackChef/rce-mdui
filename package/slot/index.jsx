@@ -47,6 +47,6 @@ const getSlotContent = curry(function(children, name) {
   return toArray(slots[0].props.children);
 });
 
-
+export default view;
 export { view, getSlots, getSlot, getSlotContent };
 

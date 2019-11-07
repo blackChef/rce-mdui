@@ -78,7 +78,9 @@
     display: flex;
     justify-content: flex-end;
     padding: $s_gutter / 2;
-
+    &:empty {
+      display: none;
+    }
     &_item {
       margin-right: $s_gutter / 2;
 

@@ -13,7 +13,7 @@ let view = function(props) {
     tagName: ButtonTag = 'button',
     type = 'button',
     // eslint-disable-next-line no-unused-vars
-    model, dispatch, dispatcher,
+    model, dispatch, dispatcher, tryToClose, forceOpen,
     ...otherProps
   } = props;
 

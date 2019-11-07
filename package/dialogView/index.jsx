@@ -81,13 +81,13 @@ let view = createClass({
 
     return (
       <Popup
+        openAnimationDuration={300}
+        closeAnimationDuration={300}
         {...otherProps}
         onOpen={this.onOpen}
         onClose={this.onClose}
         className={`dialogView ${className}`}
         model={model}
-        openAnimationDuration={350}
-        closeAnimationDuration={350}
         bgProps={{ className: 'dialogView_background' }}
       >
         <Front {...this.props} />
