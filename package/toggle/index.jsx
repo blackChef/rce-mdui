@@ -8,14 +8,15 @@ const init = function() {
   return false;
 };
 
-const update = function({ payload, model }) {
-  model.set(payload);
+const update = function({ payload: [newState, onChange], model }) {
+  model.set(newState);
+  onChange && onChange(newState);
 };
 
 let view = function(props) {
   const {
     // eslint-disable-next-line no-unused-vars
-    model, dispatch, dispatcher,
+    model, dispatch, dispatcher, onChange,
     ...otherProps
   } = props;
 
@@ -25,7 +26,7 @@ let view = function(props) {
         {...otherProps}
         type="checkbox"
         checked={model.val()}
-        onChange={event => dispatch('toggle', event.target.checked)}
+        onChange={event => dispatch('toggle', [event.target.checked, onChange])}
       />
       <div className="toggle_appearance"></div>
     </div>

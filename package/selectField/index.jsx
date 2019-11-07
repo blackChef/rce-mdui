@@ -42,10 +42,15 @@ let view = createClass({
     this.selectFirstIfNonIsSelected(this.props.options);
   },
 
+  onSelect(value) {
+    const { dispatch, onChange } = this.props;
+    dispatch('change', value);
+    onChange && onChange(value);
+  },
+
   render() {
     const {
       model,
-      dispatch,
       floatingLabel = '',
       options, // [{ value, label }]
       readOnly = false,
@@ -53,6 +58,7 @@ let view = createClass({
       className = '',
       ...otherProps
     } = this.props;
+    const { onSelect } = this;
 
     const selectedOption = options.find(i => i.value === model.val());
     const selectedLabel = selectedOption? selectedOption.label : undefined;
@@ -67,7 +73,7 @@ let view = createClass({
         <Slot
           key={value}
           name="item"
-          onClick={() => dispatch('change', value)}
+          onClick={() => onSelect(value)}
         >
           <div className={classNames}>{label}</div>
         </Slot>
