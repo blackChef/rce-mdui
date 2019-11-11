@@ -1,14 +1,14 @@
 import React from 'react';
 import createClass from 'create-react-class';
-import Textarea from 'react-textarea-autosize';
 import addESCListener from '../utils/escState';
 import noop from 'lodash/noop';
+import BaseInput from './baseInput';
+import AutoResizeInput from './autoResizeInput';
 
 const InputField = createClass({
   onFocus(event) {
     const { onFocus = noop } = this.props;
     onFocus(event);
-
     const inputDOM = event.target;
     this.removeESCListener = addESCListener(() => inputDOM.blur());
   },
@@ -37,7 +37,9 @@ const InputField = createClass({
 
     if (autoResize) {
       return (
-        <Textarea {...otherProps}
+        <AutoResizeInput
+          {...otherProps}
+          model={model}
           style={{ resize: 'none' }}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
@@ -46,7 +48,9 @@ const InputField = createClass({
     }
 
     return (
-      <input {...otherProps}
+      <BaseInput
+        {...otherProps}
+        model={model}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
       />

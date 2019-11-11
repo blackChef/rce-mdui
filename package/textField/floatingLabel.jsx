@@ -3,7 +3,6 @@ import createClass from 'create-react-class';
 import createComponent from 'rce-pattern/createComponent';
 import setClassNames from 'classnames';
 import InputField from './inputField';
-import { view as ClearBtn } from './clearBtn';
 
 
 const name = 'TextField--floatingLabel';
@@ -46,11 +45,9 @@ let view = createClass({
     const {
       hint = '',
       floatingLabel = '',
-      onChange,
       className = '',
       // eslint-disable-next-line no-unused-vars
       fixedFloatingLabel,
-      shouldShowClearButton = false,
       ...otherProps
     } = this.props;
 
@@ -65,7 +62,6 @@ let view = createClass({
         <InputField
           {...otherProps}
           className="textField_field"
-          onChange={onChange}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
@@ -73,10 +69,6 @@ let view = createClass({
         <div className="textField_line"></div>
         <label className="textField_floatingLabel">{floatingLabel}</label>
         {hint && <div className="textField_hint">{hint}</div>}
-        {
-          shouldShowClearButton &&
-          <ClearBtn {...otherProps}/>
-        }
      </div>
     );
   },

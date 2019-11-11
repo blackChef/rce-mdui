@@ -1,13 +1,13 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
 import noop from 'lodash/noop';
-import { view as Simple } from './simple';
+import { view as NoFloatingLabel } from './noFloatingLabel';
 import { view as FloatingLabel } from './floatingLabel';
 import { view as Icon } from '../icon/';
 import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down';
 
 
-const name = 'textFieldBtn';
+const name = 'TextFieldBtn';
 
 const init = function() {};
 
@@ -28,7 +28,7 @@ let view = function(props) {
     Component = FloatingLabel;
 
   } else {
-    Component = Simple;
+    Component = NoFloatingLabel;
   }
 
   return (
