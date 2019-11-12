@@ -1,5 +1,6 @@
 import React from 'react';
 import createComponent from 'rce-pattern/createComponent';
+import createProxyModel from 'rce-pattern/createProxyModel';
 import noop from 'lodash/noop';
 import { view as NoFloatingLabel } from './noFloatingLabel';
 import { view as FloatingLabel } from './floatingLabel';
@@ -38,7 +39,9 @@ let view = function(props) {
         onClick={onClick}
         className="textFieldBtn_btn"
       />
-      <Component readOnly value={value}
+      <Component
+        readOnly
+        model={createProxyModel(value)}
         floatingLabel={floatingLabel}
         fixedFloatingLabel={true}
         hint={hint}
