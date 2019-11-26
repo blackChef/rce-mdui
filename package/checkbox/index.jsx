@@ -18,7 +18,7 @@ const isChecked = event => event.target.checked;
 let view = function(props) {
   const {
     // eslint-disable-next-line no-unused-vars
-    model, dispatcher, dispatch,
+    model, dispatch,
     style = "checkbox",
     ...otherProps
   } = props;
@@ -29,7 +29,7 @@ let view = function(props) {
         {...otherProps}
         type="checkbox"
         checked={model.val()}
-        onChange={dispatcher('toggle', isChecked)}
+        onChange={e => dispatch('toggle', isChecked(e))}
       />
       <div className={`${style}_appearance`}></div>
     </div>

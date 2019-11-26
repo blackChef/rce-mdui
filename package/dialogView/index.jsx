@@ -78,7 +78,6 @@ let view = createClass({
       className = '',
       ...otherProps
     } = this.props;
-
     return (
       <Popup
         openAnimationDuration={300}
