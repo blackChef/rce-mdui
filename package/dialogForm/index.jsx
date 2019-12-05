@@ -1,7 +1,7 @@
 import React from 'react';
 import noop from 'lodash/noop';
 import createComponent from 'rce-pattern/createComponent';
-import { view as Transition } from '../transition/appear';
+import { view as Transition } from '../transition/enter';
 import { view as Dialog } from '../dialog/';
 import { view as Slot } from '../slot/';
 import { view as LinkButton } from '../buttons/linkButton';
