@@ -18,8 +18,9 @@ let view = createClass({
   onFocus() {
     this.setState({ isFocused: true });
   },
-  onBlur() {
+  onBlur(e) {
     this.setState({ isFocused: false });
+    this.props.onBlur && this.props.onBlur(e);
   },
   componentDidMount() {
     this.input = this.mainRef.querySelector('.textField_field');
