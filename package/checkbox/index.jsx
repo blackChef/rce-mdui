@@ -18,7 +18,7 @@ const isChecked = event => event.target.checked;
 let view = function(props) {
   const {
     // eslint-disable-next-line no-unused-vars
-    model, dispatch,
+    model, dispatch, dispatcher,
     style = "checkbox",
     ...otherProps
   } = props;
