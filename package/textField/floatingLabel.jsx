@@ -29,18 +29,15 @@ let view = createClass({
     if (this.props.fixedFloatingLabel) {
       return true;
     }
-
+    if (this.props.model.val() !== '') {
+      return true;
+    }
     if (this.state.isFocused) {
       return true;
     }
-
-    // mounted
-    if (this.input) {
-      return this.input.value !== '';
+    if (this.props.defaultValue !== undefined && this.props.defaultValue !== '') {
+      return true;
     }
-
-    // initial render
-    return this.props.defaultValue !== '';
   },
   render() {
     const {

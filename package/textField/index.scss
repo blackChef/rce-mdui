@@ -56,21 +56,14 @@
 
   &_hint {
     // @include clipText;
-
     font-size: $s_font_caption;
     line-height: normal;
     margin-top: 2px;
     order: 3;
-    visibility: hidden;
     color: $c_primary;
     &:empty {
       display: none;
     }
-  }
-
-
-  &_field:focus:not([readonly]) + &_line + &_floatingLabel + &_hint {
-    visibility: visible;
   }
 }
 
