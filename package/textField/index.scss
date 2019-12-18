@@ -144,6 +144,15 @@
     border-bottom-style: solid;
   }
 
+  &.is_disabled {
+    .textFieldBtn_btn {
+      cursor: not-allowed;
+    }
+    .textField_field {
+      border-bottom-style: dashed;
+    }
+  }
+
   .mdIcon {
     display: flex;
     position: absolute;

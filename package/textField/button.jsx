@@ -21,6 +21,7 @@ let view = function(props) {
     floatingLabel = '',
     hint = '',
     onClick = noop,
+    disabled,
     ...otherProps
   } = props;
 
@@ -33,7 +34,7 @@ let view = function(props) {
   }
 
   return (
-    <div className={`textFieldBtn ${className}`}>
+    <div className={`textFieldBtn ${className} ${disabled ? 'is_disabled' : ''}`}>
       <button  {...otherProps}
         type="button"
         onClick={onClick}
