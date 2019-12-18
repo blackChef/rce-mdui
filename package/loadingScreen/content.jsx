@@ -3,7 +3,6 @@ import createComponent from 'rce-pattern/createComponent';
 import { view as Spinner } from '../spinner/';
 import { view as LinkButton } from '../buttons/linkButton';
 import { view as Icon } from '../icon/';
-import { view as Transition } from '../transition/leave';
 import MdError from 'react-icons/lib/md/error';
 import MdCheckCircle from 'react-icons/lib/md/check-circle';
 
@@ -103,18 +102,16 @@ let view = function(props) {
   const { model, className = '' } = props;
 
   return (
-    <Transition
+    <div
       className={`loadingScreen ${className}`}
       data-status={model.val()}
-      duration={300} name="fadeout"
     >
        <div className="loadingScreen_front">
           {renderInfo(props)}
           {renderActions(props)}
        </div>
-
        <div className="loadingScreen_background" />
-    </Transition>
+    </div>
   );
 };
 

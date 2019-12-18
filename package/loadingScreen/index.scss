@@ -18,7 +18,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-
   }
 
   &_front {
@@ -59,7 +58,7 @@
     }
   }
 
-  &[data-status="failed"] {
+  &[data-status='failed'] {
     .loadingScreen {
       &_background {
         background-color: rgba($c_paper, 0.93);
@@ -79,8 +78,10 @@
 }
 
 .loadingScreen--flat {
-  background-color: none;
   position: relative;
+  .loadingScreen_background {
+    background: none !important;
+  }
 }
 
 .loadingScreen--page {
@@ -96,7 +97,6 @@
       @include roundCorner();
       padding: $s_gutter $s_gutter * 2;
     }
-
 
     &_actions {
       justify-content: flex-end;
