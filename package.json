@@ -34,7 +34,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.2",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "rce-pattern": "^0.7.0",
     "react": "16.11.0",
     "react-dom": "16.11.0",
